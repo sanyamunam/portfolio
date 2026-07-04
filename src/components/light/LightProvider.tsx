@@ -1,5 +1,12 @@
 "use client";
-import { createContext, useContext, useEffect, type ReactNode, type RefObject } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { useInView, useMotionValue, type MotionValue } from "framer-motion";
 
 type LightCtxValue = {
@@ -11,7 +18,8 @@ const LightCtx = createContext<LightCtxValue | null>(null);
 
 export function LightProvider({ children }: { children: ReactNode }) {
   const temp = useMotionValue(0);
-  return <LightCtx.Provider value={{ temp }}>{children}</LightCtx.Provider>;
+  const value = useMemo(() => ({ temp }), [temp]);
+  return <LightCtx.Provider value={value}>{children}</LightCtx.Provider>;
 }
 
 export function useLight(): LightCtxValue {

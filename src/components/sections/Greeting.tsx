@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { GREETING } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
@@ -10,7 +11,7 @@ import { HeroIllustration } from "./HeroIllustration";
 export function Greeting() {
   const ref = useRef<HTMLElement>(null);
   useSectionLight(ref, TEMP.greeting);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
 
   return (
     <section
@@ -68,9 +69,7 @@ export function Greeting() {
 
 function M1Stub() {
   const ref = useRef<HTMLDivElement>(null);
-  const prefersReduce = useReducedMotion() ?? false;
-  const [reduce, setReduce] = useState(false);
-  useEffect(() => setReduce(prefersReduce), [prefersReduce]);
+  const reduce = useReducedMotionSafe();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.55", "end 0.1"] });
   const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
   return (

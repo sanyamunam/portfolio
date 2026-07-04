@@ -18,7 +18,7 @@ The shipped V3 is a beautiful presentation, not yet an interactive experience:
 ## 2. Non-negotiables (preserved, per Sanya)
 
 - **The Hero** — composition, layout, hierarchy, atmosphere, and the animated SVG illustration stay as-is. Only additive enhancement allowed.
-- **The light-temperature journey** — same LightScript, same beat temperatures, same emotional arc (golden → valleys → dusk → ember → golden). Valleys still dip per case (Kahramaa still reaches jet).
+- **The light-temperature journey** — same LightScript, same stops. Arc after the About merge: golden (hero) → warm (About) → wine/jet valleys per case (Work) → **dusk-turquoise (the Glass Bento beat keeps its full turquoise-background world)** → warming back to golden (Workbench → Invitation). Valleys still dip per case (Kahramaa still reaches jet).
 - **Glassmorphism language** — evolves (edge lighting, layering), never removed.
 - Voice, content facts, accent grammar (turquoise = clarity only), reduced-motion discipline, `content.ts` as the single copy source.
 

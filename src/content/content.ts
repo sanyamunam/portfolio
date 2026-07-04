@@ -76,9 +76,9 @@ export const CASES: CaseStudy[] = [
     resolution: "A revamped site fit for the federation’s profile. See for yourself — it’s live.",
     outcome: "Live on the international stage",
     media: {
-      mp4: "/media/qbf-hero.mp4",
-      webm: "/media/qbf-hero.webm",
-      poster: "/media/qbf-hero-poster.jpg",
+      mp4: "media/qbf-hero.mp4",
+      webm: "media/qbf-hero.webm",
+      poster: "media/qbf-hero-poster.jpg",
       href: "https://www.qatarbasketball.qa/",
     },
   },
@@ -216,7 +216,7 @@ export const WORKBENCH = {
     kicker: "Guide · Designing with AI",
     title: "Prompt Playbook",
     body: "A read-it-once playbook for writing prompts that generate client-ready UI — written because I got tired of explaining it one designer at a time.",
-    href: "/prompt-playbook.html",
+    href: "prompt-playbook.html",
     chromeLabel: "prompt-playbook.html",
     cta: "Open the playbook",
     typewriter: [

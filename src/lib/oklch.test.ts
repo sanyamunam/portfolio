@@ -18,6 +18,11 @@ describe("lerpHue", () => {
   it("interpolates normally when close", () => {
     expect(lerpHue(20, 40, 0.5)).toBe(30);
   });
+  it("never returns -0", () => {
+    // exact-cancellation case: without the guard, the raw modulo math can yield -0
+    expect(Object.is(lerpHue(0, 180, 0), -0)).toBe(false);
+    expect(lerpHue(0, 180, 0)).toBe(0);
+  });
 });
 
 describe("mixOklch", () => {

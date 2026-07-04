@@ -5,11 +5,17 @@ export function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
-/** Hue interpolation along the shortest arc (handles the 0/360 wrap). */
+/**
+ * Hue interpolation along the shortest arc (handles the 0/360 wrap).
+ * `+540` = +360 (keep the modulo positive) +180 (recenter), yielding a delta
+ * in (-180, 180]. At exactly 180° apart the direction is arbitrary (delta
+ * -180); the only such pair in our stops is near-achromatic (chroma <= 0.01),
+ * where hue direction is invisible.
+ */
 export function lerpHue(a: number, b: number, t: number): number {
   const d = ((b - a + 540) % 360) - 180;
   const h = (a + d * t + 360) % 360;
-  // avoid -0
+  // normalize -0 so toCss never serializes "oklch(-0 ...)"-style values
   return h === 0 ? 0 : h;
 }
 

@@ -56,6 +56,7 @@ export function ThreadNav() {
                 onClick={() => go(b.id)}
                 aria-label={b.label}
                 aria-current={current ? "true" : undefined}
+                data-cursor="nav"
                 className="pressable relative block size-6 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
               >
                 <span

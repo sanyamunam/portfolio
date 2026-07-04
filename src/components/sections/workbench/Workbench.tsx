@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { ArrowUpRight } from "@phosphor-icons/react";
-import { WORKBENCH } from "@/content/content";
+import { CURSOR, WORKBENCH } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
@@ -15,7 +15,14 @@ import { Typewriter } from "./Typewriter";
 function PlaybookArtifact() {
   const p = WORKBENCH.playbook;
   return (
-    <a href={p.href} target="_blank" rel="noopener noreferrer" className="group block h-full">
+    <a
+      href={p.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-cursor="link"
+      data-cursor-label={CURSOR.labels.open}
+      className="group block h-full"
+    >
       <GlassPanel className="pressable flex h-full flex-col overflow-hidden">
         <div className="flex items-center gap-2 border-b px-4 py-2.5 [border-color:var(--edge)]">
           <span className="size-2 rounded-full bg-[var(--edge)]" />

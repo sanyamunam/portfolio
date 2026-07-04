@@ -214,6 +214,7 @@ export function UntanglingMap() {
           <button
             type="button"
             onClick={replay}
+            data-cursor="link"
             className="pressable mt-4 text-sm italic text-muted underline-offset-4 hover:underline"
           >
             {ABOUT.replayLabel}

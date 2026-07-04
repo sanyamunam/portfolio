@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Pause, Play } from "@phosphor-icons/react";
-import type { CaseMedia } from "@/content/content";
+import { CURSOR, type CaseMedia } from "@/content/content";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 
 function Chrome({ url }: { url: string }) {
@@ -32,7 +32,7 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
   return (
     <GlassPanel className="overflow-hidden">
       <Chrome url={url} />
-      <div className="relative">
+      <div className="relative" data-cursor="play" data-cursor-label={CURSOR.labels.play}>
         <video
           ref={videoRef}
           autoPlay

@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
-import { CASES, WORK } from "@/content/content";
+import { CASES, CURSOR, WORK } from "@/content/content";
 import { useLight } from "@/components/light/LightProvider";
 import { EASE } from "@/lib/motion";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
@@ -118,7 +118,11 @@ export function WorkStage() {
   return (
     <section id="work" ref={sectionRef} className="relative">
       <div className="hidden md:block md:h-[420vh]">
-        <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
+        <div
+          className="sticky top-0 flex h-screen flex-col overflow-hidden"
+          data-cursor="case"
+          data-cursor-label={CURSOR.labels.stage}
+        >
           <div className="mx-auto w-full max-w-content px-10 pt-10">
             <QuestionHeading className="max-w-[18ch] !text-3xl lg:!text-4xl">
               {WORK.question}
@@ -138,6 +142,7 @@ export function WorkStage() {
                     type="button"
                     onClick={() => jumpTo(i)}
                     aria-current={current ? "true" : undefined}
+                    data-cursor="nav"
                     className="pressable block text-left"
                   >
                     <span

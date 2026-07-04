@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
-import { INVITATION } from "@/content/content";
+import { CURSOR, INVITATION } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
 import { EASE } from "@/lib/motion";
@@ -59,7 +59,9 @@ export function Invitation() {
         <div className="mt-14 flex items-center gap-5">
           <motion.a
             href={`mailto:${INVITATION.email}`}
-            className="pressable glass inline-block px-8 py-4 text-lg font-medium"
+            data-cursor="absorb"
+            data-cursor-label={CURSOR.labels.say}
+            className="pressable glass cta-glow inline-block px-8 py-4 text-lg font-medium"
             style={{ x: magnet.x, y: magnet.y }}
             {...magnet.handlers}
           >

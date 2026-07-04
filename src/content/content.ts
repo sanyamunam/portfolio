@@ -248,3 +248,14 @@ export const BEATS = [
   { id: "play", label: "Playground" },
   { id: "talk", label: "Say hello" },
 ] as const;
+
+/** Cursor label microcopy (Carried Light). Pointer-only — never read by SRs. */
+export const CURSOR = {
+  labels: {
+    stage: "keep scrolling",
+    caseRead: "read",
+    play: "watch",
+    open: "open",
+    say: "say hello",
+  },
+} as const;

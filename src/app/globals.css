@@ -177,3 +177,12 @@ html.cursor-hidden,
 html.cursor-hidden * {
   cursor: none !important;
 }
+
+/* Invitation CTA: its own light blooms on hover (works in both cursor modes
+   and with the cursor system inactive). */
+.cta-glow {
+  transition: box-shadow 350ms var(--ease);
+}
+.cta-glow:hover {
+  box-shadow: 0 0 0 1px var(--edge), 0 0 36px var(--glow-a);
+}

@@ -192,15 +192,16 @@ export const PLAYGROUND = {
   intro: "Side projects are how I figure out what I actually think. A couple I’m fond of:",
   items: [
     {
-      kicker: "Guide · AI workflows",
-      title: "AI Prompt Guide",
-      body: "A practical guide to getting real work out of AI — written because I got tired of explaining it one designer at a time.",
-      href: "/ai-prompt-guide.html",
+      kicker: "Guide · Designing with AI",
+      title: "Prompt Playbook",
+      body: "A read-it-once playbook for writing prompts that generate client-ready UI — written because I got tired of explaining it one designer at a time.",
+      href: "/prompt-playbook.html",
     },
     {
-      kicker: "Reference · For the team",
+      kicker: "Reference · In the making",
       title: "Laws of UX",
       body: "My running collection of the principles I keep reaching for — mostly so I stop quoting them from memory and getting them slightly wrong.",
+      comingSoon: true,
     },
   ],
   aside: {

@@ -38,6 +38,11 @@ export function PlaygroundBeat() {
                     aria-hidden
                   />
                 )}
+                {item.comingSoon && (
+                  <span className="shrink-0 rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-muted [border-color:var(--edge)]">
+                    Coming soon
+                  </span>
+                )}
               </div>
               <div className="mt-14">
                 <h3 className="font-display text-2xl tracking-tight md:text-3xl">

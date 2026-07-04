@@ -90,7 +90,13 @@ One viewport, dusk world. **Asymmetric 5-tile monochrome glass bento** (one wide
 
 ### 6.4 Beat 4 — The Living Bento *(bento-first)*
 
-The three existing tiles come alive at rest: **AI Prompt Guide** — looping typewriter cycling real prompt fragments; **Laws of UX** — auto-cycling law names (pauses on hover); **"talked out of building"** — slow ticking counter + strikethrough animation. All tiles gain cursor-aware spotlight borders. Loops are isolated leaf components; reduced-motion silences them.
+**Exactly two hobby projects** (per Sanya, 2026-07-04) + the personality aside:
+
+- **Prompt Playbook** *(completed)* — links to `/prompt-playbook.html` (the shipped "Prompt Playbook — Applab · Designing with AI" single-file HTML, replacing the old ai-prompt-guide asset). Tile comes alive with a looping typewriter cycling real prompt fragments.
+- **Laws of UX** *(work in progress)* — must clearly convey it's in the making: "Coming soon" badge (already live), kicker "Reference · In the making", NOT a link; still performs with auto-cycling law names (pauses on hover) as a preview of what's coming.
+- **"Talked out of building" aside** — kept (it's a personality moment, not a project): slow ticking counter + strikethrough animation.
+
+All tiles gain cursor-aware spotlight borders. Loops are isolated leaf components; reduced-motion silences them.
 
 ### 6.5 Beat 5 — Invitation *(kept)*
 

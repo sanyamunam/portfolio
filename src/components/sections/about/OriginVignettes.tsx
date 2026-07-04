@@ -1,5 +1,6 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { ABOUT } from "@/content/content";
 import { EASE } from "@/lib/motion";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
@@ -9,7 +10,7 @@ import { Glyph } from "./glyphs";
 
 /** M1: the thread strings the three origin moments like beads. */
 function BeadThread() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   return (
     <svg
       viewBox="0 0 1200 120"
@@ -33,7 +34,7 @@ function BeadThread() {
 }
 
 export function OriginVignettes() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   return (
     <div className="relative">
       <QuestionHeading className="max-w-[15ch]">{ABOUT.originQuestion}</QuestionHeading>

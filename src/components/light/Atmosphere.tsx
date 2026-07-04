@@ -5,9 +5,9 @@ import {
   useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
-  useReducedMotion,
   useSpring,
 } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { sampleLight, type LightTokens } from "@/lib/lightScript";
 import { useLight } from "./LightProvider";
 
@@ -30,7 +30,7 @@ function applyTokens(t: LightTokens) {
 
 export function Atmosphere() {
   const { temp } = useLight();
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
 
   // Slow, cinematic grade between worlds (~2s settle). Reduced motion: near-instant.
   const smooth = useSpring(

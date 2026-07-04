@@ -1,6 +1,7 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 type GlyphName = "workshop" | "phone" | "book";
 
 /** [d, strokeWidth][] per glyph — drawn in order. viewBox 0 0 64 64. */
@@ -37,7 +38,7 @@ const GLYPHS: Record<GlyphName, [string, number][]> = {
 };
 
 export function Glyph({ name, delay = 0 }: { name: GlyphName; delay?: number }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const paths = GLYPHS[name];
   return (
     <svg viewBox="0 0 64 64" fill="none" className="h-14 w-14 overflow-visible" aria-hidden>

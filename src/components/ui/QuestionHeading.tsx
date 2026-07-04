@@ -1,5 +1,6 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { EASE } from "@/lib/motion";
 
 /**
@@ -14,7 +15,7 @@ export function QuestionHeading({
   children: string;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const words = children.split(" ");
   return (
     <motion.h2

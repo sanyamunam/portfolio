@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { ABOUT } from "@/content/content";
 import { EASE } from "@/lib/motion";
 
@@ -85,7 +85,7 @@ function MapChip({
 }
 
 export function UntanglingMap() {
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useReducedMotionSafe();
   const ref = useRef<HTMLDivElement>(null);
   const [organized, setOrganized] = useState(reduce);
   const [seen, setSeen] = useState(false);

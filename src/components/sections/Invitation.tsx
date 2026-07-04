@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { INVITATION } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
@@ -13,7 +14,7 @@ import { useMagnetic } from "@/lib/useMagnetic";
 function ThreadBow() {
   const ref = useRef<SVGSVGElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.8 });
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   return (
     <svg
       ref={ref}

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { BENTO } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
@@ -85,7 +86,7 @@ function DomainTile({
 export function BeliefsBento() {
   const ref = useRef<HTMLElement>(null);
   useSectionLight(ref, TEMP.messyMiddle, 0.35);
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useReducedMotionSafe();
   const [spot, setSpot] = useState<number | null>(null);
   const pausedRef = useRef(false);
 

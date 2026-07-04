@@ -2,11 +2,11 @@
 import { useId, useRef } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useSpring,
 } from "framer-motion";
 
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 const PATHS = {
   // knotted mess (case openings)
   tangle:
@@ -35,7 +35,7 @@ export function ThreadSegment({
   stroke?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const gradId = useId();
   const { scrollYProgress } = useScroll({
     target: ref,

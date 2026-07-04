@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { WORKBENCH } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
@@ -57,7 +58,7 @@ function PlaybookArtifact() {
 /** Still on the workbench: the thread hasn't finished drawing this one. */
 function WipCard() {
   const w = WORKBENCH.wip;
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [li, setLi] = useState(0);
   const paused = useRef(false);
 
@@ -121,7 +122,7 @@ function WipCard() {
 /** Margin strip: the features she talked teams out of building, struck one by one. */
 function Aside() {
   const a = WORKBENCH.aside;
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [struck, setStruck] = useState(reduce ? a.strikes.length : 0);
 
   return (

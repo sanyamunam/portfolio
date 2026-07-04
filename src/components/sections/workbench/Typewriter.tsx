@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 export function Typewriter({ phrases }: { phrases: string[] }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [pi, setPi] = useState(0);
   const [len, setLen] = useState(0);
   const [deleting, setDeleting] = useState(false);

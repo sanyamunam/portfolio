@@ -3,9 +3,9 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useSpring,
 } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import type { ReactNode } from "react";
 
 export function GlassPanel({
@@ -15,7 +15,7 @@ export function GlassPanel({
   children: ReactNode;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const rawX = useMotionValue(50);
   const x = useSpring(rawX, { stiffness: 80, damping: 20 });
   const sheen = useMotionTemplate`radial-gradient(40% 60% at ${x}% 0%, var(--edge), transparent 70%)`;

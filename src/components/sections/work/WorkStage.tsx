@@ -5,10 +5,10 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { CASES, WORK } from "@/content/content";
 import { useLight } from "@/components/light/LightProvider";
 import { EASE } from "@/lib/motion";
@@ -59,7 +59,7 @@ const FRAG_POSE: [number, number, number][] = [
 export function WorkStage() {
   const sectionRef = useRef<HTMLElement>(null);
   const { temp } = useLight();
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useReducedMotionSafe();
   const [active, setActive] = useState<{ idx: number; phase: Phase } | null>(
     null,
   );

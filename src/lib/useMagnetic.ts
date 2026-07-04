@@ -1,5 +1,6 @@
 "use client";
-import { useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { useMotionValue, useSpring } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import type { PointerEvent } from "react";
 
 /**
@@ -8,7 +9,7 @@ import type { PointerEvent } from "react";
  * No-ops under reduced motion or coarse pointers.
  */
 export function useMagnetic(strength = 6) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
   const x = useSpring(rawX, { stiffness: 150, damping: 18 });

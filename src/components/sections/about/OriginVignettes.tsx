@@ -5,8 +5,7 @@ import { ABOUT } from "@/content/content";
 import { EASE } from "@/lib/motion";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { GlassPanel } from "@/components/ui/GlassPanel";
-import { Glyph } from "./glyphs";
+import { VignetteCard } from "./VignetteCard";
 
 export function OriginVignettes() {
   const reduce = useReducedMotionSafe();
@@ -22,13 +21,7 @@ export function OriginVignettes() {
       <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
         {ABOUT.moments.map((m, i) => (
           <Reveal key={m.title} delay={i * 0.1} className={["md:mt-0", "md:mt-10", "md:mt-4"][i]}>
-            <GlassPanel className="flex h-full flex-col p-7">
-              <Glyph name={m.glyph} delay={0.3 + i * 0.25} />
-              <p className="mt-5 text-xs uppercase tracking-[0.18em] text-muted">{m.kicker}</p>
-              <h3 className="mt-2 font-display text-2xl tracking-tight">{m.title}</h3>
-              <p className="mt-3 leading-relaxed text-muted">{m.body}</p>
-              <p className="mt-auto pt-6 font-hand text-2xl text-ink">{m.tagline}</p>
-            </GlassPanel>
+            <VignetteCard m={m} index={i} />
           </Reveal>
         ))}
       </div>

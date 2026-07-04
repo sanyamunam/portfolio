@@ -5,7 +5,7 @@ import { GREETING } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
 import { EASE } from "@/lib/motion";
-import { ThreadSegment } from "@/components/thread/ThreadSegment";
+import { HeroIllustration } from "./HeroIllustration";
 
 export function Greeting() {
   const ref = useRef<HTMLElement>(null);
@@ -27,10 +27,10 @@ export function Greeting() {
         {GREETING.label}
       </motion.p>
 
-      <ThreadSegment
-        variant="curl"
-        className="absolute right-4 top-24 hidden h-[70vh] w-40 md:block lg:right-16"
-      />
+      {/* Sanya's own continuous line draws itself into her, then travels on
+          through every beat of the site. Overlaps the atmosphere's glow so it
+          feels lit, not placed. */}
+      <HeroIllustration className="absolute right-0 top-1/2 hidden aspect-[571/434] w-[54%] max-w-[680px] -translate-y-1/2 md:block" />
 
       <div className="max-w-[24ch]">
         <motion.h1

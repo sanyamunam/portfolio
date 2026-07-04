@@ -84,6 +84,52 @@ body {
   }
 }
 
+/* Hero line illustration — the flowing-light palette (blush / orchid /
+   champagne / ivory / lavender / soft turquoise), shared with the thread
+   segments so the hero's line and the site's threads read as one stroke. */
+:root {
+  --hf-blush: oklch(0.66 0.12 10);
+  --hf-orchid: oklch(0.58 0.14 330);
+  --hf-champagne: oklch(0.68 0.1 85);
+  --hf-ivory: oklch(0.8 0.05 80);
+  --hf-lavender: oklch(0.6 0.08 300);
+  --hf-turquoise: oklch(0.62 0.09 200);
+}
+
+.hero-art svg {
+  transition: filter 1.4s ease;
+}
+.hero-art:hover svg {
+  /* the line catches the light */
+  filter: drop-shadow(0 0 9px oklch(0.75 0.1 340 / 0.35));
+}
+
+.hero-glow {
+  stroke: none;
+  fill: oklch(0.9 0.07 85 / 0.45);
+  filter: blur(16px);
+  animation: hero-glow-pulse 5s ease-in-out infinite alternate;
+}
+@keyframes hero-glow-pulse {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow {
+    animation: none;
+  }
+  .hero-art svg,
+  .hero-art:hover svg {
+    transition: none;
+    filter: none;
+  }
+}
+
 /* Film grain — fixed, pointer-events-none layer only (perf rule) */
 .grain {
   opacity: 0.05;

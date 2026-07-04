@@ -55,75 +55,81 @@ export function EmberCursor() {
   return (
     <>
       <motion.div className="absolute left-0 top-0" style={{ x: sx, y: sy, opacity }}>
-        <motion.div
-          style={{ scale: pressScale }}
-          animate={{ scale: absorbed ? 0.4 : 1, opacity: absorbed ? 0 : 1 }}
-          transition={{ duration: 0.32, ease: EASE }}
-        >
-          <motion.div style={{ rotate: angle, scaleX: stretch, scaleY: squash }}>
-            {/* the bead — visible in default + absorb-approach */}
+        {/* Press spring and absorb tween live on SEPARATE wrappers: with the
+            external pressScale MotionValue in style.scale, animate.scale would
+            retarget that same value each frame and fight the spring (and leave
+            absorb-while-pressed stranded at 1). Nested scales compose
+            multiplicatively, which is the intent. */}
+        <motion.div style={{ scale: pressScale }}>
+          <motion.div
+            animate={{ scale: absorbed ? 0.4 : 1, opacity: absorbed ? 0 : 1 }}
+            transition={{ duration: 0.32, ease: EASE }}
+          >
+            <motion.div style={{ rotate: angle, scaleX: stretch, scaleY: squash }}>
+              {/* the bead — visible in default + absorb-approach */}
+              <motion.div
+                className="absolute rounded-full"
+                animate={{ opacity: ring || halo ? 0 : 1, scale: ring || halo ? 0.4 : 1 }}
+                transition={{ duration: 0.2, ease: EASE }}
+                style={{
+                  width: 10,
+                  height: 10,
+                  left: -5,
+                  top: -5,
+                  background:
+                    "radial-gradient(circle at 35% 35%, oklch(1 0 0 / 0.9), var(--glow-a) 60%, transparent)",
+                  boxShadow: "0 0 14px 2px var(--glow-a), inset 0 0 0 1px var(--edge)",
+                }}
+              />
+            </motion.div>
+
+            {/* the ring — link/nav/case/play */}
             <motion.div
               className="absolute rounded-full"
-              animate={{ opacity: ring || halo ? 0 : 1, scale: ring || halo ? 0.4 : 1 }}
+              initial={false}
+              animate={{
+                opacity: ring ? 1 : 0,
+                width: ring || 26,
+                height: ring || 26,
+                left: -(ring || 26) / 2,
+                top: -(ring || 26) / 2,
+              }}
               transition={{ duration: 0.2, ease: EASE }}
               style={{
-                width: 10,
-                height: 10,
-                left: -5,
-                top: -5,
-                background:
-                  "radial-gradient(circle at 35% 35%, oklch(1 0 0 / 0.9), var(--glow-a) 60%, transparent)",
-                boxShadow: "0 0 14px 2px var(--glow-a), inset 0 0 0 1px var(--edge)",
+                border: "1.5px solid color-mix(in oklch, var(--ink) 45%, transparent)",
+                boxShadow: "0 0 14px 0 var(--glow-a)",
               }}
-            />
-          </motion.div>
+            >
+              {/* play glyph inside the ring */}
+              <motion.span
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                animate={{ opacity: kind === "play" ? 0.8 : 0 }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderTop: "5px solid transparent",
+                  borderBottom: "5px solid transparent",
+                  borderLeft: "8px solid var(--ink)",
+                  marginLeft: 1,
+                }}
+              />
+            </motion.div>
 
-          {/* the ring — link/nav/case/play */}
-          <motion.div
-            className="absolute rounded-full"
-            initial={false}
-            animate={{
-              opacity: ring ? 1 : 0,
-              width: ring || 26,
-              height: ring || 26,
-              left: -(ring || 26) / 2,
-              top: -(ring || 26) / 2,
-            }}
-            transition={{ duration: 0.2, ease: EASE }}
-            style={{
-              border: "1.5px solid color-mix(in oklch, var(--ink) 45%, transparent)",
-              boxShadow: "0 0 14px 0 var(--glow-a)",
-            }}
-          >
-            {/* play glyph inside the ring */}
-            <motion.span
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-              animate={{ opacity: kind === "play" ? 0.8 : 0 }}
-              transition={{ duration: 0.15 }}
+            {/* the halo — art */}
+            <motion.div
+              className="absolute rounded-full"
+              animate={{ opacity: halo ? 0.55 : 0, scale: halo ? 1 : 0.3 }}
+              transition={{ duration: 0.25, ease: EASE }}
               style={{
-                width: 0,
-                height: 0,
-                borderTop: "5px solid transparent",
-                borderBottom: "5px solid transparent",
-                borderLeft: "8px solid var(--ink)",
-                marginLeft: 1,
+                width: 64,
+                height: 64,
+                left: -32,
+                top: -32,
+                background: "radial-gradient(circle, var(--glow-a), transparent 70%)",
               }}
             />
           </motion.div>
-
-          {/* the halo — art */}
-          <motion.div
-            className="absolute rounded-full"
-            animate={{ opacity: halo ? 0.55 : 0, scale: halo ? 1 : 0.3 }}
-            transition={{ duration: 0.25, ease: EASE }}
-            style={{
-              width: 64,
-              height: 64,
-              left: -32,
-              top: -32,
-              background: "radial-gradient(circle, var(--glow-a), transparent 70%)",
-            }}
-          />
         </motion.div>
       </motion.div>
       <CursorLabel />

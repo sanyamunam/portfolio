@@ -30,10 +30,20 @@ function subscribeMode(onChange: () => void) {
   };
 }
 function readMode(): CursorMode {
-  return localStorage.getItem(MODE_KEY) === "lens" ? "lens" : "ember";
+  // Chrome throws on ANY localStorage access when cookies are blocked, and
+  // this runs during render (useSyncExternalStore snapshot) — never throw.
+  try {
+    return localStorage.getItem(MODE_KEY) === "lens" ? "lens" : "ember";
+  } catch {
+    return "ember";
+  }
 }
 function writeMode(m: CursorMode) {
-  localStorage.setItem(MODE_KEY, m);
+  try {
+    localStorage.setItem(MODE_KEY, m);
+  } catch {
+    // Storage blocked — the mode just won't persist across reloads.
+  }
   modeListeners.forEach((cb) => cb());
 }
 
@@ -96,17 +106,41 @@ export function CursorProvider() {
       });
     };
     const onOut = (e: PointerEvent) => {
-      if (e.relatedTarget === null) visible.set(0);
+      // relatedTarget null = pointer left the window: hide the bead AND drop
+      // the target so the label chip doesn't linger at the exit point.
+      if (e.relatedTarget === null) {
+        visible.set(0);
+        lastEl.current = null;
+        setTarget(null);
+      }
+    };
+    // Lenis scrolls the page under a stationary pointer — no pointer events
+    // fire, but the target's viewport rect moves. Re-measure so the soft-snap
+    // pull (worst for absorb, pull=1) never aims at a phantom point. This is
+    // a scroll-frame setTarget, not a pointermove one.
+    const onScroll = () => {
+      const el = lastEl.current;
+      if (!el) return;
+      const d = (el as HTMLElement).dataset;
+      setTarget({
+        kind: (d.cursor as CursorKind) ?? "default",
+        label: d.cursorLabel,
+        rect: el.getBoundingClientRect(),
+      });
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerdown", onDown, { passive: true });
     window.addEventListener("pointerup", onUp, { passive: true });
+    window.addEventListener("pointercancel", onUp, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("pointerover", onOver, { passive: true });
     document.addEventListener("pointerout", onOut, { passive: true });
     return () => {
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("pointerover", onOver);
       document.removeEventListener("pointerout", onOut);
       lastEl.current = null;
@@ -119,7 +153,9 @@ export function CursorProvider() {
   return (
     <CursorContext.Provider value={{ x, y, pressed, visible, target, mode, setMode }}>
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[9999]">
-        <EmberCursor />
+        {/* Lens skin lands in the next task; until then only ember renders
+            (a saved "lens" preference must not summon a second cursor). */}
+        {mode === "ember" ? <EmberCursor /> : null}
       </div>
     </CursorContext.Provider>
   );

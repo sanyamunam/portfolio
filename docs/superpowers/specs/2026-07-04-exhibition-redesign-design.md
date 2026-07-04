@@ -33,13 +33,14 @@ The shipped V3 is a beautiful presentation, not yet an interactive experience:
 | Beat | Now | Target | Form |
 |---|---|---|---|
 | 0 Hero | 1.0 vh-units | 1.0 | untouched |
-| 1 What I do | ~2.0 | ~1.2 | Untangling Map |
+| 1 About Sanya | ~3.4 (What-I-do + Story combined) | ~2.0 | Origin Vignettes → Untangling Map + brief |
 | 2 Work | ~14.6 | 4.2 scroll → pinned 1.0 stage | Case Stage |
 | 3 Messy middle | ~5.3 | ~1.2 | Glass Bento |
-| 4 Story | ~1.4 | ~0.9 | Illustrated Vignettes |
-| 5 Playground | ~1.5 | ~1.0 | Living Bento |
-| 6 Invitation | 1.0 | 1.0 | kept + magnetic CTA |
-| **Total** | **~23** | **~10.5** | ≈55% shorter |
+| 4 Playground | ~1.5 | ~1.0 | Living Bento |
+| 5 Invitation | 1.0 | 1.0 | kept + magnetic CTA |
+| **Total** | **~23** | **~10.4** | ≈55% shorter |
+
+**Beat order note (Sanya, 2026-07-04):** the old Beat 1 (What I do) and Beat 4 (Story) merge into ONE "About Sanya" section directly after the Hero — origin story FIRST (how she was inspired into UX), then what she does + her skills. Nav shrinks to six nodes: hello · about · work · how · play · talk.
 
 Every stopped viewport must read as a finished composition — no screens that are mostly empty or top-loaded.
 
@@ -47,17 +48,29 @@ Every stopped viewport must read as a finished composition — no screens that a
 
 Continuity is a shared visual grammar (the `--hf-*` flowing-gradient stroke, consistent weight, entry/exit stubs aligned on a shared x-lane at section boundaries), not literally one DOM path.
 
-- **M1 · Hero → Tangle.** The illustration's tail extends downward with early scroll (scrubbed stub) and feeds Beat 1's tangle — the line that drew her drags the mess in behind it.
+- **M1 · Hero → Beads → Tangle.** The illustration's tail extends downward with early scroll (scrubbed stub), links the three origin vignettes like beads on a string, then feeds the untangling map's tangle — the line that drew her carries her story, then drags the mess in behind it.
 - **M2 · Case connector.** Inside the pinned stage, a horizontal thread behind the content knots during each case's mess phase and pulls straight at its resolution (scrub-linked), flashing turquoise at each outcome. Four knots, four releases.
-- **M3 · Map → beads → bow.** The thread draws the bento's grid lines as Beat 3 enters, links the three story vignettes like beads, traces one Playground tile edge, then ties the existing bow at the CTA.
+- **M3 · Grid → tile → bow.** The thread draws the bento's grid lines as Beat 3 enters, traces one Playground tile edge, then ties the existing bow at the CTA.
 
 Reduced motion: every segment renders resolved and static.
 
 ## 6. Beat designs
 
-### 6.1 Beat 1 — The Untangling Map *(interaction-first)*
+### 6.1 Beat 1 — About Sanya *(story-first, then interaction-first; ~2.0 viewports, two movements)*
 
-Split composition. **Backdrop/right: a living tangle** — ~12 glass node-chips labeled with real mess-vocabulary ("14 stakeholders", "3 vendors", "legacy systems", "no single owner", "conflicting KPIs"…) joined by knotted gradient threads (fed by M1). On section entry the tangle **organizes itself**: nodes glide into a four-stage flow — *Listen → Untangle → Align → Ship* — and threads pull straight. Cursor proximity perturbs nearby nodes (springy, ±4px); a small "make it messy again" affordance replays the organization. **Left:** one kept short paragraph (2–3 sentences distilled from the current two) + the brief card with upgraded per-row hover states. SR fallback: visually-hidden stage list. Reduced motion: organized, static.
+One section, one nav node ("About"), two conversation questions in sequence — inspiration before practice.
+
+**Movement 1 — The Origin (illustrated vignettes).** Question: *"Who taught you to see like this?"* The three influences that moved her into UX, as glass cards linked by the thread like beads (M1), each with a small hand-authored **line-art glyph in the hero's stroke language** that draws itself on entry:
+
+1. **A workshop** — attending her first design-thinking workshop (sticky-note wall glyph).
+2. **An app** — experiencing the impact a really good interface makes: watching her dad use Google Pay (phone-with-delighted-tap glyph).
+3. **A book** — the Steve Jobs biography: realizing how central design is to the success of a product, and in turn the company (open-book glyph). *(Body copy updated to carry this design-drives-product-success framing.)*
+
+Titles + two-sentence bodies kept from the current STORY content (book body revised per above). The closing line *"Mostly, I just love figuring out people."* becomes the kinetic-type bridge into Movement 2.
+
+**Movement 2 — The Untangling Map (what she does + skills).** Question: *"So… what do you actually do?"* Split composition. **Backdrop/right: a living tangle** — ~12 glass node-chips labeled with real mess-vocabulary ("14 stakeholders", "3 vendors", "legacy systems", "no single owner", "conflicting KPIs"…) joined by knotted gradient threads, fed by the vignette bead-string. On entry the tangle **organizes itself**: nodes glide into a four-stage flow — *Listen → Untangle → Align → Ship* — and threads pull straight. Cursor proximity perturbs nearby nodes (springy, ±4px); a "make it messy again" affordance replays it. **Left:** one kept short paragraph + the brief card (roles · base · focus areas) with upgraded per-row hover states — this is the section's **skills display**; the full per-domain skill lists remain with their beliefs in the Beat 3 bento. SR fallback: visually-hidden stage list. Reduced motion: organized, static.
+
+Light: the whole About section sits in the warm world (temp ≈ 0.3). The old dedicated ember beat disappears with the merge; the dusk→playground transition still passes through the warm hues naturally on its way back to golden.
 
 ### 6.2 Beat 2 — The Case Stage *(cinema-first)*
 
@@ -75,15 +88,11 @@ Mobile: no pin — four compact stacked case cards (fragments collapse to a tigh
 
 One viewport, dusk world. **Asymmetric 5-tile monochrome glass bento** (one wide anchor tile carrying the beat's closing thought + four standard tiles), one tile per domain. At rest each tile shows its turquoise domain kicker + skill list; hover/focus **crossfades the tile face to the belief statement** (kept verbatim). Idle: a soft spotlight drifts tile-to-tile so the grid performs unattended; any interaction takes over. The thread draws the grid's dividing lines on entry (M3). Tiles are keyboard-focusable; beliefs+skills mirrored semantically. Explicitly NOT a colour bento (V2 lesson: she rejected colour tiles; glass + accent kickers only).
 
-### 6.4 Beat 4 — Illustrated Vignettes *(illustration-first)*
-
-Three glass cards linked by the thread like beads. Each card: a small hand-authored **line-art glyph in the hero's stroke language** (sticky-note wall · phone with one delighted tap · open book) that draws itself on entry, above the kept title + two-sentence body. The closing line *"Mostly, I just love figuring out people."* arrives as kinetic type (word stagger). One composed viewport.
-
-### 6.5 Beat 5 — The Living Bento *(bento-first)*
+### 6.4 Beat 4 — The Living Bento *(bento-first)*
 
 The three existing tiles come alive at rest: **AI Prompt Guide** — looping typewriter cycling real prompt fragments; **Laws of UX** — auto-cycling law names (pauses on hover); **"talked out of building"** — slow ticking counter + strikethrough animation. All tiles gain cursor-aware spotlight borders. Loops are isolated leaf components; reduced-motion silences them.
 
-### 6.6 Beat 6 — Invitation *(kept)*
+### 6.5 Beat 5 — Invitation *(kept)*
 
 Composition unchanged. CTA becomes magnetic (≤6px pull toward cursor); bow unchanged; footer unchanged.
 
@@ -114,5 +123,5 @@ Hero changes beyond additive polish · LightScript/Atmosphere changes · deploym
 2. Each middle beat has a distinct composition + at least one meaningful interaction; the heading→paragraph→card rhythm is gone.
 3. The thread visibly travels the whole journey (M1–M3) and still turns turquoise only at clarity moments.
 4. The light arc measures the same at every beat as the shipped V3 (goldens/valleys/dusk/ember exact).
-5. Ideas land visually before they're read — a visitor who reads nothing still understands: she untangles messes (Beat 1), took four organizations through it (Beat 2), works five disciplines as one loop (Beat 3).
+5. Ideas land visually before they're read — a visitor who reads nothing still understands: how she found UX and that she untangles messes (Beat 1), took four organizations through it (Beat 2), works five disciplines as one loop (Beat 3).
 6. Full keyboard + reduced-motion + SR parity; 60fps scrub; zero console errors.

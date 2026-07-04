@@ -31,8 +31,14 @@ export function ThreadNav() {
     const el = document.getElementById(id);
     if (!el) return;
     const lenis = (window as unknown as { __lenis?: Lenis }).__lenis;
-    if (lenis) lenis.scrollTo(el, { duration: 1.2 });
-    else el.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(el, { duration: 1.2 });
+      return;
+    }
+    // Lenis is absent exactly when prefers-reduced-motion disabled it (see
+    // SmoothScroll) — so this fallback must not animate for those users.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView(reduce ? undefined : { behavior: "smooth" });
   };
 
   return (
@@ -50,7 +56,7 @@ export function ThreadNav() {
                 onClick={() => go(b.id)}
                 aria-label={b.label}
                 aria-current={current ? "true" : undefined}
-                className="pressable relative block size-4 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                className="pressable relative block size-6 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
               >
                 <span
                   className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 ${

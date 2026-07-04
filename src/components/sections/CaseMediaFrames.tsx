@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Pause, Play } from "@phosphor-icons/react";
 import type { CaseMedia } from "@/content/content";
 import { GlassPanel } from "@/components/ui/GlassPanel";
@@ -17,18 +17,17 @@ function Chrome({ url }: { url: string }) {
 
 export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const toggle = () => {
     const v = videoRef.current;
     if (!v) return;
-    if (v.paused) {
-      v.play();
-      setPlaying(true);
-    } else {
-      v.pause();
-      setPlaying(false);
-    }
+    if (v.paused) void v.play().catch(() => {});
+    else v.pause();
   };
+
+  useEffect(() => {
+    void videoRef.current?.play().catch(() => {});
+  }, []);
 
   return (
     <GlassPanel className="overflow-hidden">
@@ -40,9 +39,11 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           poster={media.poster}
           className="block w-full"
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
         >
           <source src={media.webm} type="video/webm" />
           <source src={media.mp4} type="video/mp4" />

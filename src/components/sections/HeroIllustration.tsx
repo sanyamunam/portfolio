@@ -32,6 +32,7 @@ const MAIN_KEYS = [0, 0.1, 0.27, 0.44, 0.66, 0.85, 1];
 export function HeroIllustration({ className = "" }: { className?: string }) {
   const reduce = useReducedMotion() ?? false;
   const gradId = useId();
+  const maskId = useId();
 
   // Cursor proximity: the drawing leans gently toward the pointer.
   const rawX = useMotionValue(0);
@@ -98,40 +99,53 @@ export function HeroIllustration({ className = "" }: { className?: string }) {
             <ellipse className="hero-glow" cx="120" cy="330" rx="85" ry="55" />
           </motion.g>
 
-          <g
-            stroke={`url(#${gradId})`}
-            strokeWidth={1.3}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* the single continuous line becomes the illustration */}
-            <motion.path
-              d={HERO_PATHS[0]}
-              initial={{ pathLength: reduce ? 1 : 0 }}
-              animate={{ pathLength: reduce ? 1 : MAIN_KEYS }}
-              transition={
-                reduce
-                  ? { duration: 0 }
-                  : { delay: START, duration: MAIN_DUR, times: MAIN_TIMES, ease: "easeInOut" }
-              }
-            />
-            {/* small details settle in as the main stroke finishes */}
-            {HERO_PATHS.slice(1).map((d, i) => (
+          {/* The reveal mask: the same paths stroked wide in white, drawing
+              along the line's own trajectory. The FILLED artwork below is
+              uncovered pen-stroke by pen-stroke — original solid line weight,
+              still hand-drawn on load. */}
+          <mask id={maskId}>
+            <g
+              stroke="#fff"
+              strokeWidth={10}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            >
               <motion.path
-                key={d.slice(0, 24)}
-                d={d}
-                initial={{ pathLength: reduce ? 1 : 0, opacity: reduce ? 1 : 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
+                d={HERO_PATHS[0]}
+                initial={{ pathLength: reduce ? 1 : 0 }}
+                animate={{ pathLength: reduce ? 1 : MAIN_KEYS }}
                 transition={
                   reduce
                     ? { duration: 0 }
-                    : {
-                        delay: DETAIL_START + i * DETAIL_STAGGER,
-                        duration: DETAIL_DUR,
-                        ease: "easeInOut",
-                      }
+                    : { delay: START, duration: MAIN_DUR, times: MAIN_TIMES, ease: "easeInOut" }
                 }
               />
+              {HERO_PATHS.slice(1).map((d, i) => (
+                <motion.path
+                  key={d.slice(0, 24)}
+                  d={d}
+                  initial={{ pathLength: reduce ? 1 : 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : {
+                          delay: DETAIL_START + i * DETAIL_STAGGER,
+                          duration: DETAIL_DUR,
+                          ease: "easeInOut",
+                        }
+                  }
+                />
+              ))}
+            </g>
+          </mask>
+
+          {/* the artwork itself: filled exactly like the Illustrator original,
+              inked in the flowing gradient */}
+          <g fill={`url(#${gradId})`} mask={`url(#${maskId})`}>
+            {HERO_PATHS.map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
             ))}
           </g>
         </svg>

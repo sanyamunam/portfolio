@@ -24,7 +24,7 @@ The shipped V3 is a beautiful presentation, not yet an interactive experience:
 
 ## 3. Approved direction
 
-**"The Exhibition" + thread-as-spine (A+B hybrid).** Each middle beat becomes a distinct installation with its own interaction model — interaction-first → cinema-first → diagram-first → illustration-first → bento-first — while the continuous thread line morphs through the whole journey as first-class connective tissue.
+**"The Exhibition" + thread-as-spine (A+B hybrid).** Each middle beat becomes a distinct installation with its own interaction model — story-then-interaction (About) → cinema (Work) → diagram (Bento) → object (Workbench) — while the continuous thread line morphs through the whole journey as first-class connective tissue.
 
 **Decisions locked in brainstorming:** pinned scrubbed case stage · pseudo-3D only (no WebGL/R3F) · full copy license, but balanced — paragraphs are reduced and restructured into UI patterns, not eliminated · Beat 3 = glass bento (not orbital constellation).
 
@@ -50,7 +50,7 @@ Continuity is a shared visual grammar (the `--hf-*` flowing-gradient stroke, con
 
 - **M1 · Hero → Beads → Tangle.** The illustration's tail extends downward with early scroll (scrubbed stub), links the three origin vignettes like beads on a string, then feeds the untangling map's tangle — the line that drew her carries her story, then drags the mess in behind it.
 - **M2 · Case connector.** Inside the pinned stage, a horizontal thread behind the content knots during each case's mess phase and pulls straight at its resolution (scrub-linked), flashing turquoise at each outcome. Four knots, four releases.
-- **M3 · Grid → tile → bow.** The thread draws the bento's grid lines as Beat 3 enters, traces one Playground tile edge, then ties the existing bow at the CTA.
+- **M3 · Grid → unfinished outline → bow.** The thread draws the bento's grid lines as Beat 3 enters; in Beat 4 it IS the partially-drawn Laws of UX outline — visibly stopping mid-stroke (a work the line hasn't finished drawing); then it ties the existing bow at the CTA.
 
 Reduced motion: every segment renders resolved and static.
 
@@ -88,15 +88,15 @@ Mobile: no pin — four compact stacked case cards (fragments collapse to a tigh
 
 One viewport, dusk world. **Asymmetric 5-tile monochrome glass bento** (one wide anchor tile carrying the beat's closing thought + four standard tiles), one tile per domain. At rest each tile shows its turquoise domain kicker + skill list; hover/focus **crossfades the tile face to the belief statement** (kept verbatim). Idle: a soft spotlight drifts tile-to-tile so the grid performs unattended; any interaction takes over. The thread draws the grid's dividing lines on entry (M3). Tiles are keyboard-focusable; beliefs+skills mirrored semantically. Explicitly NOT a colour bento (V2 lesson: she rejected colour tiles; glass + accent kickers only).
 
-### 6.4 Beat 4 — The Living Bento *(bento-first)*
+### 6.4 Beat 4 — The Workbench Pair *(object-first)*
 
-**Exactly two hobby projects** (per Sanya, 2026-07-04) + the personality aside:
+**Exactly two hobby projects** (per Sanya, 2026-07-04), presented as objects at honestly different stages — the asymmetry IS the design. Bento explicitly rejected (too thin with two cells).
 
-- **Prompt Playbook** *(completed)* — links to `/prompt-playbook.html` (the shipped "Prompt Playbook — Applab · Designing with AI" single-file HTML, replacing the old ai-prompt-guide asset). Tile comes alive with a looping typewriter cycling real prompt fragments.
-- **Laws of UX** *(work in progress)* — must clearly convey it's in the making: "Coming soon" badge (already live), kicker "Reference · In the making", NOT a link; still performs with auto-cycling law names (pauses on hover) as a preview of what's coming.
-- **"Talked out of building" aside** — kept (it's a personality moment, not a project): slow ticking counter + strikethrough animation.
+- **Prompt Playbook** *(the finished artifact, larger)* — a glass browser frame showing a **live miniature of the actual shipped page** (`/prompt-playbook.html` — a scaled, non-interactive iframe or faithful static preview; the real thing, not a mockup), with title, one-line body, and the open-in-new-tab link. Subtle looping typewriter in the frame's chrome bar cycling real prompt fragments.
+- **Laws of UX** *(still on the workbench, smaller)* — a card rendered as a **partially-drawn line outline** in the thread's stroke language: the card's border visibly stops mid-draw (the site's motif — the line simply hasn't finished drawing it yet), auto-cycling law names ghost through the unfinished interior (pauses on hover), quiet "in the making" note. NOT a link. Reduced motion: outline shown at its partial state, static; names static.
+- **"Talked out of building" aside** — kept as a small margin strip beneath the pair (personality moment, not a project): slow ticking counter + strikethrough animation.
 
-All tiles gain cursor-aware spotlight borders. Loops are isolated leaf components; reduced-motion silences them.
+Both objects gain cursor-aware spotlight treatment. Loops are isolated leaf components; reduced-motion silences them. SR: both projects exposed as a semantic list with status ("available" / "in progress").
 
 ### 6.5 Beat 5 — Invitation *(kept)*
 

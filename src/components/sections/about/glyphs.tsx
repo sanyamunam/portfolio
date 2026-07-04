@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 type GlyphName = "workshop" | "phone" | "book";
 
+/** Indices into GLYPHS — keep in sync when editing the path arrays below. */
+const WORKSHOP_TILTED_NOTE = 4;
+const BOOK_TEXT_LINES = [2, 3] as const;
+const PHONE_TICK_D = "M 28 33 l 3 3 l 6 -7";
+
 /** [d, strokeWidth][] per glyph — drawn in order. viewBox 0 0 64 64. */
 const GLYPHS: Record<GlyphName, [string, number][]> = {
   workshop: [
@@ -24,7 +29,7 @@ const GLYPHS: Record<GlyphName, [string, number][]> = {
     ["M 32 32 m -5 0 a 5 5 0 1 0 10 0 a 5 5 0 1 0 -10 0", 1.4],
     ["M 44 20 l 4 -4 M 47 28 l 5 0 M 40 14 l 1 -5", 1.4],
     // the tick of a payment landing
-    ["M 28 33 l 3 3 l 6 -7", 2],
+    [PHONE_TICK_D, 2],
   ],
   book: [
     // open spread
@@ -51,7 +56,8 @@ export function Glyph({
   return (
     <svg viewBox="0 0 64 64" fill="none" className="h-14 w-14 overflow-visible" aria-hidden>
       {paths.map(([d, w], i) => {
-        const isBookLine = name === "book" && (i === 2 || i === 3) && !reduce;
+        const isBookLine =
+          name === "book" && (BOOK_TEXT_LINES as readonly number[]).includes(i) && !reduce;
 
         const path = (
           <motion.path
@@ -72,7 +78,7 @@ export function Glyph({
                   ? {
                       pathLength: { delay: delay + i * 0.18, duration: 0.5, ease: "easeInOut" },
                       strokeOpacity: hovered
-                        ? { delay: (i - 2) * 0.15, duration: 0.6, ease: "easeInOut" }
+                        ? { delay: (i - BOOK_TEXT_LINES[0]) * 0.15, duration: 0.6, ease: "easeInOut" }
                         : { duration: 0.2, ease: "easeInOut" },
                     }
                   : { delay: delay + i * 0.18, duration: 0.5, ease: "easeInOut" }
@@ -81,7 +87,7 @@ export function Glyph({
         );
 
         // workshop: the tilted sticky note peels and re-sticks on hover
-        if (name === "workshop" && i === 4) {
+        if (name === "workshop" && i === WORKSHOP_TILTED_NOTE) {
           return (
             <motion.g
               key={`wrap-${d}`}
@@ -109,7 +115,7 @@ export function Glyph({
       {name === "phone" && !reduce && (
         <>
           <motion.path
-            d="M 28 33 l 3 3 l 6 -7"
+            d={PHONE_TICK_D}
             stroke="var(--ink)"
             strokeWidth={2}
             strokeLinecap="round"

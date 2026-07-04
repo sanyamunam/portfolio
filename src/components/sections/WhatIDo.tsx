@@ -41,14 +41,17 @@ export function WhatIDo() {
             <p className="text-xs uppercase tracking-[0.16em] text-muted">
               {b.heading}
             </p>
-            <p className="mt-5 font-display text-2xl tracking-tight">{b.name}</p>
-            <ul className="mt-3 space-y-1 text-sm text-muted">
+            <h3 className="mt-5 font-display text-2xl tracking-tight">{b.name}</h3>
+            <ul aria-label="Roles" className="mt-3 space-y-1 text-sm text-muted">
               {b.roles.map((r) => (
                 <li key={r}>{r}</li>
               ))}
             </ul>
             <p className="mt-5 text-sm">{b.base}</p>
-            <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-2 border-t pt-5 text-sm text-muted [border-color:var(--edge)]">
+            <ul
+              aria-label="Focus areas"
+              className="mt-5 flex flex-wrap gap-x-3 gap-y-2 border-t pt-5 text-sm text-muted [border-color:var(--edge)]"
+            >
               {b.focus.map((f) => (
                 <li key={f}>{f}</li>
               ))}

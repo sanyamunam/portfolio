@@ -4,6 +4,7 @@ import { WhatIDo } from "@/components/sections/WhatIDo";
 import { Work } from "@/components/sections/Work";
 import { MessyMiddle } from "@/components/sections/MessyMiddle";
 import { Story } from "@/components/sections/Story";
+import { PlaygroundBeat } from "@/components/sections/PlaygroundBeat";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Work />
         <MessyMiddle />
         <Story />
+        <PlaygroundBeat />
       </main>
     </>
   );

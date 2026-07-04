@@ -14,6 +14,10 @@ describe("sampleLight", () => {
     expect(sampleLight(99)).toEqual(sampleLight(STOPS.length - 1));
   });
 
+  it("falls back to the golden stop on NaN instead of crashing", () => {
+    expect(sampleLight(NaN)).toEqual(sampleLight(0));
+  });
+
   it("interpolates between stops", () => {
     const mid = sampleLight(0.5);
     expect(mid.bg).not.toBe(sampleLight(0).bg);

@@ -76,7 +76,9 @@ const KEYS = Object.keys(STOPS[0]) as (keyof LightTokens)[];
 /** Sample the full token set at any temperature (fractional allowed). */
 export function sampleLight(t: number): LightTokens {
   const max = STOPS.length - 1;
-  const v = Math.min(max, Math.max(0, t));
+  // NaN would otherwise crash deep inside the mixer (called per animation
+  // frame) — fall back to the golden opening state instead.
+  const v = Number.isNaN(t) ? 0 : Math.min(max, Math.max(0, t));
   const i = Math.min(max - 1, Math.floor(v));
   const f = v - i;
   const out = {} as LightTokens;
@@ -86,7 +88,11 @@ export function sampleLight(t: number): LightTokens {
   return out;
 }
 
-/** Named target temperatures per beat (spec §3). */
+/**
+ * Named target temperatures per beat (spec §3).
+ * These are ordinal positions on the STOPS axis above — inserting or
+ * reordering a stop changes what every value here means. Edit both together.
+ */
 export const TEMP = {
   greeting: 0,
   whatIDo: 0.3,

@@ -169,3 +169,11 @@ body {
     transition: none;
   }
 }
+
+/* Carried Light cursor: ember mode hides the native cursor everywhere.
+   The class is applied by CursorProvider only on fine pointers without
+   reduced motion, and removed on unmount/mode switch. */
+html.cursor-hidden,
+html.cursor-hidden * {
+  cursor: none !important;
+}

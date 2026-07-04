@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Caveat } from "next/font/google";
 import "./globals.css";
+import { CursorProvider } from "@/components/cursor/CursorProvider";
 import { LightProvider } from "@/components/light/LightProvider";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body>
         <LightProvider>
           <SmoothScroll>{children}</SmoothScroll>
+          <CursorProvider />
         </LightProvider>
       </body>
     </html>

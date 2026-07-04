@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
+import { EASE } from "@/lib/motion";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { CURSOR, WORKBENCH } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
@@ -14,6 +15,22 @@ import { Typewriter } from "./Typewriter";
 /** The finished artifact: glass browser frame with a live miniature of the real page. */
 function PlaybookArtifact() {
   const p = WORKBENCH.playbook;
+  const reduce = useReducedMotionSafe();
+  const [hovered, setHovered] = useState(false);
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 150, damping: 20 });
+  const sy = useSpring(py, { stiffness: 150, damping: 20 });
+  const rotateY = useTransform(sx, (v) => v * 3);
+  const rotateX = useTransform(sy, (v) => v * -3);
+
+  const onPointerMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    if (reduce || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set(((e.clientX - r.left) / r.width) * 2 - 1);
+    py.set(((e.clientY - r.top) / r.height) * 2 - 1);
+  };
+
   return (
     <a
       href={p.href}
@@ -22,42 +39,59 @@ function PlaybookArtifact() {
       data-cursor="link"
       data-cursor-label={CURSOR.labels.open}
       className="group block h-full"
+      style={{ perspective: 900 }}
+      onPointerMove={onPointerMove}
+      onPointerEnter={(e) => {
+        if (!reduce && e.pointerType === "mouse") setHovered(true);
+      }}
+      onPointerLeave={() => {
+        setHovered(false);
+        px.set(0);
+        py.set(0);
+      }}
     >
-      <GlassPanel className="pressable flex h-full flex-col overflow-hidden">
-        <div className="flex items-center gap-2 border-b px-4 py-2.5 [border-color:var(--edge)]">
-          <span className="size-2 rounded-full bg-[var(--edge)]" />
-          <span className="size-2 rounded-full bg-[var(--edge)]" />
-          <span className="size-2 rounded-full bg-[var(--edge)]" />
-          <span className="ml-3">
-            <Typewriter phrases={WORKBENCH.playbook.typewriter} />
-          </span>
-        </div>
-        {/* live miniature of the actual shipped page */}
-        <div className="relative h-64 overflow-hidden" aria-hidden>
-          <iframe
-            src={p.href}
-            title=""
-            tabIndex={-1}
-            loading="lazy"
-            className="pointer-events-none absolute left-0 top-0 origin-top-left overflow-hidden"
-            style={{ width: 1280, height: 900, transform: "scale(0.46)" }}
-          />
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--glass)] to-transparent" />
-        </div>
-        <div className="flex flex-1 flex-col p-6 md:p-7">
-          <p className="text-xs uppercase tracking-[0.16em] text-muted">{p.kicker}</p>
-          <h3 className="mt-3 font-display text-2xl tracking-tight md:text-3xl">{p.title}</h3>
-          <p className="mt-3 max-w-[48ch] leading-relaxed text-muted">{p.body}</p>
-          <p className="mt-auto flex items-center gap-2 pt-5 text-sm">
-            {p.cta}
-            <ArrowUpRight
-              size={16}
-              className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              aria-hidden
+      <motion.div
+        className="h-full"
+        style={reduce ? undefined : { rotateX, rotateY }}
+        animate={{ y: hovered ? -4 : 0 }}
+        transition={{ duration: 0.3, ease: EASE }}
+      >
+        <GlassPanel className="pressable flex h-full flex-col overflow-hidden">
+          <div className="flex items-center gap-2 border-b px-4 py-2.5 [border-color:var(--edge)]">
+            <span className="size-2 rounded-full bg-[var(--edge)]" />
+            <span className="size-2 rounded-full bg-[var(--edge)]" />
+            <span className="size-2 rounded-full bg-[var(--edge)]" />
+            <span className="ml-3">
+              <Typewriter phrases={WORKBENCH.playbook.typewriter} />
+            </span>
+          </div>
+          {/* live miniature of the actual shipped page */}
+          <div className="relative h-64 overflow-hidden" aria-hidden>
+            <iframe
+              src={p.href}
+              title=""
+              tabIndex={-1}
+              loading="lazy"
+              className="pointer-events-none absolute left-0 top-0 origin-top-left overflow-hidden"
+              style={{ width: 1280, height: 900, transform: "scale(0.46)" }}
             />
-          </p>
-        </div>
-      </GlassPanel>
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--glass)] to-transparent" />
+          </div>
+          <div className="flex flex-1 flex-col p-6 md:p-7">
+            <p className="text-xs uppercase tracking-[0.16em] text-muted">{p.kicker}</p>
+            <h3 className="mt-3 font-display text-2xl tracking-tight md:text-3xl">{p.title}</h3>
+            <p className="mt-3 max-w-[48ch] leading-relaxed text-muted">{p.body}</p>
+            <p className="mt-auto flex items-center gap-2 pt-5 text-sm">
+              {p.cta}
+              <ArrowUpRight
+                size={16}
+                className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </p>
+          </div>
+        </GlassPanel>
+      </motion.div>
     </a>
   );
 }
@@ -67,6 +101,7 @@ function WipCard() {
   const w = WORKBENCH.wip;
   const reduce = useReducedMotionSafe();
   const [li, setLi] = useState(0);
+  const [hot, setHot] = useState(false);
   const paused = useRef(false);
 
   useEffect(() => {
@@ -80,8 +115,14 @@ function WipCard() {
   return (
     <div
       className="relative h-full p-6 md:p-7"
-      onPointerEnter={() => (paused.current = true)}
-      onPointerLeave={() => (paused.current = false)}
+      onPointerEnter={() => {
+        paused.current = true;
+        setHot(true);
+      }}
+      onPointerLeave={() => {
+        paused.current = false;
+        setHot(false);
+      }}
       role="group"
       aria-label={`${w.title} — in progress`}
     >
@@ -105,6 +146,19 @@ function WipCard() {
           whileInView={{ pathLength: 0.62 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={reduce ? { duration: 0 } : { duration: 1.4, ease: "easeInOut" }}
+        />
+        {/* hover: the line teases a little more progress, then relaxes */}
+        <motion.rect
+          x="2"
+          y="2"
+          width="396"
+          height="296"
+          rx="20"
+          stroke="var(--hf-orchid)"
+          strokeWidth={1.6}
+          initial={{ pathLength: 0, pathOffset: 0.62 }}
+          animate={hot && !reduce ? { pathLength: 0.16 } : { pathLength: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
         />
       </svg>
       <p className="text-xs uppercase tracking-[0.16em] text-muted">{w.kicker}</p>

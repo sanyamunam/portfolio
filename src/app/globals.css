@@ -17,6 +17,12 @@
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/*
+ * Only ink/muted/accent are promoted to Tailwind theme colors — components use
+ * text-ink etc. The rest (--bg, --glow-*, --glass, --edge, --ease) are
+ * deliberately NOT promoted: they are atmosphere/material internals, consumed
+ * only via raw var() in this sheet and in Atmosphere.tsx.
+ */
 @theme inline {
   --color-ink: var(--ink);
   --color-muted: var(--muted);

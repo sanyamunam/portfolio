@@ -135,13 +135,19 @@ export function WorkStage() {
 
           {/* center narrative: crossfades in place */}
           <div className="relative z-10 grid min-h-[380px]">
-            <AnimatePresence mode="wait" initial={false}>
+            {/* no mode="wait": children grid-stack, so exit and enter overlap
+                as a true crossfade (mode="wait" left a ~270ms blank gap) */}
+            <AnimatePresence initial={false}>
               {c && active && (
                 <motion.div
                   key={`${active.idx}-${active.phase}`}
                   initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -14 }}
+                  exit={
+                    reduce
+                      ? { opacity: 0, transition: { duration: 0.25 } }
+                      : { opacity: 0, y: -14, transition: { duration: 0.28, ease: EASE } }
+                  }
                   transition={{ duration: 0.45, ease: EASE }}
                   className="col-start-1 row-start-1 self-center"
                 >
@@ -193,16 +199,18 @@ export function WorkStage() {
             </AnimatePresence>
           </div>
 
-          {/* media panel: keyed by case only, tilts by phase */}
-          <div className="relative z-10 [perspective:1200px]">
-            <AnimatePresence mode="wait" initial={false}>
+          {/* media panel: keyed by case only, tilts by phase; grid-stacked so
+              consecutive cases crossfade instead of gapping */}
+          <div className="relative z-10 grid [perspective:1200px]">
+            <AnimatePresence initial={false}>
               {c && (
                 <motion.div
                   key={c.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  exit={{ opacity: 0, transition: { duration: 0.3 } }}
                   transition={{ duration: 0.4 }}
+                  className="col-start-1 row-start-1"
                   style={{ rotateY: mediaTilt }}
                 >
                   {c.media ? <LiveFrame url={c.url} media={c.media} /> : <ConfidentialFrame url={c.url} />}

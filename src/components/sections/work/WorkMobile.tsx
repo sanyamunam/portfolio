@@ -16,9 +16,9 @@ function MobileCase({ c }: { c: CaseStudy }) {
         {c.n} · {c.tag}
       </p>
       <h3 className="mt-2 font-display text-3xl tracking-tight">{c.client}</h3>
-      <ul className="mt-5 space-y-2">
+      <ul className="mt-5 space-y-1.5 border-l pl-4 [border-color:var(--edge)]">
         {c.fragments.map((f) => (
-          <li key={f} className="font-display text-lg tracking-tight">
+          <li key={f} className="text-base leading-snug">
             {f}
           </li>
         ))}

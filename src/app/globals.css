@@ -154,3 +154,8 @@ body {
   transform-origin: left center;
   transition: transform 0.6s var(--ease);
 }
+@media (prefers-reduced-motion: reduce) {
+  .strike-line::after {
+    transition: none;
+  }
+}

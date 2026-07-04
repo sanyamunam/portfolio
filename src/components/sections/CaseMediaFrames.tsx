@@ -32,7 +32,17 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
   return (
     <GlassPanel className="overflow-hidden">
       <Chrome url={url} />
-      <div className="relative" data-cursor="play">
+      <div
+        className="relative"
+        data-cursor="play"
+        // Whole-frame click toggles playback so the play cursor is honest.
+        // The corner button stays the keyboard/AT control; no role/tabIndex
+        // here — this is a redundant pointer affordance.
+        onClick={(e) => {
+          if ((e.target as Element).closest("a")) return;
+          toggle();
+        }}
+      >
         <video
           ref={videoRef}
           autoPlay
@@ -50,7 +60,12 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
         </video>
         <button
           type="button"
-          onClick={toggle}
+          // stopPropagation: the wrapper also toggles on click — without it a
+          // button press would double-toggle (button + wrapper).
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle();
+          }}
           aria-label={playing ? "Pause video" : "Play video"}
           data-cursor="play"
           data-cursor-label={CURSOR.labels.play}
@@ -63,6 +78,8 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
         href={media.href}
         target="_blank"
         rel="noopener noreferrer"
+        data-cursor="link"
+        data-cursor-label={CURSOR.labels.open}
         className="pressable group flex items-center justify-between px-5 py-4 text-sm"
       >
         Visit the live site

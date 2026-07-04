@@ -124,6 +124,10 @@ export function CursorProvider() {
       const el = lastEl.current;
       if (!el) return;
       const d = (el as HTMLElement).dataset;
+      // Rect is only consumed by snap/absorb kinds (nonzero pull) —
+      // case/play/art must not re-render the cursor subtree per scroll frame.
+      const kind = d.cursor;
+      if (kind !== "link" && kind !== "nav" && kind !== "absorb") return;
       setTarget({
         kind: (d.cursor as CursorKind) ?? "default",
         label: d.cursorLabel,

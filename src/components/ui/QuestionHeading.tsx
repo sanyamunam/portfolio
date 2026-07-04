@@ -1,28 +1,47 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
 import { EASE } from "@/lib/motion";
 
-/** The interviewer's voice. Large Bricolage, blur-rise entrance. */
+/**
+ * The interviewer's voice — words arrive one by one, like the question is
+ * being asked, not printed. Children must be a plain string (all copy comes
+ * from content.ts).
+ */
 export function QuestionHeading({
   children,
   className = "",
 }: {
-  children: ReactNode;
+  children: string;
   className?: string;
 }) {
   const reduce = useReducedMotion();
+  const words = children.split(" ");
   return (
     <motion.h2
-      initial={
-        reduce ? { opacity: 0 } : { opacity: 0, y: 44, filter: "blur(8px)" }
-      }
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial="hidden"
+      whileInView="shown"
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.9, ease: EASE }}
+      transition={{ staggerChildren: reduce ? 0 : 0.07 }}
       className={`font-display text-4xl leading-[1.05] tracking-tight text-balance md:text-6xl lg:text-7xl ${className}`}
     >
-      {children}
+      {words.map((w, i) => (
+        <motion.span
+          key={`${w}-${i}`}
+          className="inline-block whitespace-pre"
+          variants={{
+            hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 26, filter: "blur(6px)" },
+            shown: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { duration: 0.55, ease: EASE },
+            },
+          }}
+        >
+          {w}
+          {i < words.length - 1 ? " " : ""}
+        </motion.span>
+      ))}
     </motion.h2>
   );
 }

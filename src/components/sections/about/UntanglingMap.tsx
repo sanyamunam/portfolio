@@ -87,8 +87,17 @@ function MapChip({
 export function UntanglingMap() {
   const reduce = useReducedMotionSafe();
   const ref = useRef<HTMLDivElement>(null);
-  const [organized, setOrganized] = useState(reduce);
-  const [seen, setSeen] = useState(false);
+  const [organizedByTimer, setOrganizedByTimer] = useState(false);
+  // Derived, not stored: `reduce` is deliberately `false` on the very first
+  // client render (see useReducedMotionSafe), so mirroring it into state via
+  // a useState initializer or a setState-in-effect can't be trusted — once
+  // the real value arrives this must take effect on the very same render.
+  const organized = organizedByTimer || reduce;
+  // Ref (not state) so the "already observed" guard doesn't itself retrigger
+  // this effect — a state-backed guard here would re-run the effect on the
+  // very setSeen(true) that starts the organize timer, and the effect's own
+  // cleanup would disconnect+clear that timer before it ever fires.
+  const seenRef = useRef(false);
 
   // pointer position in the map's own % space (parked far away by default)
   const px = useMotionValue(-100);
@@ -96,15 +105,15 @@ export function UntanglingMap() {
 
   // organize once, shortly after first entering view
   useEffect(() => {
-    if (reduce || seen) return;
+    if (reduce || seenRef.current) return;
     const el = ref.current;
     if (!el) return;
     let t: ReturnType<typeof setTimeout> | undefined;
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          setSeen(true);
-          t = setTimeout(() => setOrganized(true), 900);
+          seenRef.current = true;
+          t = setTimeout(() => setOrganizedByTimer(true), 900);
           io.disconnect();
         }
       },
@@ -115,12 +124,12 @@ export function UntanglingMap() {
       io.disconnect();
       if (t) clearTimeout(t);
     };
-  }, [reduce, seen]);
+  }, [reduce]);
 
   const replay = () => {
     if (reduce) return;
-    setOrganized(false);
-    setTimeout(() => setOrganized(true), 1100);
+    setOrganizedByTimer(false);
+    setTimeout(() => setOrganizedByTimer(true), 1100);
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -146,6 +155,7 @@ export function UntanglingMap() {
           className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
         >
           <motion.g
+            initial={{ opacity: organized ? 0 : 1 }}
             animate={{ opacity: organized ? 0 : 1 }}
             transition={{ duration: 0.9, ease: EASE }}
             stroke="var(--hf-orchid)"
@@ -155,6 +165,7 @@ export function UntanglingMap() {
             <path d="M 20 25 C 70 55, 30 5, 80 70 C 95 88, 15 80, 45 40" />
           </motion.g>
           <motion.g
+            initial={{ opacity: organized ? 1 : 0 }}
             animate={{ opacity: organized ? 1 : 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: organized ? 0.5 : 0 }}
             stroke="var(--hf-champagne)"
@@ -187,6 +198,7 @@ export function UntanglingMap() {
         {/* stage labels appear once organized */}
         <motion.div
           aria-hidden
+          initial={{ opacity: organized ? 1 : 0 }}
           animate={{ opacity: organized ? 1 : 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
           className="mt-4 grid grid-cols-4"

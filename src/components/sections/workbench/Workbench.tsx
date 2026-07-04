@@ -123,13 +123,18 @@ function WipCard() {
 function Aside() {
   const a = WORKBENCH.aside;
   const reduce = useReducedMotionSafe();
-  const [struck, setStruck] = useState(reduce ? a.strikes.length : 0);
+  const [struckByTimer, setStruckByTimer] = useState(0);
+  // Derived, not stored: `reduce` is deliberately `false` on the very first
+  // client render (see useReducedMotionSafe), so mirroring it into state via
+  // a useState initializer or a setState-in-effect can't be trusted — once
+  // the real value arrives this must take effect on the very same render.
+  const struck = reduce ? a.strikes.length : struckByTimer;
 
   return (
     <motion.div
       onViewportEnter={() => {
         if (reduce) return;
-        a.strikes.forEach((_, i) => setTimeout(() => setStruck(i + 1), 700 + i * 800));
+        a.strikes.forEach((_, i) => setTimeout(() => setStruckByTimer(i + 1), 700 + i * 800));
       }}
       viewport={{ once: true, amount: 0.6 }}
       className="glass flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-7"

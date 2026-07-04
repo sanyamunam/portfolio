@@ -60,6 +60,7 @@ function DomainTile({
         <div className="relative mt-4 grid min-h-[120px]">
           {/* rest face: skills */}
           <motion.ul
+            initial={{ opacity: lit ? 0 : 1 }}
             animate={{ opacity: lit ? 0 : 1 }}
             transition={{ duration: 0.4, ease: EASE }}
             className="col-start-1 row-start-1 space-y-1.5 text-sm text-muted"
@@ -70,6 +71,7 @@ function DomainTile({
           </motion.ul>
           {/* lit face: the belief */}
           <motion.p
+            initial={{ opacity: lit ? 1 : 0 }}
             animate={{ opacity: lit ? 1 : 0 }}
             transition={{ duration: 0.4, ease: EASE }}
             aria-hidden={!lit}

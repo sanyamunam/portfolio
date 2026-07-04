@@ -20,6 +20,7 @@ export function StageThread({ phase }: { phase: Phase }) {
         stroke="var(--hf-orchid)"
         strokeWidth={1.5}
         strokeLinecap="round"
+        initial={{ opacity: knotted ? 1 : 0 }}
         animate={{ opacity: knotted ? 1 : 0 }}
         transition={{ duration: 0.7, ease: EASE }}
       />
@@ -27,6 +28,10 @@ export function StageThread({ phase }: { phase: Phase }) {
         d="M -20 80 L 1220 80"
         strokeWidth={1.5}
         strokeLinecap="round"
+        initial={{
+          opacity: knotted ? 0 : 1,
+          stroke: phase === "resolve" ? "var(--accent)" : "var(--hf-champagne)",
+        }}
         animate={{
           opacity: knotted ? 0 : 1,
           stroke: phase === "resolve" ? "var(--accent)" : "var(--hf-champagne)",

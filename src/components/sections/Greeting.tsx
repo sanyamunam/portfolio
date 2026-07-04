@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { GREETING } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
@@ -33,9 +33,6 @@ export function Greeting() {
           feels lit, not placed. */}
       <HeroIllustration className="absolute right-0 top-1/2 hidden aspect-[571/434] w-[54%] max-w-[680px] -translate-y-1/2 md:block" />
 
-      {/* M1: the line leaves the drawing and heads for the story below */}
-      <M1Stub />
-
       <div className="max-w-[24ch]">
         <motion.h1
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, filter: "blur(10px)" }}
@@ -64,29 +61,5 @@ export function Greeting() {
         </motion.p>
       </div>
     </section>
-  );
-}
-
-function M1Stub() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotionSafe();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.55", "end 0.1"] });
-  const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
-  return (
-    <div
-      ref={ref}
-      aria-hidden
-      className="pointer-events-none absolute -bottom-[18vh] right-[16%] hidden h-[30vh] w-16 md:block"
-    >
-      <svg viewBox="0 0 64 240" fill="none" className="h-full w-full overflow-visible">
-        <motion.path
-          d="M 48 0 C 60 60, 16 110, 32 160 C 44 196, 24 220, 32 240"
-          stroke="var(--hf-orchid)"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          style={{ pathLength: reduce ? 1 : pathLength }}
-        />
-      </svg>
-    </div>
   );
 }

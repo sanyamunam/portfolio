@@ -26,7 +26,7 @@ export const STOPS: Stop[] = [
     muted: [0.48, 0.03, 25],
     glowA: [0.85, 0.09, 340],
     glowB: [0.9, 0.06, 85],
-    glass: [0.98, 0.01, 80, 0.4],
+    glass: [0.98, 0.01, 80, 0.22],
     edge: [1, 0, 0, 0.5],
   },
   {
@@ -73,6 +73,23 @@ export const STOPS: Stop[] = [
 
 const KEYS = Object.keys(STOPS[0]) as (keyof LightTokens)[];
 
+/**
+ * Text tokens are NOT linearly interpolated like the atmosphere colors:
+ * a linear ink mix between a light world (dark text) and a dark world
+ * (light text) passes through unreadable mid-greys while the background is
+ * still light (measured ~2:1 for muted at temp 0.3). Instead, ink/muted
+ * derive from the CURRENT background lightness — dark text over light
+ * worlds, light text over dark, with a fast smooth hand-off in the narrow
+ * band where the background itself is mid (only crossed briefly mid-scroll).
+ */
+const DARK_TEXT = { ink: [0.3, 0.035, 25] as Ok, muted: [0.45, 0.03, 25] as Ok };
+const LIGHT_TEXT = { ink: [0.95, 0.015, 80] as Ok, muted: [0.8, 0.02, 60] as Ok };
+
+function smoothstep(lo: number, hi: number, x: number): number {
+  const u = Math.min(1, Math.max(0, (x - lo) / (hi - lo)));
+  return u * u * (3 - 2 * u);
+}
+
 /** Sample the full token set at any temperature (fractional allowed). */
 export function sampleLight(t: number): LightTokens {
   const max = STOPS.length - 1;
@@ -85,6 +102,11 @@ export function sampleLight(t: number): LightTokens {
   for (const k of KEYS) {
     out[k] = toCss(mixOklch(STOPS[i][k], STOPS[i + 1][k], f));
   }
+  // contrast-guaranteed text: follow the background, not the stop mix
+  const bgL = mixOklch(STOPS[i].bg, STOPS[i + 1].bg, f)[0];
+  const dark = smoothstep(0.48, 0.62, bgL); // 1 = light bg -> dark text
+  out.ink = toCss(mixOklch(LIGHT_TEXT.ink, DARK_TEXT.ink, dark));
+  out.muted = toCss(mixOklch(LIGHT_TEXT.muted, DARK_TEXT.muted, dark));
   return out;
 }
 

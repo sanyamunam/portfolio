@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Bricolage_Grotesque, Caveat } from "next/font/google";
 import "./globals.css";
 import { LightProvider } from "@/components/light/LightProvider";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
@@ -8,6 +8,13 @@ const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
   axes: ["opsz", "wdth"],
+});
+
+/** Handwritten voice — used only for the origin vignettes' takeaway lines. */
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={bricolage.variable}>
+    <html lang="en" className={`${bricolage.variable} ${caveat.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         <link

@@ -108,21 +108,29 @@ export const INVITATION = {
 
 export const ABOUT = {
   originQuestion: "Who taught you to see like this?",
+  originIntro:
+    "I studied and graduated as a computer-science engineer — I never planned to work in UX. It found me: one workshop, one app, and one book at a time.",
   moments: [
     {
       glyph: "workshop" as const,
+      kicker: "01 — The workshop",
       title: "A workshop.",
-      body: "My first design-thinking workshop. A room full of people who disagreed about everything — and a wall of sticky notes that slowly changed their minds. I walked out rearranged.",
+      body: "A design-thinking workshop at Broadcom — my first company — flipped how I saw software. I walked in certain it was about technology, and walked out realising it’s really about people.",
+      tagline: "People first. Always.",
     },
     {
       glyph: "phone" as const,
+      kicker: "02 — The app",
       title: "An app.",
-      body: "Watching my dad use Google Pay for the first time. Two taps, and delight on his face. That’s when I felt what a really good interface can do to a person.",
+      body: "Then I watched my dad send money on Google Pay — something as nerve-wracking as moving money, done effortlessly, with nobody explaining a thing. That quiet ease stayed with me.",
+      tagline: "The best UX is invisible.",
     },
     {
       glyph: "book" as const,
+      kicker: "03 — The book",
       title: "A book.",
-      body: "The Steve Jobs biography. It made me realise design isn’t decoration — it’s central to whether a product succeeds, and in turn the company behind it.",
+      body: "Reading Steve Jobs’ biography, it finally clicked: how much a product’s success rides on the experience and the interface itself — not just the engineering underneath.",
+      tagline: "Design is a philosophy.",
     },
   ],
   bridge: "Mostly, I just love figuring out people.",

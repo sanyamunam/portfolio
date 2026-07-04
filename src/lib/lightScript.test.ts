@@ -18,6 +18,16 @@ describe("sampleLight", () => {
     expect(sampleLight(NaN)).toEqual(sampleLight(0));
   });
 
+  it("keeps text readable while the background is light", () => {
+    // ink follows the BACKGROUND, not the linear stop mix: at temp 0.3 the
+    // bg is still light (L~0.81), so ink must remain the dark family —
+    // a linear mix would land at an unreadable mid-grey (the haze bug).
+    expect(sampleLight(0.3).ink).toBe(sampleLight(0).ink);
+    expect(sampleLight(0.3).muted).toBe(sampleLight(0).muted);
+    // and on dark worlds the light family holds
+    expect(sampleLight(3).ink).toBe(sampleLight(4).ink);
+  });
+
   it("interpolates between stops", () => {
     const mid = sampleLight(0.5);
     expect(mid.bg).not.toBe(sampleLight(0).bg);

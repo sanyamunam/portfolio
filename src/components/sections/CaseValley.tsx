@@ -28,8 +28,11 @@ export function CaseValley({ c }: { c: CaseStudy }) {
     [1.1, c.depth, 0.8, 0.5]
   );
   useMotionValueEvent(scrollYProgress, "change", (p) => {
-    // only steer the light while this case is actually the active passage
-    if (p > 0.001 && p < 0.999) temp.set(valley.get());
+    // Steer the light only while this case is the active passage. The gate
+    // closes at 0.95 (not ~1) so this writer goes quiet BEFORE the next
+    // beat's in-view trigger fires — two writers on the same frame strobe
+    // the atmosphere (seen at the Kahramaa -> MessyMiddle seam).
+    if (p > 0.001 && p < 0.95) temp.set(valley.get());
   });
 
   return (

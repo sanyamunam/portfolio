@@ -124,7 +124,7 @@ export function BeliefsBento() {
           preserveAspectRatio="none"
           fill="none"
           aria-hidden
-          className="pointer-events-none absolute -inset-3 h-[calc(100%+24px)] w-[calc(100%+24px)] overflow-visible"
+          className="pointer-events-none absolute -inset-3 hidden h-[calc(100%+24px)] w-[calc(100%+24px)] overflow-visible md:block"
         >
           <motion.path
             d="M 0 50 L 100 50 M 33.5 0 L 33.5 100 M 67 0 L 67 100"

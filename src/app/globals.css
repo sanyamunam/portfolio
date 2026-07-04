@@ -48,9 +48,18 @@ body {
   /* one crisp edge highlight only — an interior glow wash + heavy blur made
      every panel milky and cost text contrast (the "haze") */
   box-shadow: inset 0 1px 0 var(--edge);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 1.25rem;
+}
+/* The unprefixed `backdrop-filter` above gets silently folded away by the
+   build's CSS minifier when written as a plain sibling declaration next to
+   its -webkit- twin (Lightning CSS vendor-prefix dedup keeps only one). An
+   @supports block with the unprefixed feature query is never folded, so this
+   is the reliable way to ship the standard property alongside the prefix. */
+@supports (backdrop-filter: blur(1px)) {
+  .glass {
+    backdrop-filter: blur(12px);
+  }
 }
 
 /* Keyboard focus: one site-wide ring in the clarity accent (turquoise) */

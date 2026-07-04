@@ -36,9 +36,24 @@ function locate(p: number): { idx: number; local: number } | null {
 function phaseOf(local: number): Phase {
   return local < 0.38 ? "mess" : local < 0.7 ? "turn" : "resolve";
 }
+/**
+ * Ink/muted contrast is guaranteed by the bg-lightness-driven text model in
+ * lightScript.ts, but only outside a transitional band: bg lightness in
+ * roughly (0.55, 0.72) can't hit the required delta with EITHER text
+ * extreme (dark or light) — neither is far enough away. That band sits at
+ * temperature (0.45, 1.14). The old tail (0.8 -> 0.75 -> 1 -> 0.55) crossed
+ * it on a slow linear ramp spanning fully a third of the case's local
+ * range, so "resolve" — the outcome line the visitor is meant to actually
+ * read — spent most of itself unreadable. The crossing through that band is
+ * unavoidable (temperature is continuous, and resolve must warm back up
+ * toward golden), so instead we snap through it fast right as resolve
+ * begins and hold flat at a safely-golden-side temperature (passes
+ * contrast) for the rest of the phase, matching the spec's "flashing
+ * turquoise" beat as a quick decisive turn rather than a slow fade.
+ */
 function valleyTemp(local: number, depth: number): number {
-  const xs = [0, 0.38, 0.8, 1];
-  const ys = [1.1, depth, 0.75, 0.55];
+  const xs = [0, 0.38, 0.7, 0.76, 1];
+  const ys = [1.1, depth, depth, 0.3, 0.3];
   for (let s = 0; s < xs.length - 1; s++) {
     if (local <= xs[s + 1]) {
       const f = (local - xs[s]) / (xs[s + 1] - xs[s]);

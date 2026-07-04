@@ -8,6 +8,8 @@ import {
 } from "framer-motion";
 
 const PATHS = {
+  // loose curl (greeting)
+  curl: "M 60 0 C 140 90, -20 170, 70 260 S 30 430, 110 520 C 150 570, 90 600, 100 640",
   // knotted mess (case openings)
   tangle:
     "M 20 20 C 180 -20, 40 180, 200 140 C 340 105, 180 260, 60 220 C -40 185, 150 340, 260 300 C 350 268, 240 420, 120 380 C 40 353, 160 480, 240 460",

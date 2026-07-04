@@ -5,7 +5,7 @@ import { GREETING } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
 import { EASE } from "@/lib/motion";
-import { HeroIllustration } from "./HeroIllustration";
+import { ThreadSegment } from "@/components/thread/ThreadSegment";
 
 export function Greeting() {
   const ref = useRef<HTMLElement>(null);
@@ -27,9 +27,10 @@ export function Greeting() {
         {GREETING.label}
       </motion.p>
 
-      {/* The thread begins as Sanya herself — it untangles into the rest of
-          the site from here. Balances the left-anchored copy. */}
-      <HeroIllustration className="absolute right-0 top-1/2 hidden aspect-[800/640] w-[52%] max-w-[660px] -translate-y-1/2 md:block" />
+      <ThreadSegment
+        variant="curl"
+        className="absolute right-4 top-24 hidden h-[70vh] w-40 md:block lg:right-16"
+      />
 
       <div className="max-w-[24ch]">
         <motion.h1

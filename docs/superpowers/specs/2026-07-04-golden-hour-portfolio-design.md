@@ -29,18 +29,19 @@ Three ideas fused (chosen from five explored concepts):
 
 **Positioning:** clarity from complexity, retold by a **warm host** rather than a cool architect. She makes the complicated feel calm and human. Voice stays: humble, curious, quietly confident, dry-fun. She is NOT a UI/visual designer — UX strategy, discovery, facilitation, leadership, digital transformation.
 
-## 3. Narrative arc — six beats
+## 3. Narrative arc — seven beats
 
 The emotional shape is a valley: warm → deep → warm.
 
 | # | Beat | Question (interviewer) | Content | Light |
 |---|------|------------------------|---------|-------|
 | 0 | Greeting | — (no question) | "Hi. I'm Sanya." + "You probably have questions. Good — questions are how I make a living." Label: `Sanya Munam — UX Strategy & Design Operations · Doha`. Thread enters loosely curled. Scroll cue: "go on, ask." | Full golden hour (orchid/cream) |
-| 1 | What I do | "So… what do you actually do?" | Positioning as a promise: she untangles complicated products, teams, and decisions until they make sense to humans. No title, no skills list. | Warm, bright |
+| 1 | What I do | "So… what do you actually do?" | Positioning as a promise: she untangles complicated products, teams, and decisions until they make sense to humans. Alongside it, **"the short version"** — a compact frosted-glass brief card (name, roles: UX Consultant / UX Strategist / UX Lead / Design Ops Lead; base: Doha; focus areas), framed as considerate hosting: *"In a hurry? Here's the short version."* The scannable bio recruiters need. | Warm, bright |
 | 2 | Case studies | "What does that look like in real life?" | Three cases, each a **light valley** (see §4). QBF (live video) + confidential cases (abstracted glass mockups). | Deepens per case: wine → jet black at messiest → warmth restored at resolution |
-| 3 | How she works | "How do you handle the messy middle?" | Five working beliefs (discovery, strategy, alignment, leadership, AI & systems) told as habits/philosophy, one statement at a time, thread weaving between them. Not a capability list. | Dusk-turquoise, contemplative |
+| 3 | How she works + skills | "How do you handle the messy middle?" | Five working beliefs (discovery, strategy, alignment, leadership, AI & systems) told as habits/philosophy, one statement at a time, thread weaving between them. The beat closes with **"the practical list"** — a quiet, scannable skill index grouped under the five domains (UX strategy, product thinking, UX research, information architecture, stakeholder workshops & communication, requirement gathering, design systems, design ops & team leadership, AI-assisted product design, digital transformation). Philosophy first, receipts after. | Dusk-turquoise, contemplative |
 | 4 | Story | "Who taught you to see like this?" | The three moments — a workshop, an app, a book — as small glass-framed vignettes. Personal, brief, no career timeline. | Warming back up |
-| 5 | Invitation | "Got a wonderfully complicated problem?" | She asks the *visitor* a question for once. One big email CTA; thread ties into a bow beside it. Minimal footer. | Brightest screen on the site — warmer than the opening |
+| 5 | Hobby projects | "And what do you make when nobody's paying you?" | The playground: side/hobby projects as playful glass tiles with light, fun microcopy (V2 Playground content carries over as source material). Shows curiosity and range without pretending to be a visual-design showcase. | Bright, playful warmth |
+| 6 | Invitation | "Got a wonderfully complicated problem?" | She asks the *visitor* a question for once. One big email CTA; thread ties into a bow beside it. Minimal footer. | Brightest screen on the site — warmer than the opening |
 
 ## 4. Case studies — the light-valley model
 
@@ -105,7 +106,7 @@ Full `prefers-reduced-motion` fallback: static gradient per beat (instant change
 
 ## 7. Navigation
 
-Near-invisible: a fine vertical thread at the screen edge with six subtle nodes (the beats). Current question appears in tiny text on hover. Click travels to the beat. Keyboard-operable with visible focus. Mobile: single column; cursor-warmth off; atmosphere and thread simplified but present.
+Near-invisible: a fine vertical thread at the screen edge with seven subtle nodes (the beats). Current question appears in tiny text on hover. Click travels to the beat. Keyboard-operable with visible focus. Mobile: single column; cursor-warmth off; atmosphere and thread simplified but present.
 
 ## 8. Technical architecture
 
@@ -125,7 +126,7 @@ Near-invisible: a fine vertical thread at the screen edge with six subtle nodes 
 
 ### 8.3 Sections & data
 
-Beats as data-driven sections: `Greeting` · `WhatIDo` · `CaseValley` (×3) · `MessyMiddle` · `Story` · `Invitation` + `ThreadNav`. All copy and case data live in one `content.ts` — no prose in components.
+Beats as data-driven sections: `Greeting` · `WhatIDo` (incl. short-version brief card) · `CaseValley` (×3) · `MessyMiddle` (incl. skill index) · `Story` · `Playground` · `Invitation` + `ThreadNav`. All copy and case data live in one `content.ts` — no prose in components.
 
 ### 8.4 Performance rules
 
@@ -147,6 +148,8 @@ Beats as data-driven sections: `Greeting` · `WhatIDo` · `CaseValley` (×3) · 
 
 - Case-study copy: adapt from V2's `content` / `docs/case-study-intake.md` in `portfolio/`, rewritten into the mess → turn → resolution shape and the warmer host voice.
 - Story moments (workshop / app / book) carry over from V2's About, retold shorter.
+- Hobby/side projects: carry over from V2's Playground section, rewritten into the host voice for Beat 5.
+- Skill index (Beat 3) and short-version brief card (Beat 1): source facts from the master prompt's expertise list + V2 Capabilities domains.
 - QBF video assets copied from `portfolio/public/media/`.
 - Still pending from Sanya (do not block build): Field Notes personal bits, real case metrics, confirmation of drafted microcopy lines.
 

@@ -1,4 +1,5 @@
 import { Atmosphere } from "@/components/light/Atmosphere";
+import { ThreadNav } from "@/components/nav/ThreadNav";
 import { Greeting } from "@/components/sections/Greeting";
 import { WhatIDo } from "@/components/sections/WhatIDo";
 import { Work } from "@/components/sections/Work";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Atmosphere />
+      <ThreadNav />
       <main>
         <Greeting />
         <WhatIDo />

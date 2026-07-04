@@ -2,7 +2,7 @@ import { Atmosphere } from "@/components/light/Atmosphere";
 import { ThreadNav } from "@/components/nav/ThreadNav";
 import { Greeting } from "@/components/sections/Greeting";
 import { About } from "@/components/sections/about/About";
-import { Work } from "@/components/sections/Work";
+import { WorkStage } from "@/components/sections/work/WorkStage";
 import { MessyMiddle } from "@/components/sections/MessyMiddle";
 import { PlaygroundBeat } from "@/components/sections/PlaygroundBeat";
 import { Invitation } from "@/components/sections/Invitation";
@@ -15,7 +15,7 @@ export default function Home() {
       <main>
         <Greeting />
         <About />
-        <Work />
+        <WorkStage />
         <MessyMiddle />
         <PlaygroundBeat />
         <Invitation />

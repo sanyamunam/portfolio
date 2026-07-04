@@ -31,6 +31,7 @@ export function GlassPanel({
               rawX.set(((e.clientX - r.left) / r.width) * 100);
             }
       }
+      onPointerLeave={reduce ? undefined : () => rawX.set(50)}
     >
       <motion.div
         aria-hidden

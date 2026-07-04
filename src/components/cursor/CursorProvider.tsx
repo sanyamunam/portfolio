@@ -9,6 +9,8 @@ import {
   type CursorTarget,
 } from "@/lib/cursor";
 import { EmberCursor } from "./EmberCursor";
+import { LensCursor } from "./LensCursor";
+import { CursorToggle } from "./CursorToggle";
 
 const FINE_QUERY = "(hover: hover) and (pointer: fine)";
 
@@ -153,10 +155,9 @@ export function CursorProvider() {
   return (
     <CursorContext.Provider value={{ x, y, pressed, visible, target, mode, setMode }}>
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[9999]">
-        {/* Lens skin lands in the next task; until then only ember renders
-            (a saved "lens" preference must not summon a second cursor). */}
-        {mode === "ember" ? <EmberCursor /> : null}
+        {mode === "ember" ? <EmberCursor /> : <LensCursor />}
       </div>
+      <CursorToggle />
     </CursorContext.Provider>
   );
 }

@@ -40,7 +40,10 @@ export function ThreadSegment({
 
   return (
     <div ref={ref} aria-hidden className={`pointer-events-none ${className}`}>
-      <svg viewBox={viewBox} fill="none" className="h-full w-full">
+      {/* overflow-visible: thread paths intentionally stray past the viewBox
+          (tangle especially); the wrapper is decorative + pointer-events-none,
+          so letting strokes bleed reads better than hard clipping. */}
+      <svg viewBox={viewBox} fill="none" className="h-full w-full overflow-visible">
         <motion.path
           d={d ?? PATHS[variant]}
           stroke={stroke}

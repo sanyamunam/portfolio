@@ -339,10 +339,9 @@ export const WORKBENCH = {
 
 export const BEATS = [
   { id: "hello", label: "Hello" },
-  { id: "what", label: "What I do" },
+  { id: "about", label: "About Sanya" },
   { id: "work", label: "Real life" },
   { id: "how", label: "The messy middle" },
-  { id: "story", label: "How I learned to see" },
   { id: "play", label: "Playground" },
   { id: "talk", label: "Say hello" },
 ] as const;

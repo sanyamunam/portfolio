@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useSpring,
@@ -50,6 +51,7 @@ function MapChip({
   delay,
   px,
   py,
+  onHover,
 }: {
   label: string;
   colPct: number;
@@ -59,6 +61,7 @@ function MapChip({
   delay: number;
   px: MotionValue<number>;
   py: MotionValue<number>;
+  onHover: (on: boolean) => void;
 }) {
   const [dx, dy, rot] = mess;
   const perturb = usePerturb(px, py, colPct, rowPct);
@@ -71,6 +74,8 @@ function MapChip({
         organized ? { x: "0%", y: "0%", rotate: 0 } : { x: `${dx}%`, y: `${dy}%`, rotate: rot }
       }
       transition={{ duration: 1.0, ease: EASE, delay }}
+      onPointerEnter={() => onHover(true)}
+      onPointerLeave={() => onHover(false)}
     >
       {/* inner layer carries the cursor perturbation so it never fights the
           organize/scatter transform above */}
@@ -102,6 +107,11 @@ export function UntanglingMap() {
   // pointer position in the map's own % space (parked far away by default)
   const px = useMotionValue(-100);
   const py = useMotionValue(-100);
+
+  // hovered chip index (desktop only) — drives the connection-line hints below
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+  const chipX = (i: number) => COL_X[ABOUT.mapNodes[i].stage];
+  const chipY = (i: number) => ROW_Y[i % 3];
 
   // organize once, shortly after first entering view
   useEffect(() => {
@@ -173,6 +183,30 @@ export function UntanglingMap() {
           >
             <path d="M 10 18 L 90 18 M 10 50 L 90 50 M 10 82 L 90 82" />
           </motion.g>
+
+          {/* connection hints: only meaningful once chips sit at their organized
+              anchor points — before that, coordinates would point at empty space */}
+          <AnimatePresence>
+            {organized &&
+              hoverIdx !== null &&
+              [hoverIdx - 1, hoverIdx + 1]
+                .filter((j) => j >= 0 && j < ABOUT.mapNodes.length)
+                .map((j) => (
+                  <motion.line
+                    key={`hint-${hoverIdx}-${j}`}
+                    x1={chipX(hoverIdx)}
+                    y1={chipY(hoverIdx)}
+                    x2={chipX(j)}
+                    y2={chipY(j)}
+                    stroke="var(--hf-champagne)"
+                    strokeWidth={0.35}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.5 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduce ? 0 : 0.25 }}
+                  />
+                ))}
+          </AnimatePresence>
         </svg>
 
         <div
@@ -191,6 +225,7 @@ export function UntanglingMap() {
               delay={i * 0.045}
               px={px}
               py={py}
+              onHover={(on) => setHoverIdx(on ? i : null)}
             />
           ))}
         </div>

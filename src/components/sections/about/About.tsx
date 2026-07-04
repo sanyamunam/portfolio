@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { ABOUT, WHAT_I_DO } from "@/content/content";
+import { ABOUT } from "@/content/content";
 import { useSectionLight } from "@/components/light/LightProvider";
 import { TEMP } from "@/lib/lightScript";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
@@ -13,7 +13,7 @@ export function About() {
   const ref = useRef<HTMLElement>(null);
   // Tall section (~2 viewports): pass a reachable in-view amount (MessyMiddle lesson).
   useSectionLight(ref, TEMP.about, 0.25);
-  const b = WHAT_I_DO.brief;
+  const b = ABOUT.brief;
 
   return (
     <section id="about" ref={ref} className="mx-auto max-w-content px-6 py-28 md:px-10 md:py-36">

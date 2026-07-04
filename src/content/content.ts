@@ -30,28 +30,6 @@ export const GREETING = {
   cue: "go on, ask",
 };
 
-export const WHAT_I_DO = {
-  question: "So… what do you actually do?",
-  answer: [
-    "I untangle complicated things. Products with too many stakeholders. Teams with too many opinions. Systems nobody fully understands anymore.",
-    "I sit with the mess until it makes sense — then I make sure it makes sense to everyone else. People call that UX strategy. I mostly call it listening, drawing, and asking “why” one more time than is polite.",
-  ],
-  brief: {
-    heading: "In a hurry? The short version.",
-    name: "Sanya Munam",
-    roles: ["UX Consultant", "UX Strategist", "UX Lead", "Design Operations Lead"],
-    base: "Doha, Qatar",
-    focus: [
-      "UX strategy",
-      "Discovery & research",
-      "Stakeholder alignment",
-      "Design ops & teams",
-      "AI-assisted design",
-      "Digital transformation",
-    ],
-  },
-};
-
 export const WORK = {
   question: "What does that look like in real life?",
   intro:
@@ -119,103 +97,6 @@ export const CASES: CaseStudy[] = [
   },
 ];
 
-export const MESSY_MIDDLE = {
-  question: "How do you handle the messy middle?",
-  beliefs: [
-    {
-      domain: "Discovery",
-      statement:
-        "Fall in love with the problem before anyone mentions solutions. The first version of the problem is almost never the real one.",
-    },
-    {
-      domain: "Strategy",
-      statement:
-        "A strategy you can’t sketch on a whiteboard isn’t a strategy. It’s a document.",
-    },
-    {
-      domain: "Alignment",
-      statement:
-        "Alignment isn’t agreement. It’s everyone understanding the same thing well enough to argue productively.",
-    },
-    {
-      domain: "Leadership & Ops",
-      statement:
-        "Teams do their best work when the process disappears. Design ops is making the machine so quiet nobody notices it running.",
-    },
-    {
-      domain: "AI & Systems",
-      statement:
-        "AI doesn’t replace the thinking. It replaces the waiting between thoughts — I design workflows where it does exactly that.",
-    },
-  ],
-  skillsHeading: "The practical list",
-  skillsIntro: "For the scanners — no hard feelings, I skim too.",
-  skills: [
-    {
-      group: "Strategy & Thinking",
-      items: ["UX Strategy", "Product Thinking", "Design Thinking", "Digital Transformation"],
-    },
-    {
-      group: "Research & Discovery",
-      items: ["UX Research", "Requirement Gathering", "Information Architecture"],
-    },
-    {
-      group: "People & Rooms",
-      items: ["Stakeholder Workshops", "Client Communication", "Facilitation"],
-    },
-    {
-      group: "Teams & Ops",
-      items: ["Managing Design Teams", "Design Operations", "Design Systems"],
-    },
-    {
-      group: "AI",
-      items: ["AI-assisted Product Design", "AI Workflow Design"],
-    },
-  ],
-};
-
-export const STORY = {
-  question: "Who taught you to see like this?",
-  moments: [
-    {
-      title: "A workshop.",
-      body: "My first design-thinking workshop. A room full of people who disagreed about everything — and a wall of sticky notes that slowly changed their minds. I walked out rearranged.",
-    },
-    {
-      title: "An app.",
-      body: "Watching my dad use Google Pay for the first time. Two taps, and delight on his face. Somebody had thought about him without ever meeting him. I wanted to be that somebody.",
-    },
-    {
-      title: "A book.",
-      body: "The Steve Jobs biography. Not the myth — the obsession. The idea that caring about details nobody sees is the whole job.",
-    },
-  ],
-  close: "Mostly, I just love figuring out people.",
-};
-
-export const PLAYGROUND = {
-  question: "And what do you make when nobody’s paying you?",
-  intro: "Side projects are how I figure out what I actually think. A couple I’m fond of:",
-  items: [
-    {
-      kicker: "Guide · Designing with AI",
-      title: "Prompt Playbook",
-      body: "A read-it-once playbook for writing prompts that generate client-ready UI — written because I got tired of explaining it one designer at a time.",
-      href: "/prompt-playbook.html",
-    },
-    {
-      kicker: "Reference · In the making",
-      title: "Laws of UX",
-      body: "My running collection of the principles I keep reaching for — mostly so I stop quoting them from memory and getting them slightly wrong.",
-      comingSoon: true,
-    },
-  ],
-  aside: {
-    kicker: "Quietly proud of",
-    text: "I keep a list of features I’ve talked teams out of building. It’s some of my best work.",
-  },
-};
-
 export const INVITATION = {
   question: "Got a wonderfully complicated problem?",
   answer:
@@ -264,6 +145,20 @@ export const ABOUT = {
     { id: "ship", label: "something shipped", stage: 3 },
   ],
   replayLabel: "make it messy again",
+  brief: {
+    heading: "In a hurry? The short version.",
+    name: "Sanya Munam",
+    roles: ["UX Consultant", "UX Strategist", "UX Lead", "Design Operations Lead"],
+    base: "Doha, Qatar",
+    focus: [
+      "UX strategy",
+      "Discovery & research",
+      "Stakeholder alignment",
+      "Design ops & teams",
+      "AI-assisted design",
+      "Digital transformation",
+    ],
+  },
 };
 
 export const BENTO = {

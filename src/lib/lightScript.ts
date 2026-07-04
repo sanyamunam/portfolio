@@ -96,10 +96,7 @@ export function sampleLight(t: number): LightTokens {
 export const TEMP = {
   greeting: 0,
   about: 0.3,
-  whatIDo: 0.3,
-  workIntro: 0.9,
   messyMiddle: 4,
-  story: 1,
   playground: 0.3,
   invitation: 0,
 } as const;

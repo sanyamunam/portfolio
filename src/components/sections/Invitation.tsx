@@ -7,6 +7,7 @@ import { TEMP } from "@/lib/lightScript";
 import { EASE } from "@/lib/motion";
 import { QuestionHeading } from "@/components/ui/QuestionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { useMagnetic } from "@/lib/useMagnetic";
 
 /** The thread ties itself into a small bow beside the CTA. */
 function ThreadBow() {
@@ -37,6 +38,7 @@ function ThreadBow() {
 export function Invitation() {
   const ref = useRef<HTMLElement>(null);
   useSectionLight(ref, TEMP.invitation);
+  const magnet = useMagnetic(6);
 
   return (
     <section
@@ -54,12 +56,14 @@ export function Invitation() {
       </Reveal>
       <Reveal delay={0.2}>
         <div className="mt-14 flex items-center gap-5">
-          <a
+          <motion.a
             href={`mailto:${INVITATION.email}`}
             className="pressable glass inline-block px-8 py-4 text-lg font-medium"
+            style={{ x: magnet.x, y: magnet.y }}
+            {...magnet.handlers}
           >
             {INVITATION.cta}
-          </a>
+          </motion.a>
           <ThreadBow />
         </div>
       </Reveal>

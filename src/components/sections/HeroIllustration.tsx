@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId } from "react";
+import { useEffect, useId, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -30,7 +30,9 @@ const MAIN_TIMES = [0, 0.18, 0.31, 0.52, 0.63, 0.85, 1];
 const MAIN_KEYS = [0, 0.1, 0.27, 0.44, 0.66, 0.85, 1];
 
 export function HeroIllustration({ className = "" }: { className?: string }) {
-  const reduce = useReducedMotion() ?? false;
+  const prefersReduce = useReducedMotion() ?? false;
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => setReduce(prefersReduce), [prefersReduce]);
   const gradId = useId();
   const maskId = useId();
 

@@ -110,7 +110,7 @@ export function VignetteCard({ m, index }: { m: Moment; index: number }) {
         )}
 
         <motion.div style={reduce ? undefined : { x: glyphX, y: glyphY }}>
-          <Glyph name={m.glyph} delay={0.3 + index * 0.25} />
+          <Glyph name={m.glyph} delay={0.3 + index * 0.25} hovered={hovered && !reduce} />
         </motion.div>
         <motion.div style={reduce ? undefined : { x: textX, y: textY }}>
           <p className="mt-5 text-xs uppercase tracking-[0.18em] text-muted">{m.kicker}</p>

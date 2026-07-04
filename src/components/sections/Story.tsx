@@ -25,7 +25,7 @@ export function Story() {
         {STORY.moments.map((m, i) => (
           <Reveal key={m.title} delay={i * 0.08} className={OFFSETS[i]}>
             <GlassPanel className="h-full p-7 md:p-8">
-              <p className="font-display text-2xl tracking-tight">{m.title}</p>
+              <h3 className="font-display text-2xl tracking-tight">{m.title}</h3>
               <p className="mt-4 leading-relaxed text-muted">{m.body}</p>
             </GlassPanel>
           </Reveal>

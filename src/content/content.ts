@@ -253,7 +253,7 @@ export const BEATS = [
 export const CURSOR = {
   labels: {
     stage: "keep scrolling",
-    caseRead: "read",
+    caseRead: "read", // reserved: clickable case links (not yet shipped)
     play: "watch",
     open: "open",
     say: "say hello",

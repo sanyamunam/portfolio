@@ -21,6 +21,7 @@ export function CursorLabel() {
           exit={{ opacity: 0, transition: { duration: 0.12 } }}
           transition={{ duration: 0.16, ease: EASE }}
         >
+          {/* SR-safe only because CursorProvider unmounts entirely when inactive — keep label rendering inside the provider. */}
           <motion.span
             initial={{ y: 4 }}
             animate={{ y: 0 }}

@@ -32,7 +32,7 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
   return (
     <GlassPanel className="overflow-hidden">
       <Chrome url={url} />
-      <div className="relative" data-cursor="play" data-cursor-label={CURSOR.labels.play}>
+      <div className="relative" data-cursor="play">
         <video
           ref={videoRef}
           autoPlay
@@ -52,6 +52,8 @@ export function LiveFrame({ url, media }: { url: string; media: CaseMedia }) {
           type="button"
           onClick={toggle}
           aria-label={playing ? "Pause video" : "Play video"}
+          data-cursor="play"
+          data-cursor-label={CURSOR.labels.play}
           className="pressable absolute bottom-3 right-3 rounded-full bg-[var(--glass)] p-2.5 backdrop-blur-md"
         >
           {playing ? <Pause size={16} weight="fill" /> : <Play size={16} weight="fill" />}

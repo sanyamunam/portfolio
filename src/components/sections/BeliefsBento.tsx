@@ -52,7 +52,7 @@ function DomainTile({
       className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
     >
       <GlassPanel
-        className={`h-full p-6 transition-shadow duration-500 md:p-7 ${
+        className={`tile-glow h-full p-6 transition-shadow duration-500 md:p-7 ${
           lit ? "shadow-[inset_0_0_0_1px_var(--accent)]" : ""
         }`}
       >
@@ -110,14 +110,46 @@ export function BeliefsBento() {
     pausedRef.current = false;
   };
 
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Grid-level proximity glow: writes CSS custom properties directly on each
+  // tile's DOM node (no React state) so pointermove never triggers a render.
+  // Reading 6 rects per move is safe here because this handler performs no
+  // layout WRITES (custom-property writes don't invalidate layout), and the
+  // rects must be read fresh anyway since scrolling moves them.
+  const onGridMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (reduce || e.pointerType !== "mouse") return;
+    gridRef.current
+      ?.querySelectorAll<HTMLElement>(".tile-glow")
+      .forEach((t) => {
+        const r = t.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        const my = e.clientY - r.top;
+        const dist = Math.hypot(mx - r.width / 2, my - r.height / 2);
+        t.style.setProperty("--mx", `${mx}px`);
+        t.style.setProperty("--my", `${my}px`);
+        t.style.setProperty("--md", String(Math.max(0, 1 - dist / 320)));
+      });
+  };
+  const onGridLeave = () => {
+    gridRef.current
+      ?.querySelectorAll<HTMLElement>(".tile-glow")
+      .forEach((t) => t.style.setProperty("--md", "0"));
+  };
+
   return (
     <section id="how" ref={ref} className="mx-auto max-w-content px-6 py-28 md:px-10 md:py-36">
       <QuestionHeading className="max-w-[15ch]">{BENTO.question}</QuestionHeading>
 
       <div
+        ref={gridRef}
         className="relative mt-14"
         onPointerEnter={pause}
-        onPointerLeave={resume}
+        onPointerMove={onGridMove}
+        onPointerLeave={() => {
+          resume();
+          onGridLeave();
+        }}
         onFocusCapture={pause}
         onBlurCapture={resume}
       >
@@ -143,7 +175,7 @@ export function BeliefsBento() {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-6">
           {/* anchor tile */}
           <Reveal className="md:col-span-2">
-            <GlassPanel className="h-full p-6 md:p-7">
+            <GlassPanel className="tile-glow h-full p-6 md:p-7">
               <p className="text-xs uppercase tracking-[0.18em] text-muted">{BENTO.anchor.kicker}</p>
               <h3 className="mt-4 font-display text-2xl tracking-tight md:text-3xl">
                 {BENTO.anchor.title}

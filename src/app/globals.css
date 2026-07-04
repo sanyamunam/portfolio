@@ -199,3 +199,31 @@ html.cursor-hidden * {
     opacity: 1 !important;
   }
 }
+
+/* Bento tiles catch the light you carry: a warm ring where the cursor is,
+   fading with distance (--md 0..1 set from a single grid-level listener).
+   Ring only — never a fill over text (the haze rule). */
+.tile-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    180px circle at var(--mx, 50%) var(--my, 50%),
+    var(--glow-a),
+    transparent 75%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: calc(var(--md, 0) * 0.9);
+  pointer-events: none;
+  transition: opacity 200ms var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-glow::before {
+    display: none;
+  }
+}

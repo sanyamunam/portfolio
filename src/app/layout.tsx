@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+import { LightProvider } from "@/components/light/LightProvider";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -34,7 +36,11 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <LightProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </LightProvider>
+      </body>
     </html>
   );
 }

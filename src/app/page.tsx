@@ -4,7 +4,7 @@ import { Greeting } from "@/components/sections/Greeting";
 import { About } from "@/components/sections/about/About";
 import { WorkStage } from "@/components/sections/work/WorkStage";
 import { BeliefsBento } from "@/components/sections/BeliefsBento";
-import { PlaygroundBeat } from "@/components/sections/PlaygroundBeat";
+import { Workbench } from "@/components/sections/workbench/Workbench";
 import { Invitation } from "@/components/sections/Invitation";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
         <About />
         <WorkStage />
         <BeliefsBento />
-        <PlaygroundBeat />
+        <Workbench />
         <Invitation />
       </main>
     </>

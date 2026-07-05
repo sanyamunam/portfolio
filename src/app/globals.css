@@ -259,3 +259,100 @@ html.cursor-hidden * {
     box-shadow: none;
   }
 }
+
+/* Vignette BorderGlow (spec §2.5): a directional warmth ring + outer halo
+   that follow the cursor angle around the origin cards (--edge-prox 0..1 and
+   --cursor-angle set on the card by its existing pointer tracking; CSS-var
+   writes only). Warmth palette only — no turquoise.
+
+   Construction note: the single-element triple-layer mask (ring XOR + cone
+   intersect via `mask-composite: exclude, intersect`) was rejected — layers
+   composite pairwise bottom-up, so it computes content-box XOR (full ∩ cone),
+   which leaks the card INTERIOR everywhere outside the cone. Instead the two
+   masks live on nested elements and multiply naturally: the parent carries
+   only the cone mask, its ::before carries the .tile-glow two-layer ring
+   mask. Verified cone-limited ring in headless Chromium (verify-cl12). */
+.vignette-borderglow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask: conic-gradient(
+    from var(--cursor-angle, 0deg) at 50% 50%,
+    #000 25%,
+    transparent 40%,
+    transparent 60%,
+    #000 75%
+  );
+  mask: conic-gradient(
+    from var(--cursor-angle, 0deg) at 50% 50%,
+    #000 25%,
+    transparent 40%,
+    transparent 60%,
+    #000 75%
+  );
+  /* 0 until --edge-prox 0.5, full at 1 (negative calc clamps to 0) */
+  opacity: calc((var(--edge-prox, 0) - 0.5) / 0.5);
+  transition: opacity 0.35s var(--ease);
+}
+.vignette-borderglow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background:
+    radial-gradient(at 15% 10%, var(--hf-blush) 0px, transparent 55%),
+    radial-gradient(at 80% 30%, var(--hf-orchid) 0px, transparent 55%),
+    radial-gradient(at 50% 90%, var(--hf-champagne) 0px, transparent 55%),
+    linear-gradient(var(--hf-champagne) 0 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* Outer halo: cone-masked champagne glow that reaches ~24px past the card
+   edge (sits outside GlassPanel's overflow clip, behind the glass in DOM).
+   Alphas are literals derived from --hf-champagne: oklch(0.68 0.1 85) —
+   relative color syntax is avoided to stay safe through Lightning CSS. */
+.vignette-edgehalo {
+  position: absolute;
+  inset: -24px;
+  border-radius: calc(1.25rem + 24px);
+  pointer-events: none;
+  -webkit-mask: conic-gradient(
+    from var(--cursor-angle, 0deg) at 50% 50%,
+    #000 8%,
+    transparent 20%,
+    transparent 80%,
+    #000 92%
+  );
+  mask: conic-gradient(
+    from var(--cursor-angle, 0deg) at 50% 50%,
+    #000 8%,
+    transparent 20%,
+    transparent 80%,
+    #000 92%
+  );
+  /* later ramp than the ring: 0 until --edge-prox 0.6, full at 1 */
+  opacity: calc((var(--edge-prox, 0) - 0.6) / 0.4);
+  transition: opacity 0.35s var(--ease);
+}
+.vignette-edgehalo::before {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border-radius: 1.25rem;
+  box-shadow:
+    0 0 3px 0 oklch(0.68 0.1 85 / 0.5),
+    0 0 8px 0 oklch(0.68 0.1 85 / 0.35),
+    0 0 18px 1px oklch(0.68 0.1 85 / 0.22),
+    0 0 34px 2px oklch(0.68 0.1 85 / 0.12);
+}
+@media (prefers-reduced-motion: reduce) {
+  .vignette-borderglow,
+  .vignette-edgehalo {
+    display: none;
+  }
+}

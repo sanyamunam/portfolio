@@ -57,35 +57,56 @@ export function VignetteCard({ m, index }: { m: Moment; index: number }) {
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (reduce || e.pointerType !== "mouse") return;
     const r = e.currentTarget.getBoundingClientRect();
-    px.set(((e.clientX - r.left) / r.width) * 2 - 1);
-    py.set(((e.clientY - r.top) / r.height) * 2 - 1);
+    const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+    px.set(nx);
+    py.set(ny);
+    // BorderGlow drivers (spec §2.5): edge proximity (Chebyshev, 0 center →
+    // 1 edge) and cursor angle for the cone mask. CSS-var writes only on the
+    // move path — no React state, no new listeners.
+    const s = e.currentTarget.style;
+    s.setProperty("--edge-prox", String(Math.max(Math.abs(nx), Math.abs(ny))));
+    s.setProperty(
+      "--cursor-angle",
+      `${((Math.atan2(ny, nx) * 180) / Math.PI + 90).toFixed(1)}deg`,
+    );
   };
   const onPointerEnter = (e: React.PointerEvent<HTMLDivElement>) => {
     if (reduce || e.pointerType !== "mouse") return;
     setHovered(true);
     setInked(true);
   };
-  const onPointerLeave = () => {
+  const onPointerLeave = (e: React.PointerEvent<HTMLDivElement>) => {
     setHovered(false);
     px.set(0);
     py.set(0);
+    // Angle can stay — only proximity fades the glow layers out.
+    e.currentTarget.style.setProperty("--edge-prox", "0");
   };
 
   return (
     <motion.div
       ref={cardRef}
-      className="h-full"
+      className="relative h-full"
       onPointerMove={onPointerMove}
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
       animate={{ y: hovered && !reduce ? -3 : 0 }}
       transition={{ duration: 0.3, ease: EASE }}
     >
+      {/* Directional edge halo (spec §2.5, layer 2). Lives OUTSIDE GlassPanel
+          (whose overflow-hidden would clip it) so the cone-masked champagne
+          glow can extend past the card edge; placed before it in DOM so the
+          glass renders on top where they overlap. */}
+      {!reduce && <div aria-hidden className="vignette-edgehalo" />}
       <GlassPanel
         className={`flex h-full flex-col p-7 transition-shadow duration-300 ${
           hovered ? "shadow-[0_12px_32px_oklch(0_0_0_/_0.08)]" : ""
         }`}
       >
+        {/* Directional border glow (spec §2.5, layer 1): cone-masked 1px
+            warmth ring, driven by --edge-prox / --cursor-angle. */}
+        {!reduce && <div aria-hidden className="vignette-borderglow" />}
         {/* interior warmth */}
         <motion.div
           aria-hidden

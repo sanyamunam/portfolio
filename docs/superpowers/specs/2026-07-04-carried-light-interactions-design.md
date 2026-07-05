@@ -215,6 +215,20 @@ The primary CTA (already magnetic) gets `data-cursor="absorb"` + label `CURSOR.l
 
 The illustration wrapper in `Greeting.tsx` gets `data-cursor="art"`. No changes inside `HeroIllustration.tsx`. Existing cursor-lean and hover shimmer remain; the ember halo / lens expansion layers on top from the cursor overlay.
 
+## 3.7 Addendum (2026-07-05, approved): Liquid Lens upgrade
+
+Sanya reviewed the shipped pass and directed that the lens skin be elevated to a **FluidGlass-inspired liquid lens** (reference: reactbits.dev fluid-glass). The literal React Bits component (Three.js `MeshTransmissionMaterial` refracting an internal canvas scene) cannot refract live DOM and is rejected as an engine; the approved engine is an **SVG displacement-map filter applied via `backdrop-filter: url(#…)`** — real refraction of the actual page pixels, no WebGL, no new dependencies.
+
+Requirements (supersedes §1.5's visual treatment; §1.5's structure, springs, sizes, states, and label behavior remain):
+
+- **Refraction:** a radial lens displacement map (feImage data-URI; R = x-displacement, G = y-displacement, neutral 127-gray center) drives `feDisplacementMap` so the disc's EDGES visibly bend the page beneath (barrel distortion) while the CENTER stays near-clear — a true plano-convex lens read, echoing the reference's ior≈1.15 character. If feImage-in-backdrop-filter proves unreliable in Chromium, an feTurbulence-based displacement (organic "fluid" wobble, low baseFrequency, scale ~40–70) is the approved fallback recipe. Either way the effect must be verified by pixel comparison in headless Chromium, not assumed.
+- **Chromatic fringe, site-native:** the rim carries a faint conic-gradient fringe built from the HERO palette (`--hf-blush` / `--hf-champagne` / `--hf-turquoise`), not generic RGB split — the lens refracts *her* light. Low opacity (≤0.3), slow rotation permitted, must not reduce text contrast under the rim.
+- **Specular life:** the existing inset top highlight stays; add a small glint that slides opposite the motion vector (MotionValue-driven, transform-only).
+- **Fluid motion:** velocity-driven elastic squash/stretch (gentler than ember — cap ≈1.12) composed with the existing lazy follow spring; press squeeze unchanged.
+- **No fog:** blur inside the disc ≤0.5px; the center must keep text legible (the haze rule bends for edge refraction — that IS the requested aesthetic — but never for contrast fog).
+- **Graceful degradation:** runtime feature-check (`CSS.supports` on `backdrop-filter: url(…)` or equivalent empirical probe); unsupported browsers (Safari/Firefox today) get the existing brightness/saturate lens exactly as shipped. Touch/reduced-motion unchanged (provider unmounts).
+- Ember skin and the evaluation toggle are untouched; Sanya's ember-vs-lens decision is still pending and this upgrade informs it.
+
 ## 4. Out of scope (explicit)
 
 - No cursor trails, no WebGL/canvas distortion, no magnification of text.

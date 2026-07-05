@@ -254,8 +254,15 @@ html.cursor-hidden * {
    which leaks the card INTERIOR everywhere outside the cone. Instead the two
    masks live on nested elements and multiply naturally: the parent carries
    only the cone mask, its ::before carries the .tile-glow two-layer ring
-   mask. Cone stops mirror the React Bits reference (coneSpread 25): ~180°
-   arc facing the cursor, tighter halo — see spec §2.5. */
+   mask. Cone stops mirror the React Bits reference (coneSpread 25). Exact
+   geometry: ring = 180° fully-opaque arc facing the cursor + 54° fades each
+   side (only a 72° notch opposite stays dark); halo = tighter 58° opaque
+   + fades (144° total) — see spec §2.5.
+
+   The 0.35s opacity transition never completes during continuous pointer
+   movement (each --edge-prox write retargets it mid-flight from its current
+   value) — that perpetual retargeting IS the smoothing; it reads as a soft
+   lag-follow, not a stall. Don't "fix" it by removing the transition. */
 .vignette-borderglow {
   position: absolute;
   inset: 0;
@@ -302,6 +309,8 @@ html.cursor-hidden * {
    relative color syntax is avoided to stay safe through Lightning CSS. */
 .vignette-edgehalo {
   position: absolute;
+  /* -24px is sized to the About grid's gap-6 (24px): the halo reaches exactly
+     to — never past — the neighboring card's edge. Change together. */
   inset: -24px;
   border-radius: calc(1.25rem + 24px);
   pointer-events: none;

@@ -215,6 +215,18 @@ The primary CTA (already magnetic) gets `data-cursor="absorb"` + label `CURSOR.l
 
 The illustration wrapper in `Greeting.tsx` gets `data-cursor="art"`. No changes inside `HeroIllustration.tsx`. Existing cursor-lean and hover shimmer remain; the ember halo / lens expansion layers on top from the cursor overlay.
 
+## 2.5 Addendum (2026-07-05, approved): Vignette BorderGlow
+
+Sanya directed a BorderGlow-inspired edge glow (reference: reactbits.dev border-glow) for the three origin cards, merged with the site palette. Adaptation rules:
+
+- **Drivers:** reuse VignetteCard's existing pointer tracking (px/py ∈ [-1,1]) — NO new listeners. Derive two CSS vars written on the card element per move: `--edge-prox` = max(|px|, |py|) (Chebyshev distance ≈ rectangle-edge proximity, 0 center → 1 edge) and `--cursor-angle` = atan2(py, px) in deg + 90. Writes are CSS-var only (established hot-path rule).
+- **Layer 1 — directional gradient border:** a masked 1px ring (same mask-composite technique as `.tile-glow`, NOT the reference's opaque padding-box trick — our cards are translucent glass) carrying a mesh gradient of `--hf-blush` / `--hf-orchid` / `--hf-champagne` (NO turquoise — accent scarcity; warmth palette only, this is the About beat), visible through a conic cone mask centered on `--cursor-angle` (cone spread ≈ 25%), opacity ramping with `--edge-prox` (fade-in starts ≈ 0.5, full at 1.0).
+- **Layer 2 — outer glow:** a cone-masked halo extending ≈ 24px beyond the card (layered champagne box-shadows on an inset child, `mix-blend-mode: plus-lighter` optional pending contrast check), opacity ramp slightly later (≈ 0.6 → 1.0). Must not wash out neighbors or text — check against all three light worlds the About beat traverses.
+- **No fill layer:** the reference's soft-light interior mesh fill is dropped — VignetteCard already has the interior warmth glow; stacking both would violate the haze rule.
+- **No intro sweep** (reference `animated=false`); the approved entrance sheen stays.
+- Hover-off: layers fade out ≤ 0.75s ease; reduced-motion/touch: no layers rendered (existing handler gating).
+- Coexists with parallax/warmth/sheen/ink; existing behaviors unchanged.
+
 ## 3.7 Addendum (2026-07-05, approved): Liquid Lens upgrade
 
 Sanya reviewed the shipped pass and directed that the lens skin be elevated to a **FluidGlass-inspired liquid lens** (reference: reactbits.dev fluid-glass). The literal React Bits component (Three.js `MeshTransmissionMaterial` refracting an internal canvas scene) cannot refract live DOM and is rejected as an engine; the approved engine is an **SVG displacement-map filter applied via `backdrop-filter: url(#…)`** — real refraction of the actual page pixels, no WebGL, no new dependencies.

@@ -178,6 +178,23 @@ html.cursor-hidden * {
   cursor: none !important;
 }
 
+/* Liquid lens: the rim's chromatic fringe drifts slowly. The cursor only
+   exists on fine pointers without reduced motion (provider unmounts), but the
+   media guard stays for hygiene. */
+@keyframes lens-fringe-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.lens-fringe {
+  animation: lens-fringe-spin 14s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lens-fringe {
+    animation: none;
+  }
+}
+
 /* Invitation CTA: its own light blooms on hover (works in both cursor modes
    and with the cursor system inactive). */
 .cta-glow {

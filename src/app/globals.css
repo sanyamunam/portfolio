@@ -254,7 +254,8 @@ html.cursor-hidden * {
    which leaks the card INTERIOR everywhere outside the cone. Instead the two
    masks live on nested elements and multiply naturally: the parent carries
    only the cone mask, its ::before carries the .tile-glow two-layer ring
-   mask. Verified cone-limited ring in headless Chromium (verify-cl12). */
+   mask. Cone stops mirror the React Bits reference (coneSpread 25): ~180°
+   arc facing the cursor, tighter halo — see spec §2.5. */
 .vignette-borderglow {
   position: absolute;
   inset: 0;

@@ -367,12 +367,12 @@ export default async function CaseStudy({
           >
             <Reveal>
               <h2 className="display" style={{ fontSize: 'var(--text-display)' }}>
-                The messy middle
+                {project.processTitle ?? 'The messy middle'}
               </h2>
             </Reveal>
             <Reveal delay={0.08}>
               <span className="caption" style={{ color: 'var(--muted)' }}>
-                Inside the FigJam war room — hover to develop
+                {project.processNote ?? 'Inside the FigJam war room — hover to develop'}
               </span>
             </Reveal>
           </div>

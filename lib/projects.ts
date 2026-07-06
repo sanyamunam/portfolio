@@ -29,10 +29,13 @@ export type Project = {
   overviewHeading?: string;
   /* Real cases not yet shipped: renders a "coming soon" showcase plate */
   comingSoon?: boolean;
-  /* Real cases: process artifacts from the FigJam war room.
-     processLead is the featured board-wide shot, shown before the strip. */
+  /* Real cases: artifact strip (process work or photography).
+     processLead is a featured wide shot shown before the strip;
+     processTitle/processNote override the default section header. */
   processLead?: { src: string; caption: string; meta: string };
   process?: { src: string; caption: string; w: number }[];
+  processTitle?: string;
+  processNote?: string;
 };
 
 export const projects: Project[] = [
@@ -194,33 +197,58 @@ export const projects: Project[] = [
     index: '04',
     client: 'AlMujadilah',
     title: 'A mosque designed around her',
-    year: '2025',
-    role: 'UX Lead',
+    year: '2022',
+    role: 'Project Manager',
     sector: 'Culture · Community',
     specimen: { name: 'Orchid', hex: '#E5BDDF', rgb: '229, 189, 223', cmyk: '0, 18, 3, 10' },
+    clientLogo: '/almujadilah-logo.svg',
+    liveUrl: 'https://almujadilah.qa/en',
+    video: '/almujadilah-home.mp4',
+    videoCaption: 'almujadilah.qa — the live platform',
+    overviewHeading: 'An initiative of Her Highness. Delivered.',
     overview:
-      'AlMujadilah is the first mosque and education centre designed specifically for women in Qatar. Its digital companion had to carry the same intention: programmes, prayer times, learning circles and community — designed with quietness and dignity.',
+      'AlMujadilah is a landmark mosque and education centre for women in Doha — an initiative of Her Highness Sheikha Moza bint Nasser, inaugurated in her presence. As Project Manager, I led its digital platform from design through development to go-live.',
+    snapshot: [
+      { label: 'Trigger', value: 'An initiative of HH Sheikha Moza' },
+      { label: 'Mandate', value: 'A digital home for a mosque for women' },
+      { label: 'Role', value: 'Project Manager — design → go-live' },
+      { label: 'Scope', value: 'Design · Development · Launch' },
+      { label: 'Status', value: 'Live since 2022' },
+    ],
+    processTitle: 'The place itself',
+    processNote: 'AlMujadilah, in moments — hover to develop',
+    process: [
+      {
+        src: '/process-am/inauguration.jpg',
+        caption: 'The inauguration — Her Highness Sheikha Moza bint Nasser',
+        w: 340,
+      },
+      { src: '/process-am/hall.jpg', caption: 'The hall — lectures under the lattice light', w: 440 },
+      { src: '/process-am/space.jpg', caption: 'The space — dialogue inside AlMujadilah’s curves', w: 440 },
+      { src: '/process-am/circles.jpg', caption: 'Community — learning circles at work', w: 440 },
+      { src: '/process-am/programmes.jpg', caption: 'Programmes — research talks to Ramadan nights', w: 440 },
+    ],
     chapters: [
       {
-        label: 'The challenge',
-        lead: 'Serene — without feeling empty.',
-        text: 'Sacred space demands restraint. The product had to serve first-time visitors and daily members through the same calm surface.',
+        label: 'The mandate',
+        lead: 'A first-of-its-kind mosque deserves a first-rate launch.',
+        text: 'AlMujadilah is a mosque and education centre built around women — an initiative of Her Highness Sheikha Moza, inaugurated in her presence. Its digital platform had to carry the same care, and it had to be ready for the moment.',
       },
       {
-        label: 'The approach',
-        lead: 'Translate the architecture into interface.',
-        text: 'Light, geometry, threshold — rendered as generous whitespace, a soft rhythm of prayer-time anchors, and content that never shouts.',
+        label: 'The delivery',
+        lead: 'One thread from design to go-live.',
+        text: 'As Project Manager I carried the platform across every hand-off — aligning designers, developers and the client team, protecting the design intent through the build, and clearing the road to launch.',
       },
       {
         label: 'The outcome',
-        lead: '“Part of the place itself.”',
-        text: 'That’s how the community describes the companion app — used daily for prayer times, weekly for circles, lectures and gatherings.',
+        lead: 'Live — and part of the community’s rhythm.',
+        text: 'The platform shipped in 2022 and serves the community today: programmes, learning circles, research and prayer times, one calm digital home.',
       },
     ],
     stats: [
-      { value: '4.9', label: 'Store rating' },
-      { value: '70%', label: 'Weekly active members' },
-      { value: '120+', label: 'Programmes hosted' },
+      { value: '2022', label: 'Launched — live ever since' },
+      { value: 'E2E', label: 'Led from design through development to go-live' },
+      { value: '01', label: 'A first — a mosque designed around women' },
     ],
   },
 ];

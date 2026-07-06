@@ -31,7 +31,6 @@ export default function Footer() {
         {[0, 1].map((i) => (
           <div key={i} className="marquee-inner" style={{ alignItems: 'center' }}>
             {SKILLS.map((s, j) => {
-              const accents = ['var(--turquoise)', 'var(--orchid)', 'var(--sienna)'];
               const editorial = j % 2 === 1;
               return (
                 <span
@@ -51,9 +50,9 @@ export default function Footer() {
                             fontSize: 16,
                             textTransform: 'none',
                             lineHeight: 1,
-                            color: accents[Math.floor(j / 2) % accents.length],
+                            color: 'var(--bone)',
                           }
-                        : { color: 'var(--bone)' }
+                        : { color: 'var(--muted)' }
                     }
                   >
                     {s}

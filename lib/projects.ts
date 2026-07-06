@@ -142,7 +142,6 @@ const projectList: Project[] = [
   {
     slug: 'qatar-olympic-committee',
     index: '02',
-    cardMedia: { type: 'image', src: '/cards/qoc-card.jpg' },
     client: 'Qatar Olympic Committee',
     title: 'Preparing the stage for 2036',
     year: '2025',

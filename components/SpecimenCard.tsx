@@ -78,7 +78,11 @@ export default function SpecimenCard({ project }: { project: Project }) {
                 textTransform: 'none',
               }}
             >
-              {project.disabled ? 'In progress' : specimen.name}
+              {project.disabled
+                ? 'In progress'
+                : project.comingSoon
+                  ? 'In the works'
+                  : specimen.name}
             </span>
           </div>
         )}

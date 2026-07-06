@@ -56,12 +56,12 @@ export default function Footer() {
             style={{
               fontSize: 'clamp(1.6rem, 4.5vw, 3.4rem)',
               textTransform: 'none',
-              maxWidth: '18ch',
-              lineHeight: 1.05,
+              maxWidth: '26ch',
+              lineHeight: 1.08,
+              textWrap: 'balance',
             }}
           >
-            Always up for a conversation about UX, products, and unreasonably
-            good design.
+            Always up for a conversation about UX and unreasonably good design.
           </p>
         </Reveal>
 

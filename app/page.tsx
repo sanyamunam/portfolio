@@ -278,6 +278,60 @@ export default function Home() {
             </div>
           </Link>
         </Reveal>
+
+        {/* what I actually do — craft and leadership, type only */}
+        <div
+          className="hairline-top"
+          style={{
+            gridColumn: '1 / -1',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+            gap: 'clamp(32px, 5vw, 80px)',
+            paddingTop: 'clamp(28px, 4vw, 48px)',
+          }}
+        >
+          <Reveal>
+            <p className="caption" style={{ color: 'var(--turquoise)', marginBottom: 20 }}>
+              The craft
+            </p>
+            <ul style={{ listStyle: 'none', display: 'grid', gap: 10 }}>
+              {[
+                'UX Strategy',
+                'Benchmarking',
+                'User Interviews',
+                'Persona Mapping',
+                'Wireframing',
+                'Client Pitches',
+                'Design Direction',
+              ].map((s) => (
+                <li key={s} style={{ fontWeight: 500, color: 'var(--bone)' }}>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <p className="caption" style={{ color: 'var(--turquoise)', marginBottom: 20 }}>
+              The leadership
+            </p>
+            <ul style={{ listStyle: 'none', display: 'grid', gap: 14 }}>
+              {[
+                'Running design operations for a 25+ designer team',
+                'Leading a team of UX specialists',
+                'Aligning stakeholders at every altitude',
+                'Carrying products from design to go-live',
+              ].map((s) => (
+                <li
+                  key={s}
+                  style={{ fontWeight: 500, color: 'var(--bone)', maxWidth: '40ch' }}
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
       </section>
     </>
   );

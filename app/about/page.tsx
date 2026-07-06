@@ -26,12 +26,15 @@ const sparks = [
 ];
 
 const capabilities = [
-  'UX Strategy & Research',
-  'Product Design',
-  'Design Systems',
-  'Bilingual & RTL Design',
-  'Prototyping & Testing',
-  'Design Leadership',
+  'UX Strategy',
+  'Benchmarking',
+  'User Interviews',
+  'Persona Mapping',
+  'Wireframing',
+  'Client Pitches',
+  'Design Direction',
+  'Design Ops — 25+ team',
+  'UX Team Leadership',
 ];
 
 export default function About() {

@@ -209,6 +209,35 @@ img, svg { display: block; max-width: 100%; }
   filter: none;
 }
 
+/* ——— Maker's stamp — the hand-coded seal ————————— */
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border: 1px solid var(--turquoise);
+  color: var(--turquoise);
+  transform: rotate(-2deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s, color 0.4s;
+}
+
+.stamp:hover {
+  transform: rotate(0deg) scale(1.03);
+  background: var(--turquoise);
+  color: var(--jet);
+}
+
+.stamp .stamp-mark {
+  display: inline-block;
+  animation: stamp-spin 14s linear infinite;
+}
+
+@keyframes stamp-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* ——— Coming-soon journey tracker ——————————————— */
 
 .pulse-dot {

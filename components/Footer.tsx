@@ -82,19 +82,33 @@ export default function Footer() {
           </span>
         </Reveal>
 
+        {/* the maker's stamp — this site is handmade, and proud of it */}
+        <Reveal delay={0.22}>
+          <div
+            className="stamp caption"
+            data-cursor
+            data-cursor-label="100% handmade"
+            style={{ marginTop: 'clamp(32px, 5vw, 56px)' }}
+          >
+            <span className="stamp-mark" aria-hidden>✺</span>
+            <span>Designed & hand-coded by Sanya Munam — no template in sight</span>
+            <span className="stamp-mark" aria-hidden>✺</span>
+          </div>
+        </Reveal>
+
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             width: '100%',
-            marginTop: 'clamp(48px, 7vw, 100px)',
+            marginTop: 'clamp(40px, 6vw, 80px)',
             flexWrap: 'wrap',
             gap: 16,
           }}
         >
           <span className="caption">©2026 Sanya Munam — All rights reserved</span>
           <span className="caption" style={{ color: 'var(--muted)' }}>
-            Designed & hand-coded by Sanya Munam. No template in sight.
+            Built from scratch with Next.js
           </span>
         </div>
       </div>

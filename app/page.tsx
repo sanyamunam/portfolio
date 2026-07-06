@@ -32,24 +32,19 @@ export default function Home() {
           padding: '0 0 4px',
         }}
       >
-        {/* atmosphere — the darkroom's version of botanical photography,
-            with two slow-drifting pools of light for a living hero */}
+        {/* atmosphere — the darkroom's version of botanical photography */}
         <motion.div
           aria-hidden
           style={{
             position: 'absolute',
             inset: 0,
             opacity: atmosphereOpacity,
-            overflow: 'hidden',
             background: `
               radial-gradient(60% 50% at 78% 18%, rgba(157,107,128,0.16) 0%, transparent 60%),
               radial-gradient(50% 45% at 12% 68%, rgba(153,225,217,0.10) 0%, transparent 60%),
               radial-gradient(45% 40% at 55% 95%, rgba(229,189,223,0.08) 0%, transparent 55%)`,
           }}
-        >
-          <div className="hero-blob hero-blob--a" />
-          <div className="hero-blob hero-blob--b" />
-        </motion.div>
+        />
 
         {/* rotated side label — running header */}
         <div

@@ -4,6 +4,19 @@ import Reveal from './Reveal';
 
 const EMAIL = 'sanyamunam95@gmail.com';
 
+const SKILLS = [
+  'UX Strategy',
+  'Benchmarking',
+  'User Interviews',
+  'Persona Mapping',
+  'Wireframing',
+  'Client Pitches',
+  'Design Direction',
+  'Stakeholder Alignment',
+  'Design Operations',
+  'Team Leadership',
+];
+
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--jet-3)', position: 'relative' }}>
@@ -15,13 +28,13 @@ export default function Footer() {
       >
         {[0, 1].map((i) => (
           <div key={i} className="marquee-inner">
-            {Array.from({ length: 6 }).map((_, j) => (
+            {SKILLS.map((s) => (
               <span
-                key={j}
+                key={s}
                 className="caption"
-                style={{ padding: '0 28px', color: 'var(--muted)' }}
+                style={{ padding: '0 24px', color: 'var(--muted)' }}
               >
-                Sanya Munam — UX Lead ✺ Doha, Qatar ✺ Curiosity as an operating system ✺
+                {s} <span style={{ color: 'var(--turquoise)' }}>✺</span>
               </span>
             ))}
           </div>
@@ -82,31 +95,30 @@ export default function Footer() {
           </span>
         </Reveal>
 
-        {/* the maker's stamp — this site is handmade, and proud of it */}
-        <Reveal delay={0.22}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            marginTop: 'clamp(48px, 7vw, 96px)',
+            flexWrap: 'wrap',
+            gap: 20,
+          }}
+        >
+          <span className="caption">©2026 Sanya Munam — All rights reserved</span>
+
+          {/* the maker's stamp — handmade, and proud of it */}
           <div
             className="stamp caption"
             data-cursor
             data-cursor-label="100% handmade"
-            style={{ marginTop: 'clamp(32px, 5vw, 56px)' }}
           >
             <span className="stamp-mark" aria-hidden>✺</span>
             <span>Designed & hand-coded by Sanya Munam — no template in sight</span>
             <span className="stamp-mark" aria-hidden>✺</span>
           </div>
-        </Reveal>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            marginTop: 'clamp(40px, 6vw, 80px)',
-            flexWrap: 'wrap',
-            gap: 16,
-          }}
-        >
-          <span className="caption">©2026 Sanya Munam — All rights reserved</span>
           <span className="caption" style={{ color: 'var(--muted)' }}>
             Built from scratch with Next.js
           </span>

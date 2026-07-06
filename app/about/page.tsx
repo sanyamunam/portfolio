@@ -122,50 +122,16 @@ export default function About() {
             </p>
           </Reveal>
 
-          {/* the road here — colophon-style biography rows */}
-          <Reveal delay={0.08}>
-            <div
-              className="hairline-top"
-              style={{ display: 'grid', gap: 10, padding: '18px 0 22px' }}
-            >
-              {[
-                ['Raised in', 'India'],
-                ['Studied', 'Computer Science Engineering'],
-                ['First role', 'R&D Engineer — Broadcom'],
-                ['Then', 'Curiosity won. UX ever since.'],
-              ].map(([k, v]) => (
-                <div key={k} style={{ display: 'flex', gap: 20 }}>
-                  <span className="caption" style={{ width: 84, flexShrink: 0, paddingTop: 2 }}>
-                    {k}
-                  </span>
-                  <span style={{ fontWeight: 600, fontSize: 14, color: 'var(--bone)' }}>
-                    {v}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <p style={{ color: 'var(--muted)', maxWidth: '52ch', marginBottom: 18 }}>
-              Engineering taught me how products are built — but design kept
-              stealing my attention. Google Pay making money movement
-              invisible. Myntra making a thousand choices feel effortless. I
-              crossed over to UX out of sheer curiosity about experiences like
-              those, and never looked back. Three moments made the decision
-              for me — they’re just below.
+          <Reveal delay={0.1}>
+            <p style={{ color: 'var(--muted)', maxWidth: '52ch', marginBottom: 24 }}>
+              I didn’t arrive at UX through a job posting. I arrived through
+              curiosity — three moments, spread across a few unremarkable
+              months, that quietly rewired what I wanted to do with my life.
+              They still shape how I work: observe closely, respect people’s
+              time, and sweat the details nobody will ever consciously notice.
             </p>
           </Reveal>
-          <Reveal delay={0.16}>
-            <p
-              className="caption"
-              style={{ color: 'var(--muted)', marginBottom: 24, lineHeight: 1.8 }}
-            >
-              Off the clock — deep in Awwwards, Medium and Muzli, collecting
-              other people’s good decisions.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
+          <Reveal delay={0.18}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
               {capabilities.map((c) => (
                 <span
@@ -179,6 +145,76 @@ export default function About() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      {/* ——— the basics — a slim colophon band ——————————— */}
+      <section
+        style={{
+          padding: 'clamp(36px, 5vw, 64px) var(--gutter)',
+          borderBottom: '1px solid var(--line)',
+        }}
+      >
+        <Reveal>
+          <p className="caption" style={{ color: 'var(--turquoise)', marginBottom: 28 }}>
+            The basics
+          </p>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(210px, 100%), 1fr))',
+              gap: 'clamp(20px, 3vw, 40px)',
+            }}
+          >
+            {[
+              ['Raised in', 'India'],
+              ['Studied', 'Computer Science Engineering'],
+              ['First role', 'R&D Engineer — Broadcom'],
+              ['Then', 'Curiosity won. UX ever since.'],
+            ].map(([k, v]) => (
+              <div key={k}>
+                <p className="caption" style={{ color: 'var(--muted)', marginBottom: 8 }}>
+                  {k}
+                </p>
+                <p style={{ fontWeight: 600, fontSize: 15, color: 'var(--bone)' }}>{v}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* things that keep me curious */}
+        <Reveal delay={0.12}>
+          <div
+            className="hairline-top"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 14,
+              marginTop: 'clamp(24px, 3.5vw, 40px)',
+              paddingTop: 'clamp(18px, 2.5vw, 28px)',
+            }}
+          >
+            <span className="caption" style={{ color: 'var(--muted)' }}>
+              Product crushes — Google Pay & Myntra, for making hard things effortless
+            </span>
+            <a
+              href="https://www.youtube.com/watch?v=MnrJzXM7a6o&t=463s"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="caption link-line"
+              data-cursor-label="Watch keynote"
+              style={{ color: 'var(--turquoise)' }}
+            >
+              On repeat — Steve Jobs’ 2007 iPhone launch, a masterclass in
+              product & presentation ↗
+            </a>
+            <span className="caption" style={{ color: 'var(--muted)' }}>
+              Off the clock — Awwwards, Medium, Muzli
+            </span>
+          </div>
+        </Reveal>
       </section>
 
       {/* ——— three sparks ————————————————————— */}

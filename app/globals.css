@@ -1,0 +1,291 @@
+/* ————————————————————————————————————————————————
+   SANYA — dark-room editorial
+   Shelby Kay structure, transposed to a Jet Black darkroom.
+   Ink: bone. Voice: turquoise. Specimens: wine / orchid / sienna.
+   0px radius everywhere except glass specimen cards.
+   ———————————————————————————————————————————————— */
+
+:root {
+  /* Surfaces — tonal darkroom shifts (deepest ← → lifted) */
+  --jet: #131216;        /* L1 page canvas */
+  --jet-2: #1b171c;      /* L2 wine-tinted section shift */
+  --jet-3: #0d0c10;      /* L3 deepest — contact / footer */
+
+  /* Ink system */
+  --bone: #eae3d6;       /* primary ink on dark */
+  --muted: #98909b;      /* whispering metadata */
+  --line: rgba(234, 227, 214, 0.14);
+
+  /* Specimen accents — from the color-card posts */
+  --turquoise: #99e1d9;  /* brand voice — the SANYA wordmark ink */
+  --orchid: #e5bddf;
+  --wine: #9d6b80;
+  --sienna: #d6b292;
+
+  /* Glass */
+  --glass: rgba(234, 227, 214, 0.05);
+  --glass-border: rgba(234, 227, 214, 0.14);
+
+  /* Type */
+  --font-ranade: 'Ranade', 'Ranade Variable', Georgia, serif;
+  --font-switzer: 'Switzer', 'Switzer Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --text-wordmark: clamp(4.2rem, 20.5vw, 16rem);
+  --text-display-lg: clamp(3rem, 10.5vw, 9.5rem);
+  --text-display: clamp(2.4rem, 6.5vw, 5.2rem);
+  --text-heading: clamp(1.35rem, 2.2vw, 1.65rem);
+  --text-body: 0.9375rem;
+  --text-caption: 0.6875rem;
+
+  /* Layout */
+  --gutter: clamp(20px, 4.5vw, 64px);
+  --section-gap: clamp(96px, 14vw, 200px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--jet);
+  color: var(--bone);
+  font-family: var(--font-switzer);
+  font-size: var(--text-body);
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--turquoise);
+  color: var(--jet);
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--jet-3); }
+::-webkit-scrollbar-thumb { background: #35313a; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+/* Native cursor off on fine pointers — the ink dot takes over */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, [data-cursor] { cursor: none; }
+}
+
+/* ——— Type roles ——————————————————————————— */
+
+.caption {
+  font-family: var(--font-switzer);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.display {
+  font-family: var(--font-ranade);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.body-lg {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* ——— Surfaces & atmosphere ————————————————— */
+
+.section {
+  padding: var(--section-gap) var(--gutter);
+  position: relative;
+}
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 300;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1.5%); }
+  50% { transform: translate(1.5%, -2%); }
+  75% { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ——— Glass — the one digital material ————————— */
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+}
+
+/* ——— Editorial hairline rows ————————————————— */
+
+.hairline-top { border-top: 1px solid var(--line); }
+
+/* ——— Links ————————————————————————————— */
+
+.link-line {
+  position: relative;
+  display: inline-block;
+}
+
+.link-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ——— CTA — the one loud link ——————————————— */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 1px solid currentColor;
+  font-family: var(--font-switzer);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s, border-color 0.35s;
+}
+
+.cta:hover {
+  background: var(--turquoise);
+  border-color: var(--turquoise);
+  color: var(--jet);
+}
+
+/* ——— Case chapters — numeral / lead / support ——————— */
+
+.chapter-row {
+  display: grid;
+  grid-template-columns: clamp(90px, 12vw, 170px) minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 64px);
+  padding-top: clamp(24px, 3.5vw, 44px);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .chapter-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* ——— Process filmstrip — contact sheet from the war room ——— */
+
+.filmstrip {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(16px, 2.5vw, 32px);
+  overflow-x: auto;
+  padding: 16px var(--gutter) 28px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: #35313a var(--jet);
+}
+
+.filmstrip .artifact {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  margin: 0;
+  padding: 10px;
+}
+
+/* prints develop on hover — monochrome until you look closer */
+.filmstrip img {
+  filter: grayscale(0.85) contrast(1.03) brightness(0.92);
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filmstrip .artifact:hover img {
+  filter: none;
+}
+
+/* ——— Ink illustration (mask recolor) ————————— */
+
+/* mask URL is set inline (base-path aware) where the class is used */
+.ink-illustration {
+  aspect-ratio: 571 / 434;
+  width: 100%;
+  background: currentColor;
+}
+
+/* ——— Nav responsive ————————————————————— */
+
+@media (max-width: 640px) {
+  .nav-meta { display: none; }
+}
+
+/* ——— Marquee ———————————————————————————— */
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
+
+.marquee-inner {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ——— Reduced motion ————————————————————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .grain { animation: none; }
+  .marquee-inner { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

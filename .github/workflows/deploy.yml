@@ -23,11 +23,10 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      # Injects basePath for project-page URLs and enables Pages on first run
+      # basePath (/portfolio) is set in next.config.mjs — no injection needed
       - uses: actions/configure-pages@v5
         with:
           enablement: true
-          static_site_generator: next
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

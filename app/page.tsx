@@ -88,8 +88,8 @@ export default function Home() {
               Sanya Munam — UX Lead · Doha, Qatar
             </p>
             <p className="body-lg" style={{ color: 'var(--bone)' }}>
-              I shape UX strategy and design direction for products that
-              disappear into people’s lives.
+              I shape UX strategy and design direction for products that feel
+              effortless.
             </p>
           </motion.div>
           <motion.span

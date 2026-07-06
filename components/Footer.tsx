@@ -27,16 +27,41 @@ export default function Footer() {
         aria-hidden
       >
         {[0, 1].map((i) => (
-          <div key={i} className="marquee-inner">
-            {SKILLS.map((s) => (
-              <span
-                key={s}
-                className="caption"
-                style={{ padding: '0 24px', color: 'var(--muted)' }}
-              >
-                {s} <span style={{ color: 'var(--turquoise)' }}>✺</span>
-              </span>
-            ))}
+          <div key={i} className="marquee-inner" style={{ alignItems: 'center' }}>
+            {SKILLS.map((s, j) => {
+              const accents = ['var(--turquoise)', 'var(--orchid)', 'var(--sienna)'];
+              const editorial = j % 2 === 1;
+              return (
+                <span
+                  key={s}
+                  style={{
+                    padding: '0 12px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 24,
+                  }}
+                >
+                  <span
+                    className={editorial ? 'display' : 'caption'}
+                    style={
+                      editorial
+                        ? {
+                            fontSize: 16,
+                            textTransform: 'none',
+                            lineHeight: 1,
+                            color: accents[Math.floor(j / 2) % accents.length],
+                          }
+                        : { color: 'var(--bone)' }
+                    }
+                  >
+                    {s}
+                  </span>
+                  <span aria-hidden style={{ color: 'var(--muted)', fontSize: 10 }}>
+                    ✺
+                  </span>
+                </span>
+              );
+            })}
           </div>
         ))}
       </div>

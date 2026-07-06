@@ -9,19 +9,37 @@ const sparks = [
     index: '01',
     title: 'The workshop',
     color: 'var(--wine)',
-    text: 'A one-day design workshop was supposed to be a box to tick. Instead, I watched a room full of strangers argue passionately about the placement of a single button — and realised that behind every screen is a hundred deliberate decisions. I wanted to be the one making them.',
+    text: 'A one-day design thinking workshop at Broadcom — my first company — was supposed to be a box to tick. Instead, I watched a room full of strangers argue passionately about the placement of a single button — and realised that behind every screen is a hundred deliberate decisions. I wanted to be the one making them.',
+    artifact: {
+      src: '/sparks/broadcom.svg',
+      alt: 'Broadcom logo',
+      caption: 'Where it started',
+      fit: 'logo' as const,
+    },
   },
   {
     index: '02',
     title: 'Dad & GPay',
     color: 'var(--turquoise)',
     text: 'My father — a man who once asked me to "open the Google" — sent money on GPay on his first try. No manual, no fear, no phone call to me. I sat there quietly amazed. Great design doesn’t teach people technology; it makes technology irrelevant. That’s the standard I hold every product to.',
+    artifact: {
+      src: '/sparks/gpay.svg',
+      alt: 'Google Pay logo',
+      caption: 'Dad-approved UX',
+      fit: 'logo' as const,
+    },
   },
   {
     index: '03',
     title: 'The biography',
     color: 'var(--orchid)',
     text: 'Walter Isaacson’s Steve Jobs kept me up for a week. Not the genius mythology — the obsession. Fonts on a dropout’s calligraphy bench becoming the Mac’s typography. The idea that taste is a discipline, that technology alone is not enough — it has to marry the liberal arts. I never unread that.',
+    artifact: {
+      src: '/sparks/jobs-book.jpg',
+      alt: 'Steve Jobs by Walter Isaacson — book cover',
+      caption: '600 pages, one week',
+      fit: 'cover' as const,
+    },
   },
 ];
 
@@ -30,6 +48,8 @@ const capabilities = [
   'Benchmarking',
   'User Interviews',
   'Persona Mapping',
+  'Google Analytics',
+  'Hotjar Analysis',
   'Wireframing',
   'Client Pitches',
   'Design Direction',
@@ -141,11 +161,8 @@ export default function About() {
           {sparks.map((s, i) => (
             <Reveal key={s.index} delay={i * 0.08}>
               <article
-                className="hairline-top"
+                className="hairline-top spark-row"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'clamp(60px, 10vw, 140px) 1fr',
-                  gap: 'clamp(16px, 4vw, 64px)',
                   paddingTop: 'clamp(24px, 4vw, 48px)',
                   /* alternating editorial indent */
                   marginLeft: i === 1 ? 'clamp(0px, 8vw, 160px)' : 0,
@@ -173,6 +190,35 @@ export default function About() {
                     {s.text}
                   </p>
                 </div>
+
+                {/* the artifact — the actual object that lit the spark */}
+                <figure className="spark-artifact">
+                  <div
+                    className="spark-plate"
+                    style={
+                      s.artifact.fit === 'cover'
+                        ? { padding: 0 }
+                        : undefined
+                    }
+                  >
+                    <img
+                      src={withBase(s.artifact.src)}
+                      alt={s.artifact.alt}
+                      loading="lazy"
+                      style={
+                        s.artifact.fit === 'cover'
+                          ? { width: '100%', display: 'block' }
+                          : { width: '80%', maxHeight: 56, objectFit: 'contain' }
+                      }
+                    />
+                  </div>
+                  <figcaption
+                    className="caption"
+                    style={{ marginTop: 10, color: 'var(--muted)', textAlign: 'center' }}
+                  >
+                    {s.artifact.caption}
+                  </figcaption>
+                </figure>
               </article>
             </Reveal>
           ))}

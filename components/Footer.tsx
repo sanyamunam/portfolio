@@ -9,6 +9,8 @@ const SKILLS = [
   'Benchmarking',
   'User Interviews',
   'Persona Mapping',
+  'Google Analytics',
+  'Hotjar Analysis',
   'Wireframing',
   'Client Pitches',
   'Design Direction',

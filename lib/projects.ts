@@ -160,7 +160,7 @@ const projectList: Project[] = [
       { label: 'Mandate', value: 'A digital home ready for world scrutiny' },
       { label: 'Role', value: 'UX Lead — design direction' },
       { label: 'Partner', value: 'Microsoft' },
-      { label: 'Research', value: 'Benchmarking · Personas · Olympian interviews' },
+      { label: 'Research', value: 'GA & Hotjar · Benchmarking · Personas · Interviews' },
       { label: 'Status', value: 'In development — launching soon' },
     ],
     processLead: {
@@ -185,8 +185,8 @@ const projectList: Project[] = [
       },
       {
         label: 'The approach',
-        lead: 'Ask the athletes — then draw.',
-        text: 'In partnership with Microsoft, we benchmarked Olympic committees nationally and internationally, mapped personas in depth, and interviewed Team Qatar stars — including beach-volleyball Olympian Cherif Younousse. Only then did the wireframes begin, with design direction carried through an incredible UI team.',
+        lead: 'Ask the data, then the athletes — then draw.',
+        text: 'We started inside the evidence: a detailed Google Analytics and Hotjar analysis of the existing site, revealing how users actually behaved on it. In partnership with Microsoft, we then benchmarked Olympic committees nationally and internationally, mapped personas in depth, and interviewed Team Qatar stars — including beach-volleyball Olympian Cherif Younousse. Only then did the wireframes begin, with design direction carried through an incredible UI team.',
       },
       {
         label: 'The outcome',

@@ -209,6 +209,46 @@ img, svg { display: block; max-width: 100%; }
   filter: none;
 }
 
+/* ——— Spark artifacts — the objects that lit the sparks ——— */
+
+.spark-row {
+  display: grid;
+  grid-template-columns: clamp(60px, 10vw, 140px) 1fr clamp(130px, 15vw, 180px);
+  gap: clamp(16px, 4vw, 64px);
+  align-items: start;
+}
+
+.spark-artifact {
+  margin: 0;
+  justify-self: end;
+  width: clamp(130px, 15vw, 180px);
+}
+
+/* light plate — brand marks and covers read true on it */
+.spark-plate {
+  background: #efe8dc;
+  padding: 22px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spark-row:hover .spark-plate {
+  transform: translateY(-6px);
+}
+
+@media (max-width: 760px) {
+  .spark-row {
+    grid-template-columns: clamp(48px, 12vw, 70px) 1fr;
+  }
+  .spark-artifact {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 18px;
+  }
+}
+
 /* ——— Maker's stamp — the hand-coded seal ————————— */
 
 .stamp {

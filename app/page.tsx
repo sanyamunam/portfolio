@@ -321,7 +321,7 @@ export default function Home() {
               label: 'The groundwork',
               accent: 'var(--turquoise)',
               lead: 'Research that earns the right to design.',
-              text: 'Benchmarking the best national and international players, sitting down with real users, and mapping personas until the audience stops being an abstraction.',
+              text: 'Benchmarking the best national and international players, reading real behaviour through Google Analytics and Hotjar, sitting down with users, and mapping personas until the audience stops being an abstraction.',
             },
             {
               label: 'The direction',

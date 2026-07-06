@@ -280,75 +280,91 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ——— CAPABILITIES — how I work ————————————— */}
-      <section className="section" style={{ background: 'var(--jet-2)' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-            flexWrap: 'wrap',
-            gap: 16,
-            marginBottom: 'clamp(36px, 5vw, 72px)',
-          }}
-        >
+      {/* ——— CAPABILITIES — how I work ——————————————
+           Deliberately unlike the work index: deepest surface,
+           centered anchor, and column rules instead of rows. */}
+      <section
+        className="section"
+        style={{
+          background: `
+            radial-gradient(55% 60% at 50% 0%, rgba(153,225,217,0.07) 0%, transparent 65%),
+            radial-gradient(40% 45% at 85% 100%, rgba(229,189,223,0.05) 0%, transparent 60%),
+            var(--jet-3)`,
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(44px, 6vw, 88px)' }}>
           <Reveal>
-            <h2 className="display" style={{ fontSize: 'var(--text-display)' }}>
+            <p className="caption" style={{ color: 'var(--muted)', marginBottom: 14 }}>
+              Strategy · Direction · Leadership
+            </p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h2
+              className="display"
+              style={{ fontSize: 'var(--text-heading)', color: 'var(--bone)' }}
+            >
               How I work
             </h2>
           </Reveal>
-          <Reveal delay={0.08}>
-            <span className="caption" style={{ color: 'var(--muted)' }}>
-              Strategy · Direction · Leadership
-            </span>
-          </Reveal>
         </div>
 
-        <div style={{ display: 'grid', gap: 'clamp(36px, 5vw, 64px)' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
+            gap: 'clamp(36px, 5vw, 72px)',
+            alignItems: 'start',
+          }}
+        >
           {[
             {
               label: 'The groundwork',
+              accent: 'var(--turquoise)',
               lead: 'Research that earns the right to design.',
               text: 'Benchmarking the best national and international players, sitting down with real users, and mapping personas until the audience stops being an abstraction.',
             },
             {
               label: 'The direction',
+              accent: 'var(--orchid)',
               lead: 'Strategy that survives the client room.',
               text: 'UX strategy, wireframes and concept pitches built to align high-stakes stakeholders — and to win genuine enthusiasm, not just sign-off.',
             },
             {
               label: 'The leadership',
+              accent: 'var(--sienna)',
               lead: 'Teams that ship.',
               text: 'Running design operations for a studio of 25+ designers and leading a team of UX specialists — carrying products from first sketch to go-live.',
             },
           ].map((a, i) => (
-            <Reveal key={a.label} delay={i * 0.05}>
-              <div className="chapter-row hairline-top">
-                <div>
-                  <span
-                    className="display"
-                    style={{
-                      fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
-                      color: 'var(--turquoise)',
-                      display: 'block',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="caption" style={{ marginTop: 10 }}>{a.label}</p>
-                </div>
+            <Reveal key={a.label} delay={i * 0.08}>
+              <div
+                style={{
+                  borderLeft: '1px solid var(--line)',
+                  paddingLeft: 'clamp(18px, 2.5vw, 30px)',
+                  display: 'grid',
+                  gap: 16,
+                }}
+              >
+                <span
+                  className="display"
+                  style={{ fontSize: 'clamp(2.4rem, 5vw, 4.2rem)', color: a.accent }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="caption" style={{ color: 'var(--muted)' }}>{a.label}</p>
                 <h3
                   className="display"
                   style={{
-                    fontSize: 'clamp(1.5rem, 2.7vw, 2.4rem)',
+                    fontSize: 'clamp(1.4rem, 2.2vw, 1.9rem)',
                     textTransform: 'none',
-                    lineHeight: 1.08,
+                    lineHeight: 1.1,
                     color: 'var(--bone)',
+                    maxWidth: '18ch',
                   }}
                 >
                   {a.lead}
                 </h3>
-                <p style={{ fontSize: '1.04rem', lineHeight: 1.75, color: 'var(--muted)' }}>
+                <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--muted)' }}>
                   {a.text}
                 </p>
               </div>

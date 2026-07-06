@@ -374,6 +374,37 @@ img, svg { display: block; max-width: 100%; }
   to { transform: translateX(-100%); }
 }
 
+/* ——— Touch devices — no hover, so nothing stays dimmed ——— */
+
+@media (hover: none) {
+  .filmstrip img,
+  .card-media img,
+  .card-media video,
+  .spark-plate {
+    filter: none !important;
+  }
+}
+
+/* ——— Small screens ————————————————————— */
+
+@media (max-width: 640px) {
+  .side-label {
+    display: none;
+  }
+
+  .stamp {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    max-width: 100%;
+    padding: 12px 14px;
+  }
+
+  .filmstrip figure > div {
+    height: 240px !important;
+  }
+}
+
 /* ——— Reduced motion ————————————————————— */
 
 @media (prefers-reduced-motion: reduce) {

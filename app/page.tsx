@@ -49,7 +49,7 @@ export default function Home() {
         {/* rotated side label — running header */}
         <div
           aria-hidden
-          className="display"
+          className="display side-label"
           style={{
             position: 'absolute',
             right: 0,

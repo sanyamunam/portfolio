@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import Reveal from './Reveal';
 
 const EMAIL = 'sanyamunam95@gmail.com';
@@ -22,7 +21,7 @@ export default function Footer() {
                 className="caption"
                 style={{ padding: '0 28px', color: 'var(--muted)' }}
               >
-                UX Lead — Doha, Qatar ✺ Curiosity as an operating system ✺
+                Sanya Munam — UX Lead ✺ Doha, Qatar ✺ Curiosity as an operating system ✺
               </span>
             ))}
           </div>
@@ -52,18 +51,34 @@ export default function Footer() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <a
-            href={`mailto:${EMAIL}`}
-            className="display link-line"
-            data-cursor-label="Say hi"
+          <p
+            className="display"
             style={{
-              fontSize: 'clamp(1.4rem, 4.5vw, 3.6rem)',
-              color: 'var(--bone)',
-              textTransform: 'lowercase',
+              fontSize: 'clamp(1.6rem, 4.5vw, 3.4rem)',
+              textTransform: 'none',
+              maxWidth: '18ch',
+              lineHeight: 1.05,
             }}
           >
-            {EMAIL}
+            Have a product that should disappear into people’s lives?
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.14}>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="cta"
+            data-cursor-label="Write to Sanya"
+            style={{ color: 'var(--turquoise)', marginTop: 8 }}
+          >
+            Say hello ↗
           </a>
+        </Reveal>
+
+        <Reveal delay={0.18}>
+          <span className="caption" style={{ color: 'var(--muted)' }}>
+            Doha, Qatar — GMT+3
+          </span>
         </Reveal>
 
         <div
@@ -76,14 +91,9 @@ export default function Footer() {
             gap: 16,
           }}
         >
-          <span className="caption">©2026 Sanya — All rights reserved</span>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <a href="https://www.linkedin.com" className="caption link-line">LinkedIn</a>
-            <a href="https://www.behance.net" className="caption link-line">Behance</a>
-            <Link href="/contact" className="caption link-line">Contact</Link>
-          </div>
+          <span className="caption">©2026 Sanya Munam — All rights reserved</span>
           <span className="caption" style={{ color: 'var(--muted)' }}>
-            Set in Ranade & Switzer
+            Designed & hand-coded by Sanya Munam. No template in sight.
           </span>
         </div>
       </div>

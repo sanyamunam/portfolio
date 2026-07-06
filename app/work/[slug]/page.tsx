@@ -5,8 +5,10 @@ import ShowcaseVideo from '@/components/ShowcaseVideo';
 import { projects, getProject } from '@/lib/projects';
 import { withBase } from '@/lib/site';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projects.filter((p) => !p.disabled).map((p) => ({ slug: p.slug }));
 }
 
 function tint(hex: string, alpha: number) {
@@ -21,10 +23,11 @@ export default async function CaseStudy({
 }) {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project) notFound();
+  if (!project || project.disabled) notFound();
 
+  const enabled = projects.filter((p) => !p.disabled);
   const next =
-    projects[(projects.findIndex((p) => p.slug === slug) + 1) % projects.length];
+    enabled[(enabled.findIndex((p) => p.slug === slug) + 1) % enabled.length];
   const { specimen } = project;
 
   return (

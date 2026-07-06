@@ -34,24 +34,26 @@ export default function Contact() {
       >
         <Reveal>
           <div>
-            <p className="caption" style={{ marginBottom: 16 }}>
+            <p className="caption" style={{ marginBottom: 12 }}>
+              Sanya Munam — UX Lead
+            </p>
+            <p className="body-lg" style={{ maxWidth: '30ch', marginBottom: 24 }}>
               Have a product that should disappear into people’s lives?
             </p>
             <a
               href={`mailto:${EMAIL}`}
-              className="body-lg link-line"
-              data-cursor-label="Write"
+              className="cta"
+              data-cursor-label="Write to Sanya"
               style={{ color: 'var(--turquoise)' }}
             >
-              {EMAIL}
+              Say hello ↗
             </a>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <a href="https://www.linkedin.com" className="caption link-line">LinkedIn</a>
-            <a href="https://www.behance.net" className="caption link-line">Behance</a>
-          </div>
+          <span className="caption" style={{ color: 'var(--muted)' }}>
+            Doha, Qatar — GMT+3
+          </span>
         </Reveal>
       </div>
 

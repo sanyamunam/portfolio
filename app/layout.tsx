@@ -5,9 +5,9 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Sanya — UX Lead, Doha',
+  title: 'Sanya Munam — UX Lead, Doha',
   description:
-    'Portfolio of Sanya, a UX Lead based in Qatar. Digital products for Qatar University, Qatar Basketball Federation, Qatar Olympic Committee and AlMujadilah.',
+    'Portfolio of Sanya Munam, a UX Lead based in Qatar. Digital products for the Qatar Basketball Federation, Qatar Olympic Committee, AlMujadilah and Qatar University.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

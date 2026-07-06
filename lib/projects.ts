@@ -6,6 +6,10 @@ export type Project = {
   year: string;
   role: string;
   sector: string;
+  /* No public copy yet — listed but not clickable */
+  disabled?: boolean;
+  /* Work-grid thumbnail: a looping snippet or still of the platform */
+  cardMedia?: { type: 'video' | 'image'; src: string };
   /* Color specimen identity — the dyslove.design color-card motif */
   specimen: {
     name: string;
@@ -38,10 +42,11 @@ export type Project = {
   processNote?: string;
 };
 
-export const projects: Project[] = [
+const projectList: Project[] = [
   {
     slug: 'qatar-university',
-    index: '01',
+    index: '04',
+    disabled: true,
     client: 'Qatar University',
     title: 'A campus that fits in your hand',
     year: '2023',
@@ -75,7 +80,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'qatar-basketball-federation',
-    index: '02',
+    index: '01',
+    cardMedia: { type: 'video', src: '/qbf-home.mp4' },
     client: 'Qatar Basketball Federation',
     title: 'A federation ready for the world stage',
     year: '2025',
@@ -135,7 +141,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'qatar-olympic-committee',
-    index: '03',
+    index: '02',
+    cardMedia: { type: 'image', src: '/process-qoc/board.png' },
     client: 'Qatar Olympic Committee',
     title: 'Preparing the stage for 2036',
     year: '2025',
@@ -194,7 +201,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'almujadilah',
-    index: '04',
+    index: '03',
+    cardMedia: { type: 'video', src: '/almujadilah-home.mp4' },
     client: 'AlMujadilah',
     title: 'A mosque designed around her',
     year: '2022',
@@ -252,6 +260,10 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projects: Project[] = [...projectList].sort((a, b) =>
+  a.index.localeCompare(b.index),
+);
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);

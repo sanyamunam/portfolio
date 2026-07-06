@@ -196,6 +196,19 @@ img, svg { display: block; max-width: 100%; }
   color: var(--jet);
 }
 
+/* ——— Work-grid card media — develops on hover ————————— */
+
+.card-media video,
+.card-media img {
+  filter: grayscale(0.8) brightness(0.92);
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.specimen-card:hover .card-media video,
+.specimen-card:hover .card-media img {
+  filter: none;
+}
+
 /* ——— Coming-soon journey tracker ——————————————— */
 
 .pulse-dot {

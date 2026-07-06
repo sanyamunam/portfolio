@@ -85,7 +85,7 @@ export default function Home() {
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{ maxWidth: '34ch', color: 'var(--bone)' }}
           >
-            UX Lead in Doha, Qatar.
+            I’m Sanya Munam — UX Lead in Doha, Qatar.
             <br />
             I design digital products that disappear into people’s lives.
           </motion.p>
@@ -128,63 +128,74 @@ export default function Home() {
         </div>
 
         <div>
-          {projects.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.06}>
-              <Link href={`/work/${p.slug}`} data-cursor-label="Open case">
-                <motion.div
-                  className="hairline-top"
-                  whileHover="hover"
-                  initial="rest"
-                  animate="rest"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'clamp(40px, 6vw, 80px) 1fr auto auto',
-                    gap: 'clamp(12px, 3vw, 40px)',
-                    alignItems: 'center',
-                    padding: 'clamp(20px, 3.5vw, 40px) 0',
-                    position: 'relative',
-                  }}
-                >
-                  <span className="caption" style={{ color: 'var(--muted)' }}>
-                    {p.index}
-                  </span>
+          {projects.map((p, i) => {
+            const row = (
+              <motion.div
+                className="hairline-top"
+                whileHover={p.disabled ? undefined : 'hover'}
+                initial="rest"
+                animate="rest"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'clamp(40px, 6vw, 80px) 1fr auto auto',
+                  gap: 'clamp(12px, 3vw, 40px)',
+                  alignItems: 'center',
+                  padding: 'clamp(20px, 3.5vw, 40px) 0',
+                  position: 'relative',
+                  opacity: p.disabled ? 0.45 : 1,
+                }}
+              >
+                <span className="caption" style={{ color: 'var(--muted)' }}>
+                  {p.index}
+                </span>
 
-                  <div style={{ minWidth: 0 }}>
-                    <motion.h3
-                      className="display"
-                      variants={{ rest: { x: 0 }, hover: { x: 16 } }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-                      style={{
-                        fontSize: 'clamp(1.6rem, 4.2vw, 3.4rem)',
-                        color: 'var(--bone)',
-                        textTransform: 'none',
-                      }}
-                    >
-                      {p.client}
-                    </motion.h3>
-                    <span className="caption" style={{ color: 'var(--muted)' }}>
-                      {p.title}
-                    </span>
-                  </div>
-
-                  {/* specimen swatch — ink chip */}
-                  <motion.span
-                    aria-hidden
-                    variants={{ rest: { scale: 1 }, hover: { scale: 1.6, rotate: 45 } }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                <div style={{ minWidth: 0 }}>
+                  <motion.h3
+                    className="display"
+                    variants={{ rest: { x: 0 }, hover: { x: 16 } }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                     style={{
-                      width: 14,
-                      height: 14,
-                      background: p.specimen.hex,
-                      display: 'inline-block',
+                      fontSize: 'clamp(1.6rem, 4.2vw, 3.4rem)',
+                      color: 'var(--bone)',
+                      textTransform: 'none',
                     }}
-                  />
+                  >
+                    {p.client}
+                  </motion.h3>
+                  <span className="caption" style={{ color: 'var(--muted)' }}>
+                    {p.disabled ? 'Case study soon' : p.title}
+                  </span>
+                </div>
 
-                  <span className="caption">{p.year}</span>
-                </motion.div>
-              </Link>
-            </Reveal>
-          ))}
+                {/* specimen swatch — ink chip */}
+                <motion.span
+                  aria-hidden
+                  variants={{ rest: { scale: 1 }, hover: { scale: 1.6, rotate: 45 } }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                  style={{
+                    width: 14,
+                    height: 14,
+                    background: p.specimen.hex,
+                    display: 'inline-block',
+                  }}
+                />
+
+                <span className="caption">{p.year}</span>
+              </motion.div>
+            );
+
+            return (
+              <Reveal key={p.slug} delay={i * 0.06}>
+                {p.disabled ? (
+                  row
+                ) : (
+                  <Link href={`/work/${p.slug}`} data-cursor-label="Open case">
+                    {row}
+                  </Link>
+                )}
+              </Reveal>
+            );
+          })}
           <div className="hairline-top" />
         </div>
       </section>

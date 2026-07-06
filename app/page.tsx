@@ -78,17 +78,20 @@ export default function Home() {
             flexWrap: 'wrap',
           }}
         >
-          <motion.p
-            className="body-lg"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{ maxWidth: '34ch', color: 'var(--bone)' }}
+            style={{ maxWidth: '44ch' }}
           >
-            I’m Sanya Munam — UX Lead in Doha, Qatar.
-            <br />
-            I design digital products that disappear into people’s lives.
-          </motion.p>
+            <p className="caption" style={{ marginBottom: 12 }}>
+              Sanya Munam — UX Lead · Doha, Qatar
+            </p>
+            <p className="body-lg" style={{ color: 'var(--bone)' }}>
+              I shape UX strategy and design direction for products that
+              disappear into people’s lives.
+            </p>
+          </motion.div>
           <motion.span
             className="caption"
             initial={{ opacity: 0 }}
@@ -163,7 +166,7 @@ export default function Home() {
                     {p.client}
                   </motion.h3>
                   <span className="caption" style={{ color: 'var(--muted)' }}>
-                    {p.disabled ? 'Case study soon' : p.title}
+                    {p.disabled ? 'Case study in progress — content on its way' : p.title}
                   </span>
                 </div>
 

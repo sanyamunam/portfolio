@@ -32,7 +32,7 @@ export default function Nav() {
         className="caption link-line"
         style={{ color: 'var(--bone)', fontWeight: 700 }}
       >
-        Sanya Munam<span className="nav-meta"> — UX Lead</span>
+        Sanya Munam
       </Link>
 
       <div style={{ display: 'flex', gap: 'clamp(16px, 3vw, 36px)', alignItems: 'baseline' }}>

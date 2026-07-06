@@ -81,7 +81,7 @@ const projectList: Project[] = [
   {
     slug: 'qatar-basketball-federation',
     index: '01',
-    cardMedia: { type: 'video', src: '/qbf-home.mp4' },
+    cardMedia: { type: 'image', src: '/cards/qbf-card.jpg' },
     client: 'Qatar Basketball Federation',
     title: 'A federation ready for the world stage',
     year: '2025',
@@ -142,7 +142,7 @@ const projectList: Project[] = [
   {
     slug: 'qatar-olympic-committee',
     index: '02',
-    cardMedia: { type: 'image', src: '/process-qoc/board.png' },
+    cardMedia: { type: 'image', src: '/cards/qoc-card.jpg' },
     client: 'Qatar Olympic Committee',
     title: 'Preparing the stage for 2036',
     year: '2025',
@@ -175,6 +175,7 @@ const projectList: Project[] = [
       { src: '/process-qoc/archive-book.jpg', caption: 'Archive research — Qatar’s sporting history', w: 540 },
       { src: '/process-qoc/pain-points.jpg', caption: 'Research — key pain points, mapped', w: 440 },
       { src: '/process-qoc/bench-stats.jpg', caption: 'Benchmarking — stats & records patterns', w: 500 },
+      { src: '/process-qoc/concept-home.jpg', caption: 'Concept — the new homepage, in the works', w: 300 },
     ],
     chapters: [
       {
@@ -202,7 +203,7 @@ const projectList: Project[] = [
   {
     slug: 'almujadilah',
     index: '03',
-    cardMedia: { type: 'video', src: '/almujadilah-home.mp4' },
+    cardMedia: { type: 'image', src: '/cards/am-card.jpg' },
     client: 'AlMujadilah',
     title: 'A mosque designed around her',
     year: '2022',

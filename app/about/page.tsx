@@ -93,9 +93,9 @@ export default function About() {
         <div>
           <Reveal>
             <p className="body-lg" style={{ marginBottom: 24 }}>
-              I’m Sanya Munam — a UX Lead based in Doha. For the past several years
-              I’ve designed digital products for universities, sports
-              federations and cultural institutions across Qatar.
+              I’m Sanya Munam — a UX Lead based in Doha. For the past several
+              years I’ve shaped UX strategy and design direction for sports
+              federations, cultural institutions and universities across Qatar.
             </p>
           </Reveal>
           <Reveal delay={0.1}>

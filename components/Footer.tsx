@@ -60,7 +60,8 @@ export default function Footer() {
               lineHeight: 1.05,
             }}
           >
-            Have a product that should disappear into people’s lives?
+            Always up for a conversation about UX, products, and unreasonably
+            good design.
           </p>
         </Reveal>
 

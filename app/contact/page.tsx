@@ -37,8 +37,9 @@ export default function Contact() {
             <p className="caption" style={{ marginBottom: 12 }}>
               Sanya Munam — UX Lead
             </p>
-            <p className="body-lg" style={{ maxWidth: '30ch', marginBottom: 24 }}>
-              Have a product that should disappear into people’s lives?
+            <p className="body-lg" style={{ maxWidth: '32ch', marginBottom: 24 }}>
+              Always up for a conversation about UX, products, and unreasonably
+              good design.
             </p>
             <a
               href={`mailto:${EMAIL}`}

@@ -169,17 +169,39 @@ export default function About() {
             }}
           >
             {[
-              ['Raised in', 'India'],
-              ['Studied', 'Computer Science Engineering'],
-              ['First role', 'R&D Engineer — Broadcom'],
-              ['Experience', '7+ years'],
-              ['Then', 'Curiosity won. UX ever since.'],
-            ].map(([k, v]) => (
-              <div key={k}>
+              { label: 'Raised in', value: 'India' },
+              { label: 'Studied', value: 'Computer Science Engineering' },
+              {
+                label: 'First role',
+                value: 'R&D Engineer — Broadcom',
+                href: 'https://www.broadcom.com',
+              },
+              {
+                label: 'Now',
+                value: 'Leading UX at Applab, Doha',
+                href: 'https://applab.qa',
+              },
+            ].map((row) => (
+              <div key={row.label}>
                 <p className="caption" style={{ color: 'var(--muted)', marginBottom: 8 }}>
-                  {k}
+                  {row.label}
                 </p>
-                <p style={{ fontWeight: 600, fontSize: 15, color: 'var(--bone)' }}>{v}</p>
+                {row.href ? (
+                  <a
+                    href={row.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-line"
+                    data-cursor-label="Visit"
+                    style={{ fontWeight: 600, fontSize: 15, color: 'var(--bone)' }}
+                  >
+                    {row.value} ↗
+                  </a>
+                ) : (
+                  <p style={{ fontWeight: 600, fontSize: 15, color: 'var(--bone)' }}>
+                    {row.value}
+                  </p>
+                )}
               </div>
             ))}
           </div>

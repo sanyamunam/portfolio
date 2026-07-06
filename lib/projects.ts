@@ -29,7 +29,9 @@ export type Project = {
   overviewHeading?: string;
   /* Real cases not yet shipped: renders a "coming soon" showcase plate */
   comingSoon?: boolean;
-  /* Real cases: process artifacts from the FigJam war room */
+  /* Real cases: process artifacts from the FigJam war room.
+     processLead is the featured board-wide shot, shown before the strip. */
+  processLead?: { src: string; caption: string; meta: string };
   process?: { src: string; caption: string; w: number }[];
 };
 
@@ -83,8 +85,12 @@ export const projects: Project[] = [
     partner: { name: 'Microsoft Qatar', logo: '/microsoft-logo.svg' },
     liveUrl: 'https://www.qatarbasketball.qa/',
     overviewHeading: 'From national court to world stage.',
+    processLead: {
+      src: '/process/board.png',
+      caption: 'The FigJam board — the whole redesign, thought out loud',
+      meta: '234 artifacts · one board',
+    },
     process: [
-      { src: '/process/board.png', caption: 'The wall — one board, every decision', w: 400 },
       { src: '/process/bench-icc.jpg', caption: 'Benchmarking — ICC’s fan experience', w: 200 },
       { src: '/process/bench-fantasy.jpg', caption: 'Benchmarking — live-game engagement', w: 420 },
       { src: '/process/bench-wnba.jpg', caption: 'Benchmarking — WNBA’s content engine', w: 560 },
@@ -128,25 +134,31 @@ export const projects: Project[] = [
     slug: 'qatar-olympic-committee',
     index: '03',
     client: 'Qatar Olympic Committee',
-    title: 'Rebuilt around the athletes',
+    title: 'Preparing the stage for 2036',
     year: '2025',
     role: 'UX Lead — Design Direction',
     sector: 'Sport · Government',
     specimen: { name: 'Sienna', hex: '#D6B292', rgb: '214, 178, 146', cmyk: '0, 17, 32, 16' },
     clientLogo: '/qoc-logo.svg',
     comingSoon: true,
-    overviewHeading: 'Ask the athletes. Then redesign everything.',
+    partner: { name: 'Microsoft', logo: '/microsoft-logo.svg' },
+    overviewHeading: 'The bid begins at home.',
     overview:
-      'The Qatar Olympic Committee’s website needed a ground-up revamp. I led UX from research to wireframes — benchmarking committees at home and abroad, mapping personas in depth, interviewing Team Qatar Olympians — and gave design direction to an incredible UI team.',
+      'Qatar has put its name forward to host the 2036 Olympic Games — and a bid brings the world’s eyes with it. In partnership with Microsoft, I led the UX revamp of the QOC’s digital home to be ready for that spotlight, from research and wireframes through design direction for an incredible UI team.',
     snapshot: [
-      { label: 'Trigger', value: 'A digital home due for reinvention' },
-      { label: 'Mandate', value: 'One experience for public & Team Qatar' },
+      { label: 'Trigger', value: 'Qatar’s bid to host the 2036 Games' },
+      { label: 'Mandate', value: 'A digital home ready for world scrutiny' },
       { label: 'Role', value: 'UX Lead — design direction' },
+      { label: 'Partner', value: 'Microsoft' },
       { label: 'Research', value: 'Benchmarking · Personas · Olympian interviews' },
       { label: 'Status', value: 'In development — launching soon' },
     ],
+    processLead: {
+      src: '/process-qoc/board.png',
+      caption: 'The FigJam board — where the revamp was thought out loud',
+      meta: '543 artifacts · one board',
+    },
     process: [
-      { src: '/process-qoc/board.png', caption: 'The wall — one board, every decision', w: 400 },
       { src: '/process-qoc/bench-nz.jpg', caption: 'Benchmarking — how NOCs tell athlete stories', w: 220 },
       { src: '/process-qoc/bench-chile.jpg', caption: 'Benchmarking — international committees', w: 260 },
       { src: '/process-qoc/bench-saudi.jpg', caption: 'Benchmarking — regional neighbours', w: 500 },
@@ -157,24 +169,24 @@ export const projects: Project[] = [
     chapters: [
       {
         label: 'The challenge',
-        lead: 'An Olympic ambition, a dated digital home.',
-        text: 'The QOC’s platform no longer matched the story Team Qatar was writing. The revamp had to serve two audiences at once — a public looking for stories and medals, and a sporting ecosystem looking for structure.',
+        lead: 'When you bid for the Games, the world looks you up.',
+        text: 'With Qatar putting its name forward for the 2036 Olympics, the committee’s dated platform risked telling the wrong story. The revamp was preparation — a digital home that could stand beside a bid.',
       },
       {
         label: 'The approach',
         lead: 'Ask the athletes — then draw.',
-        text: 'We benchmarked Olympic committees nationally and internationally, mapped personas in depth, and interviewed Team Qatar stars — including beach-volleyball Olympian Cherif Younousse. Only then did the wireframes begin, with design direction carried through an incredible UI team.',
+        text: 'In partnership with Microsoft, we benchmarked Olympic committees nationally and internationally, mapped personas in depth, and interviewed Team Qatar stars — including beach-volleyball Olympian Cherif Younousse. Only then did the wireframes begin, with design direction carried through an incredible UI team.',
       },
       {
         label: 'The outcome',
-        lead: 'A full experience revamp — launching soon.',
-        text: 'The entire QOC website experience was redesigned end to end. The platform is in development, on its way to launch.',
+        lead: 'Redesigned end to end — ready for the spotlight.',
+        text: 'The full QOC experience was revamped and is now in development. The reveal lands with the launch, on the road to 2036.',
       },
     ],
     stats: [
+      { value: '2036', label: 'The Games Qatar is bidding to host' },
       { value: '2', label: 'Benchmark tracks — national & international' },
       { value: '1:1', label: 'Interviews with Team Qatar Olympians' },
-      { value: '2025', label: 'Experience redesigned end to end' },
     ],
   },
   {

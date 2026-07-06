@@ -263,24 +263,86 @@ export default async function CaseStudy({
             <div
               className="glass"
               style={{
-                padding: 'clamp(56px, 9vw, 130px) clamp(24px, 5vw, 64px)',
+                padding: 'clamp(56px, 9vw, 120px) clamp(24px, 5vw, 64px)',
                 background: `radial-gradient(80% 100% at 50% 0%, ${tint(specimen.hex, 0.1)} 0%, transparent 70%), ${tint(specimen.hex, 0.04)}`,
                 borderColor: tint(specimen.hex, 0.3),
                 textAlign: 'center',
               }}
             >
               <p className="caption" style={{ color: tint(specimen.hex, 1), marginBottom: 20 }}>
-                Showcase
+                Showcase — reserved for launch
               </p>
               <h2
                 className="display"
                 style={{ fontSize: 'var(--text-display)', textTransform: 'none' }}
               >
-                In the works.
+                Something worth the wait.
               </h2>
-              <p className="caption" style={{ marginTop: 20, color: 'var(--muted)' }}>
-                The revamped platform is in development — launching soon
+              <p
+                style={{
+                  margin: '24px auto 0',
+                  maxWidth: '52ch',
+                  color: 'var(--muted)',
+                  lineHeight: 1.7,
+                }}
+              >
+                The revamped platform is in production right now. The full
+                reveal — screens, flows and all — lands on this very spot the
+                moment it ships.
               </p>
+
+              {/* journey tracker — where the project stands */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: 'clamp(14px, 3.5vw, 40px)',
+                  marginTop: 'clamp(32px, 5vw, 56px)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {[
+                  { label: 'Research', state: 'done' },
+                  { label: 'Design', state: 'done' },
+                  { label: 'Build', state: 'now' },
+                  { label: 'Launch', state: 'next' },
+                ].map((step) => (
+                  <div
+                    key={step.label}
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      className={step.state === 'now' ? 'pulse-dot' : undefined}
+                      style={{
+                        width: 10,
+                        height: 10,
+                        flexShrink: 0,
+                        background:
+                          step.state === 'next' ? 'transparent' : specimen.hex,
+                        border: `1px solid ${
+                          step.state === 'next' ? 'var(--muted)' : specimen.hex
+                        }`,
+                      }}
+                    />
+                    <span
+                      className="caption"
+                      style={{
+                        color:
+                          step.state === 'now'
+                            ? tint(specimen.hex, 1)
+                            : step.state === 'done'
+                              ? 'var(--bone)'
+                              : 'var(--muted)',
+                      }}
+                    >
+                      {step.label}
+                      {step.state === 'done' ? ' ✓' : ''}
+                      {step.state === 'now' ? ' — in progress' : ''}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </section>
@@ -314,6 +376,52 @@ export default async function CaseStudy({
               </span>
             </Reveal>
           </div>
+
+          {/* the FigJam board — featured first, the strip follows */}
+          {project.processLead && (
+            <Reveal delay={0.06}>
+              <div
+                style={{
+                  padding: '0 var(--gutter)',
+                  marginBottom: 'clamp(28px, 4vw, 48px)',
+                }}
+              >
+                <div
+                  className="glass"
+                  style={{
+                    maxWidth: 920,
+                    margin: '0 auto',
+                    padding: 'clamp(14px, 2vw, 24px)',
+                    background: tint(specimen.hex, 0.05),
+                    borderColor: tint(specimen.hex, 0.3),
+                  }}
+                >
+                  <img
+                    src={withBase(project.processLead.src)}
+                    alt={project.processLead.caption}
+                    style={{ width: '100%', display: 'block' }}
+                  />
+                  <p
+                    className="caption"
+                    style={{
+                      marginTop: 14,
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      gap: 12,
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <span style={{ color: 'var(--bone)' }}>
+                      {project.processLead.caption}
+                    </span>
+                    <span style={{ color: tint(specimen.hex, 1) }}>
+                      {project.processLead.meta}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          )}
 
           <Reveal delay={0.1}>
             <div className="filmstrip" data-cursor-label="Scroll">

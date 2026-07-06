@@ -27,13 +27,8 @@ export default function Work() {
       </section>
 
       <section
-        className="section"
-        style={{
-          background: 'var(--jet-2)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(420px, 100%), 1fr))',
-          gap: 'clamp(20px, 3vw, 40px)',
-        }}
+        className="section work-grid"
+        style={{ background: 'var(--jet-2)' }}
       >
         {projects.map((p, i) => (
           <Reveal

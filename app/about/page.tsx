@@ -116,9 +116,10 @@ export default function About() {
         <div>
           <Reveal>
             <p className="body-lg" style={{ marginBottom: 24 }}>
-              I’m Sanya Munam — a UX Lead based in Doha. For the past several
-              years I’ve shaped UX strategy and design direction for sports
-              federations, cultural institutions and universities across Qatar.
+              I’m Sanya Munam — a UX Lead based in Doha with 7+ years of
+              experience, shaping UX strategy and design direction for
+              government, private and enterprise institutions across Qatar
+              and Kuwait.
             </p>
           </Reveal>
 
@@ -171,6 +172,7 @@ export default function About() {
               ['Raised in', 'India'],
               ['Studied', 'Computer Science Engineering'],
               ['First role', 'R&D Engineer — Broadcom'],
+              ['Experience', '7+ years'],
               ['Then', 'Curiosity won. UX ever since.'],
             ].map(([k, v]) => (
               <div key={k}>

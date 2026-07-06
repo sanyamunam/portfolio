@@ -278,59 +278,82 @@ export default function Home() {
             </div>
           </Link>
         </Reveal>
+      </section>
 
-        {/* what I actually do — craft and leadership, type only */}
+      {/* ——— CAPABILITIES — how I work ————————————— */}
+      <section className="section" style={{ background: 'var(--jet-2)' }}>
         <div
-          className="hairline-top"
           style={{
-            gridColumn: '1 / -1',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-            gap: 'clamp(32px, 5vw, 80px)',
-            paddingTop: 'clamp(28px, 4vw, 48px)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+            flexWrap: 'wrap',
+            gap: 16,
+            marginBottom: 'clamp(36px, 5vw, 72px)',
           }}
         >
           <Reveal>
-            <p className="caption" style={{ color: 'var(--turquoise)', marginBottom: 20 }}>
-              The craft
-            </p>
-            <ul style={{ listStyle: 'none', display: 'grid', gap: 10 }}>
-              {[
-                'UX Strategy',
-                'Benchmarking',
-                'User Interviews',
-                'Persona Mapping',
-                'Wireframing',
-                'Client Pitches',
-                'Design Direction',
-              ].map((s) => (
-                <li key={s} style={{ fontWeight: 500, color: 'var(--bone)' }}>
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <h2 className="display" style={{ fontSize: 'var(--text-display)' }}>
+              How I work
+            </h2>
           </Reveal>
-
           <Reveal delay={0.08}>
-            <p className="caption" style={{ color: 'var(--turquoise)', marginBottom: 20 }}>
-              The leadership
-            </p>
-            <ul style={{ listStyle: 'none', display: 'grid', gap: 14 }}>
-              {[
-                'Running design operations for a 25+ designer team',
-                'Leading a team of UX specialists',
-                'Aligning stakeholders at every altitude',
-                'Carrying products from design to go-live',
-              ].map((s) => (
-                <li
-                  key={s}
-                  style={{ fontWeight: 500, color: 'var(--bone)', maxWidth: '40ch' }}
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <span className="caption" style={{ color: 'var(--muted)' }}>
+              Strategy · Direction · Leadership
+            </span>
           </Reveal>
+        </div>
+
+        <div style={{ display: 'grid', gap: 'clamp(36px, 5vw, 64px)' }}>
+          {[
+            {
+              label: 'The groundwork',
+              lead: 'Research that earns the right to design.',
+              text: 'Benchmarking the best national and international players, sitting down with real users, and mapping personas until the audience stops being an abstraction.',
+            },
+            {
+              label: 'The direction',
+              lead: 'Strategy that survives the client room.',
+              text: 'UX strategy, wireframes and concept pitches built to align high-stakes stakeholders — and to win genuine enthusiasm, not just sign-off.',
+            },
+            {
+              label: 'The leadership',
+              lead: 'Teams that ship.',
+              text: 'Running design operations for a studio of 25+ designers and leading a team of UX specialists — carrying products from first sketch to go-live.',
+            },
+          ].map((a, i) => (
+            <Reveal key={a.label} delay={i * 0.05}>
+              <div className="chapter-row hairline-top">
+                <div>
+                  <span
+                    className="display"
+                    style={{
+                      fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
+                      color: 'var(--turquoise)',
+                      display: 'block',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="caption" style={{ marginTop: 10 }}>{a.label}</p>
+                </div>
+                <h3
+                  className="display"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 2.7vw, 2.4rem)',
+                    textTransform: 'none',
+                    lineHeight: 1.08,
+                    color: 'var(--bone)',
+                  }}
+                >
+                  {a.lead}
+                </h3>
+                <p style={{ fontSize: '1.04rem', lineHeight: 1.75, color: 'var(--muted)' }}>
+                  {a.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
     </>

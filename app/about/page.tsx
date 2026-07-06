@@ -33,8 +33,8 @@ const capabilities = [
   'Wireframing',
   'Client Pitches',
   'Design Direction',
-  'Design Ops — 25+ team',
-  'UX Team Leadership',
+  'Design Operations',
+  'Team Leadership',
 ];
 
 export default function About() {

@@ -27,6 +27,8 @@ export type Project = {
   liveUrl?: string;
   /* Real cases: standfirst heading above the overview paragraph */
   overviewHeading?: string;
+  /* Real cases not yet shipped: renders a "coming soon" showcase plate */
+  comingSoon?: boolean;
   /* Real cases: process artifacts from the FigJam war room */
   process?: { src: string; caption: string; w: number }[];
 };
@@ -126,34 +128,53 @@ export const projects: Project[] = [
     slug: 'qatar-olympic-committee',
     index: '03',
     client: 'Qatar Olympic Committee',
-    title: 'One ecosystem for Team Qatar',
-    year: '2024',
-    role: 'UX Lead',
+    title: 'Rebuilt around the athletes',
+    year: '2025',
+    role: 'UX Lead — Design Direction',
     sector: 'Sport · Government',
     specimen: { name: 'Sienna', hex: '#D6B292', rgb: '214, 178, 146', cmyk: '0, 17, 32, 16' },
+    clientLogo: '/qoc-logo.svg',
+    comingSoon: true,
+    overviewHeading: 'Ask the athletes. Then redesign everything.',
     overview:
-      'From grassroots programmes to Olympic delegations, the QOC touches every athlete in the country. We designed the unified digital ecosystem — public storytelling on one face, athlete and federation services on the other.',
+      'The Qatar Olympic Committee’s website needed a ground-up revamp. I led UX from research to wireframes — benchmarking committees at home and abroad, mapping personas in depth, interviewing Team Qatar Olympians — and gave design direction to an incredible UI team.',
+    snapshot: [
+      { label: 'Trigger', value: 'A digital home due for reinvention' },
+      { label: 'Mandate', value: 'One experience for public & Team Qatar' },
+      { label: 'Role', value: 'UX Lead — design direction' },
+      { label: 'Research', value: 'Benchmarking · Personas · Olympian interviews' },
+      { label: 'Status', value: 'In development — launching soon' },
+    ],
+    process: [
+      { src: '/process-qoc/board.png', caption: 'The wall — one board, every decision', w: 400 },
+      { src: '/process-qoc/bench-nz.jpg', caption: 'Benchmarking — how NOCs tell athlete stories', w: 220 },
+      { src: '/process-qoc/bench-chile.jpg', caption: 'Benchmarking — international committees', w: 260 },
+      { src: '/process-qoc/bench-saudi.jpg', caption: 'Benchmarking — regional neighbours', w: 500 },
+      { src: '/process-qoc/archive-book.jpg', caption: 'Archive research — Qatar’s sporting history', w: 540 },
+      { src: '/process-qoc/pain-points.jpg', caption: 'Research — key pain points, mapped', w: 440 },
+      { src: '/process-qoc/bench-stats.jpg', caption: 'Benchmarking — stats & records patterns', w: 500 },
+    ],
     chapters: [
       {
         label: 'The challenge',
-        lead: 'One brand. Two audiences with opposite needs.',
-        text: 'The public wanted stories and medals; athletes and federations needed forms, accreditation and logistics. Previous attempts served neither.',
+        lead: 'An Olympic ambition, a dated digital home.',
+        text: 'The QOC’s platform no longer matched the story Team Qatar was writing. The revamp had to serve two audiences at once — a public looking for stories and medals, and a sporting ecosystem looking for structure.',
       },
       {
         label: 'The approach',
-        lead: 'A public stage in front, a working backstage behind.',
-        text: 'Two faces bound by one design language — with content modelling before visual design, so every story, athlete and event lived once and appeared everywhere.',
+        lead: 'Ask the athletes — then draw.',
+        text: 'We benchmarked Olympic committees nationally and internationally, mapped personas in depth, and interviewed Team Qatar stars — including beach-volleyball Olympian Cherif Younousse. Only then did the wireframes begin, with design direction carried through an incredible UI team.',
       },
       {
         label: 'The outcome',
-        lead: 'One system, carried through a full games cycle.',
-        text: 'A bilingual platform for Team Qatar — and a service backbone the federations now build on.',
+        lead: 'A full experience revamp — launching soon.',
+        text: 'The entire QOC website experience was redesigned end to end. The platform is in development, on its way to launch.',
       },
     ],
     stats: [
-      { value: '30+', label: 'Federations unified' },
-      { value: '2', label: 'Languages, one system' },
-      { value: '60%', label: 'Faster accreditation' },
+      { value: '2', label: 'Benchmark tracks — national & international' },
+      { value: '1:1', label: 'Interviews with Team Qatar Olympians' },
+      { value: '2025', label: 'Experience redesigned end to end' },
     ],
   },
   {

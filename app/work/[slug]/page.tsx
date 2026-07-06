@@ -251,6 +251,41 @@ export default async function CaseStudy({
         </section>
       )}
 
+      {/* ——— showcase placeholder — platform not yet live ——— */}
+      {!project.video && project.comingSoon && (
+        <section
+          style={{
+            background: 'var(--jet-2)',
+            padding: '0 var(--gutter) var(--section-gap)',
+          }}
+        >
+          <Reveal>
+            <div
+              className="glass"
+              style={{
+                padding: 'clamp(56px, 9vw, 130px) clamp(24px, 5vw, 64px)',
+                background: `radial-gradient(80% 100% at 50% 0%, ${tint(specimen.hex, 0.1)} 0%, transparent 70%), ${tint(specimen.hex, 0.04)}`,
+                borderColor: tint(specimen.hex, 0.3),
+                textAlign: 'center',
+              }}
+            >
+              <p className="caption" style={{ color: tint(specimen.hex, 1), marginBottom: 20 }}>
+                Showcase
+              </p>
+              <h2
+                className="display"
+                style={{ fontSize: 'var(--text-display)', textTransform: 'none' }}
+              >
+                In the works.
+              </h2>
+              <p className="caption" style={{ marginTop: 20, color: 'var(--muted)' }}>
+                The revamped platform is in development — launching soon
+              </p>
+            </div>
+          </Reveal>
+        </section>
+      )}
+
       {/* ——— the messy middle — process artifacts ————— */}
       {project.process && (
         <section

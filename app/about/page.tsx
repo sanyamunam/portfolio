@@ -121,16 +121,51 @@ export default function About() {
               federations, cultural institutions and universities across Qatar.
             </p>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p style={{ color: 'var(--muted)', maxWidth: '52ch', marginBottom: 24 }}>
-              I didn’t arrive at UX through a job posting. I arrived through
-              curiosity — three moments, spread across a few unremarkable
-              months, that quietly rewired what I wanted to do with my life.
-              They still shape how I work: observe closely, respect people’s
-              time, and sweat the details nobody will ever consciously notice.
+
+          {/* the road here — colophon-style biography rows */}
+          <Reveal delay={0.08}>
+            <div
+              className="hairline-top"
+              style={{ display: 'grid', gap: 10, padding: '18px 0 22px' }}
+            >
+              {[
+                ['Raised in', 'India'],
+                ['Studied', 'Computer Science Engineering'],
+                ['First role', 'R&D Engineer — Broadcom'],
+                ['Then', 'Curiosity won. UX ever since.'],
+              ].map(([k, v]) => (
+                <div key={k} style={{ display: 'flex', gap: 20 }}>
+                  <span className="caption" style={{ width: 84, flexShrink: 0, paddingTop: 2 }}>
+                    {k}
+                  </span>
+                  <span style={{ fontWeight: 600, fontSize: 14, color: 'var(--bone)' }}>
+                    {v}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <p style={{ color: 'var(--muted)', maxWidth: '52ch', marginBottom: 18 }}>
+              Engineering taught me how products are built — but design kept
+              stealing my attention. Google Pay making money movement
+              invisible. Myntra making a thousand choices feel effortless. I
+              crossed over to UX out of sheer curiosity about experiences like
+              those, and never looked back. Three moments made the decision
+              for me — they’re just below.
             </p>
           </Reveal>
-          <Reveal delay={0.18}>
+          <Reveal delay={0.16}>
+            <p
+              className="caption"
+              style={{ color: 'var(--muted)', marginBottom: 24, lineHeight: 1.8 }}
+            >
+              Off the clock — deep in Awwwards, Medium and Muzli, collecting
+              other people’s good decisions.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
               {capabilities.map((c) => (
                 <span
@@ -193,22 +228,15 @@ export default function About() {
 
                 {/* the artifact — the actual object that lit the spark */}
                 <figure className="spark-artifact">
-                  <div
-                    className="spark-plate"
-                    style={
-                      s.artifact.fit === 'cover'
-                        ? { padding: 0 }
-                        : undefined
-                    }
-                  >
+                  <div className="spark-plate">
                     <img
                       src={withBase(s.artifact.src)}
                       alt={s.artifact.alt}
                       loading="lazy"
                       style={
                         s.artifact.fit === 'cover'
-                          ? { width: '100%', display: 'block' }
-                          : { width: '80%', maxHeight: 56, objectFit: 'contain' }
+                          ? { height: '100%', width: 'auto', display: 'block' }
+                          : { width: '80%', maxHeight: 52, objectFit: 'contain' }
                       }
                     />
                   </div>

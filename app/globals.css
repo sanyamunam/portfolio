@@ -224,18 +224,24 @@ img, svg { display: block; max-width: 100%; }
   width: clamp(130px, 15vw, 180px);
 }
 
-/* light plate — brand marks and covers read true on it */
+/* light plate — brand marks and covers read true on it.
+   Uniform height, dimmed until the row is hovered, so the plates
+   whisper against the dark canvas instead of shouting. */
 .spark-plate {
-  background: #efe8dc;
-  padding: 22px 14px;
+  background: #e4ddd0;
+  height: 116px;
+  padding: 18px 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.8) grayscale(0.25);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spark-row:hover .spark-plate {
   transform: translateY(-6px);
+  filter: none;
 }
 
 @media (max-width: 760px) {

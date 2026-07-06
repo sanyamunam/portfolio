@@ -9,7 +9,7 @@ const sparks = [
     index: '01',
     title: 'The workshop',
     color: 'var(--wine)',
-    text: 'A one-day design thinking workshop at Broadcom — my first company — was supposed to be a box to tick. Instead, I watched a room full of strangers argue passionately about the placement of a single button — and realised that behind every screen is a hundred deliberate decisions. I wanted to be the one making them.',
+    text: 'A two-week design thinking workshop at Broadcom — my first company — changed what I thought actually matters when building products: users, and the problems they need solving. Coming from an engineering background, I never saw it coming. That workshop was my foothold into the world of UX.',
     artifact: {
       src: '/sparks/broadcom.svg',
       alt: 'Broadcom logo',
@@ -19,9 +19,9 @@ const sparks = [
   },
   {
     index: '02',
-    title: 'Dad & GPay',
+    title: 'Dad & Google Pay',
     color: 'var(--turquoise)',
-    text: 'My father — a man who once asked me to "open the Google" — sent money on GPay on his first try. No manual, no fear, no phone call to me. I sat there quietly amazed. Great design doesn’t teach people technology; it makes technology irrelevant. That’s the standard I hold every product to.',
+    text: 'My father — a man who once asked me to "open the Google" — sent money on Google Pay on his first try. No manual, no fear, no phone call to me. I sat there quietly amazed. Great design doesn’t teach people technology; it makes technology irrelevant. That’s the standard I hold every product to.',
     artifact: {
       src: '/sparks/gpay.svg',
       alt: 'Google Pay logo',
@@ -33,11 +33,11 @@ const sparks = [
     index: '03',
     title: 'The biography',
     color: 'var(--orchid)',
-    text: 'Walter Isaacson’s Steve Jobs kept me up for a week. Not the genius mythology — the obsession. Fonts on a dropout’s calligraphy bench becoming the Mac’s typography. The idea that taste is a discipline, that technology alone is not enough — it has to marry the liberal arts. I never unread that.',
+    text: 'Walter Isaacson’s Steve Jobs kept me up for two weeks. Not the genius mythology — the obsession. Fonts on a dropout’s calligraphy bench becoming the Mac’s typography. The idea that taste is a discipline, that technology alone is not enough — it has to marry the liberal arts. I never unread that.',
     artifact: {
       src: '/sparks/jobs-book.jpg',
       alt: 'Steve Jobs by Walter Isaacson — book cover',
-      caption: '600 pages, one week',
+      caption: '600 pages, two weeks',
       fit: 'cover' as const,
     },
   },

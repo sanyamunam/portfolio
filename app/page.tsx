@@ -35,14 +35,11 @@ export default function Home() {
         {/* atmosphere — the darkroom's version of botanical photography */}
         <motion.div
           aria-hidden
+          className="hero-atmosphere"
           style={{
             position: 'absolute',
             inset: 0,
             opacity: atmosphereOpacity,
-            background: `
-              radial-gradient(60% 50% at 78% 18%, color-mix(in srgb, var(--wine) 16%, transparent) 0%, transparent 60%),
-              radial-gradient(50% 45% at 12% 68%, color-mix(in srgb, var(--turquoise) 10%, transparent) 0%, transparent 60%),
-              radial-gradient(45% 40% at 55% 95%, color-mix(in srgb, var(--orchid) 8%, transparent) 0%, transparent 55%)`,
           }}
         />
 
@@ -111,7 +108,7 @@ export default function Home() {
       </section>
 
       {/* ——— SELECTED WORK — editorial index —————————— */}
-      <section className="section" style={{ background: 'var(--jet-2)' }}>
+      <section className="section surface-work">
         <div
           style={{
             display: 'flex',
@@ -180,7 +177,7 @@ export default function Home() {
                   style={{
                     width: 14,
                     height: 14,
-                    background: p.specimen.hex,
+                    background: `var(--${p.specimen.token})`,
                     display: 'inline-block',
                   }}
                 />
@@ -250,12 +247,8 @@ export default function Home() {
         <Reveal delay={0.12}>
           <Link href="/about" data-cursor-label="Read story" aria-label="About Sanya">
             <div
-              className="glass"
-              style={{
-                padding: 'clamp(24px, 3.5vw, 48px)',
-                background: 'color-mix(in srgb, var(--turquoise) 4%, transparent)',
-                borderColor: 'color-mix(in srgb, var(--turquoise) 18%, transparent)',
-              }}
+              className="glass fig-plate-teal"
+              style={{ padding: 'clamp(24px, 3.5vw, 48px)' }}
             >
               <div
                 className="ink-illustration"
@@ -285,15 +278,7 @@ export default function Home() {
       {/* ——— CAPABILITIES — how I work ——————————————
            Deliberately unlike the work index: deepest surface,
            centered anchor, and column rules instead of rows. */}
-      <section
-        className="section"
-        style={{
-          background: `
-            radial-gradient(55% 60% at 50% 0%, rgba(153,225,217,0.07) 0%, transparent 65%),
-            radial-gradient(40% 45% at 85% 100%, rgba(229,189,223,0.05) 0%, transparent 60%),
-            var(--jet-3)`,
-        }}
-      >
+      <section className="section surface-craft">
         <div style={{ textAlign: 'center', marginBottom: 'clamp(44px, 6vw, 88px)' }}>
           <Reveal>
             <p className="caption" style={{ color: 'var(--muted)', marginBottom: 14 }}>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { Project } from '@/lib/projects';
-import { withBase, mix } from '@/lib/site';
+import { withBase, mix, wash } from '@/lib/site';
 
 /* Work-grid card — one consistent anatomy for all four:
    a 16:10 media zone (platform still, or a specimen-color tile),
@@ -18,7 +18,6 @@ export default function SpecimenCard({ project }: { project: Project }) {
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       style={{
         border: '1px solid var(--line)',
-        background: 'var(--jet-2)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -57,8 +56,8 @@ export default function SpecimenCard({ project }: { project: Project }) {
               alignItems: 'center',
               justifyContent: 'center',
               background: `
-                radial-gradient(120% 100% at 80% 0%, ${mix(specimen.token, 30)} 0%, transparent 65%),
-                radial-gradient(100% 90% at 15% 100%, ${mix(specimen.token, 16)} 0%, transparent 60%),
+                radial-gradient(120% 100% at 80% 0%, ${wash(specimen.token, 30)} 0%, transparent 65%),
+                radial-gradient(100% 90% at 15% 100%, ${wash(specimen.token, 16)} 0%, transparent 60%),
                 var(--jet-3)`,
             }}
           >

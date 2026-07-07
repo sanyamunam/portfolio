@@ -12,3 +12,10 @@ export const withBase = (path: string) => `${BASE}${path}`;
    daylight. pct is the opaque share (0–100). */
 export const mix = (token: string, pct: number) =>
   `color-mix(in srgb, var(--${token}) ${pct}%, transparent)`;
+
+/* Surface wash: like mix(), but amplified by --wash-boost (1 in the
+   darkroom, >1 in daylight) so background washes stay visible on paper
+   without touching the dark theme. Use for surfaces only — keep the
+   base pct low enough that pct × boost stays under 100. */
+export const wash = (token: string, pct: number) =>
+  `color-mix(in srgb, var(--${token}) calc(${pct}% * var(--wash-boost, 1)), transparent)`;

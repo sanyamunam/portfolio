@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Reveal from '@/components/Reveal';
 import ShowcaseVideo from '@/components/ShowcaseVideo';
 import { projects, getProject } from '@/lib/projects';
-import { withBase, mix } from '@/lib/site';
+import { withBase, mix, wash } from '@/lib/site';
 
 export const dynamicParams = false;
 
@@ -48,6 +48,8 @@ export default async function CaseStudy({
     enabled[(enabled.findIndex((p) => p.slug === slug) + 1) % enabled.length];
   const { specimen } = project;
   const accent = (pct: number) => mix(specimen.token, pct);
+  /* background washes only — amplified in daylight via --wash-boost */
+  const soft = (pct: number) => wash(specimen.token, pct);
 
   return (
     <>
@@ -60,7 +62,7 @@ export default async function CaseStudy({
           paddingRight: 'var(--gutter)',
           position: 'relative',
           overflow: 'hidden',
-          background: `radial-gradient(70% 60% at 70% 0%, ${accent(14)} 0%, transparent 65%), var(--jet)`,
+          background: `radial-gradient(70% 60% at 70% 0%, ${soft(14)} 0%, transparent 65%), var(--jet)`,
         }}
       >
         {project.clientLogo && (
@@ -171,7 +173,7 @@ export default async function CaseStudy({
             className="glass"
             style={{
               padding: 'clamp(28px, 4vw, 48px)',
-              background: accent(8),
+              background: soft(8),
               borderColor: accent(35),
             }}
           >
@@ -241,7 +243,7 @@ export default async function CaseStudy({
               className="glass"
               style={{
                 padding: 'clamp(10px, 1.5vw, 18px)',
-                background: accent(5),
+                background: soft(5),
                 borderColor: accent(30),
               }}
             >
@@ -287,7 +289,7 @@ export default async function CaseStudy({
               className="glass"
               style={{
                 padding: 'clamp(56px, 9vw, 120px) clamp(24px, 5vw, 64px)',
-                background: `radial-gradient(80% 100% at 50% 0%, ${accent(10)} 0%, transparent 70%), ${accent(4)}`,
+                background: `radial-gradient(80% 100% at 50% 0%, ${soft(10)} 0%, transparent 70%), ${soft(4)}`,
                 borderColor: accent(30),
                 textAlign: 'center',
               }}
@@ -415,7 +417,7 @@ export default async function CaseStudy({
                     maxWidth: 920,
                     margin: '0 auto',
                     padding: 'clamp(14px, 2vw, 24px)',
-                    background: accent(5),
+                    background: soft(5),
                     borderColor: accent(30),
                   }}
                 >

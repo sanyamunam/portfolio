@@ -21,7 +21,7 @@ const SKILLS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--jet-3)', position: 'relative' }}>
+    <footer className="surface-footer" style={{ position: 'relative' }}>
       {/* running marquee strip */}
       <div
         className="marquee hairline-top"

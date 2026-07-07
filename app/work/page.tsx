@@ -26,10 +26,7 @@ export default function Work() {
         </div>
       </section>
 
-      <section
-        className="section work-grid"
-        style={{ background: 'var(--jet-2)' }}
-      >
+      <section className="section work-grid surface-work">
         {projects.map((p, i) => (
           <Reveal
             key={p.slug}

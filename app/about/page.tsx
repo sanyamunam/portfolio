@@ -80,9 +80,8 @@ export default function About() {
 
       {/* ——— the ink figure + intro ——————————————— */}
       <section
-        className="section"
+        className="section surface-profile"
         style={{
-          background: 'var(--jet-2)',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: 'clamp(40px, 6vw, 96px)',
@@ -92,11 +91,8 @@ export default function About() {
         <Reveal>
           {/* recolored ink illustration — the portrait moment */}
           <div
-            className="glass"
-            style={{
-              padding: 'clamp(24px, 4vw, 56px)',
-              background: 'color-mix(in srgb, var(--wine) 7%, transparent)',
-            }}
+            className="glass fig-plate-wine"
+            style={{ padding: 'clamp(24px, 4vw, 56px)' }}
           >
             <div
               className="ink-illustration"

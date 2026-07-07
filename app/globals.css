@@ -27,6 +27,10 @@
   --glass: rgba(234, 227, 214, 0.05);
   --glass-border: rgba(234, 227, 214, 0.14);
 
+  /* Accent-wash amplifier — daylight needs washes several times
+     stronger than the darkroom for the same perceived presence */
+  --wash-boost: 1;
+
   /* Type */
   --font-ranade: 'Ranade', 'Ranade Variable', Georgia, serif;
   --font-switzer: 'Switzer', 'Switzer Variable', ui-sans-serif, system-ui, sans-serif;
@@ -61,6 +65,8 @@
 
   --glass: rgba(44, 37, 50, 0.045);
   --glass-border: rgba(44, 37, 50, 0.13);
+
+  --wash-boost: 2.2;
 }
 
 [data-theme='light'] ::-webkit-scrollbar-track { background: var(--jet-3); }
@@ -80,8 +86,14 @@
   border: 1px solid var(--line);
 }
 
-/* nav needs no blend trickery on a uniform paper canvas */
-[data-theme='light'] .site-nav { mix-blend-mode: normal; }
+/* nav swaps blend trickery for a frosted paper bar — keeps the ink
+   readable when it floats over the daylight footer's plum-ink block */
+[data-theme='light'] .site-nav {
+  mix-blend-mode: normal;
+  background: color-mix(in srgb, var(--jet) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
 * {
   margin: 0;
@@ -495,6 +507,123 @@ img, svg { display: block; max-width: 100%; }
 
 ::view-transition-old(root) { z-index: 1; }
 ::view-transition-new(root) { z-index: 2; }
+
+/* ——— Section surfaces — two rooms, two color stories ————
+   Darkroom: tonal jet shifts, whispering accent glows.
+   Daylight: distinct spot-color washes per section — the way a
+   risograph print lays one confident ink over warm paper.
+   NOTE: keep this block after .glass so the plate rules win the cascade. */
+
+/* work cards read as bright prints pinned to the teal wall */
+.specimen-card { background: var(--jet-2); }
+
+[data-theme='light'] .specimen-card { background: #fbf6ec; }
+
+/* home hero atmosphere */
+.hero-atmosphere {
+  background:
+    radial-gradient(60% 50% at 78% 18%, color-mix(in srgb, var(--wine) 16%, transparent) 0%, transparent 60%),
+    radial-gradient(50% 45% at 12% 68%, color-mix(in srgb, var(--turquoise) 10%, transparent) 0%, transparent 60%),
+    radial-gradient(45% 40% at 55% 95%, color-mix(in srgb, var(--orchid) 8%, transparent) 0%, transparent 55%);
+}
+
+[data-theme='light'] .hero-atmosphere {
+  background:
+    radial-gradient(60% 50% at 78% 18%, color-mix(in srgb, var(--wine) 30%, transparent) 0%, transparent 62%),
+    radial-gradient(52% 46% at 10% 66%, color-mix(in srgb, var(--turquoise) 24%, transparent) 0%, transparent 62%),
+    radial-gradient(48% 42% at 55% 96%, color-mix(in srgb, var(--sienna) 22%, transparent) 0%, transparent 58%),
+    radial-gradient(40% 36% at 38% 28%, color-mix(in srgb, var(--orchid) 14%, transparent) 0%, transparent 60%);
+}
+
+/* selected work / work index — the teal room */
+.surface-work { background: var(--jet-2); }
+
+[data-theme='light'] .surface-work {
+  background:
+    radial-gradient(70% 55% at 88% 0%, color-mix(in srgb, var(--turquoise) 12%, transparent) 0%, transparent 60%),
+    color-mix(in srgb, var(--turquoise) 8%, #f4efe4);
+}
+
+/* profile / about intro — the blush room */
+.surface-profile { background: var(--jet-2); }
+
+[data-theme='light'] .surface-profile {
+  background:
+    radial-gradient(60% 50% at 12% 8%, color-mix(in srgb, var(--orchid) 12%, transparent) 0%, transparent 60%),
+    color-mix(in srgb, var(--orchid) 6%, #f4ede5);
+}
+
+/* how I work — deepest darkroom surface; warm terracotta sand in daylight */
+.surface-craft {
+  background:
+    radial-gradient(55% 60% at 50% 0%, rgba(153, 225, 217, 0.07) 0%, transparent 65%),
+    radial-gradient(40% 45% at 85% 100%, rgba(229, 189, 223, 0.05) 0%, transparent 60%),
+    var(--jet-3);
+}
+
+[data-theme='light'] .surface-craft {
+  background:
+    radial-gradient(55% 60% at 50% 0%, color-mix(in srgb, var(--sienna) 18%, transparent) 0%, transparent 65%),
+    radial-gradient(40% 45% at 85% 100%, color-mix(in srgb, var(--orchid) 12%, transparent) 0%, transparent 60%),
+    color-mix(in srgb, var(--sienna) 10%, #f1e7d4);
+}
+
+/* contact — the plum room */
+.surface-contact {
+  background:
+    radial-gradient(55% 45% at 20% 20%, color-mix(in srgb, var(--orchid) 10%, transparent) 0%, transparent 60%),
+    radial-gradient(50% 40% at 85% 70%, color-mix(in srgb, var(--turquoise) 8%, transparent) 0%, transparent 60%),
+    var(--jet);
+}
+
+[data-theme='light'] .surface-contact {
+  background:
+    radial-gradient(55% 45% at 20% 20%, color-mix(in srgb, var(--orchid) 26%, transparent) 0%, transparent 62%),
+    radial-gradient(50% 42% at 85% 70%, color-mix(in srgb, var(--turquoise) 18%, transparent) 0%, transparent 62%),
+    var(--jet);
+}
+
+/* footer — in daylight the site closes on a plum-ink block, so every
+   page ends with one confident printed moment. Tokens are re-scoped:
+   inside this block the darkroom ink system applies again. */
+.surface-footer { background: var(--jet-3); }
+
+[data-theme='light'] .surface-footer {
+  --jet: #221b28;
+  --bone: #f2ece2;
+  --muted: #9d94a6;
+  --line: rgba(242, 236, 226, 0.14);
+  --turquoise: #99e1d9;
+  --orchid: #e5bddf;
+  --sienna: #d6b292;
+  --wine: #c08ca0;
+  --glass: rgba(242, 236, 226, 0.05);
+  --glass-border: rgba(242, 236, 226, 0.14);
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(153, 225, 217, 0.06) 0%, transparent 65%),
+    #221b28;
+  color: var(--bone);
+}
+
+/* figure plates — the ink self-portrait framed in color */
+.fig-plate-teal {
+  background: color-mix(in srgb, var(--turquoise) 4%, transparent);
+  border-color: color-mix(in srgb, var(--turquoise) 18%, transparent);
+}
+
+[data-theme='light'] .fig-plate-teal {
+  background: color-mix(in srgb, var(--turquoise) 12%, #fdf9f1);
+  border-color: color-mix(in srgb, var(--turquoise) 45%, transparent);
+}
+
+.fig-plate-wine {
+  background: color-mix(in srgb, var(--wine) 7%, transparent);
+}
+
+[data-theme='light'] .fig-plate-wine {
+  background: color-mix(in srgb, var(--wine) 12%, #fdf7f0);
+  border-color: color-mix(in srgb, var(--wine) 40%, transparent);
+}
 
 /* ——— Reduced motion ————————————————————— */
 

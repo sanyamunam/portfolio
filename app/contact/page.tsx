@@ -8,6 +8,7 @@ const EMAIL = 'sanyamunam95@gmail.com';
 export default function Contact() {
   return (
     <section
+      className="surface-contact"
       style={{
         minHeight: '88svh',
         display: 'flex',
@@ -15,10 +16,6 @@ export default function Contact() {
         justifyContent: 'flex-end',
         overflow: 'hidden',
         position: 'relative',
-        background: `
-          radial-gradient(55% 45% at 20% 20%, color-mix(in srgb, var(--orchid) 10%, transparent) 0%, transparent 60%),
-          radial-gradient(50% 40% at 85% 70%, color-mix(in srgb, var(--turquoise) 8%, transparent) 0%, transparent 60%),
-          var(--jet)`,
       }}
     >
       <div

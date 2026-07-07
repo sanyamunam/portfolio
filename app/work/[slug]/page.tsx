@@ -11,6 +11,28 @@ export function generateStaticParams() {
   return projects.filter((p) => !p.disabled).map((p) => ({ slug: p.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) return {};
+  const title = `${project.client} — ${project.title}`;
+  return {
+    title,
+    description: project.overview,
+    alternates: { canonical: `/work/${project.slug}/` },
+    openGraph: {
+      title,
+      description: project.overview,
+      url: `/work/${project.slug}/`,
+      type: 'article',
+    },
+  };
+}
+
 function tint(hex: string, alpha: number) {
   const n = parseInt(hex.slice(1), 16);
   return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;

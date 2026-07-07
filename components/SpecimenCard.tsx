@@ -3,15 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { Project } from '@/lib/projects';
-import { withBase } from '@/lib/site';
-
-function tint(hex: string, alpha: number) {
-  const n = parseInt(hex.slice(1), 16);
-  const r = (n >> 16) & 255;
-  const g = (n >> 8) & 255;
-  const b = n & 255;
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
+import { withBase, mix } from '@/lib/site';
 
 /* Work-grid card — one consistent anatomy for all four:
    a 16:10 media zone (platform still, or a specimen-color tile),
@@ -65,8 +57,8 @@ export default function SpecimenCard({ project }: { project: Project }) {
               alignItems: 'center',
               justifyContent: 'center',
               background: `
-                radial-gradient(120% 100% at 80% 0%, ${tint(specimen.hex, 0.3)} 0%, transparent 65%),
-                radial-gradient(100% 90% at 15% 100%, ${tint(specimen.hex, 0.16)} 0%, transparent 60%),
+                radial-gradient(120% 100% at 80% 0%, ${mix(specimen.token, 30)} 0%, transparent 65%),
+                radial-gradient(100% 90% at 15% 100%, ${mix(specimen.token, 16)} 0%, transparent 60%),
                 var(--jet-3)`,
             }}
           >
@@ -74,7 +66,7 @@ export default function SpecimenCard({ project }: { project: Project }) {
               className="display"
               style={{
                 fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
-                color: tint(specimen.hex, 0.9),
+                color: mix(specimen.token, 90),
                 textTransform: 'none',
               }}
             >
@@ -106,11 +98,12 @@ export default function SpecimenCard({ project }: { project: Project }) {
             gap: 12,
           }}
         >
-          <span className="caption" style={{ color: tint(specimen.hex, 0.9) }}>
+          <span className="caption" style={{ color: mix(specimen.token, 90) }}>
             {project.index} / {project.year}
           </span>
           {project.clientLogo ? (
             <img
+              className="client-logo"
               src={withBase(project.clientLogo)}
               alt={project.client}
               style={{ height: 34, width: 'auto', opacity: 0.95 }}
@@ -149,8 +142,8 @@ export default function SpecimenCard({ project }: { project: Project }) {
           <span
             className="caption"
             style={{
-              border: `1px solid ${tint(specimen.hex, 0.5)}`,
-              color: tint(specimen.hex, 1),
+              border: `1px solid ${mix(specimen.token, 50)}`,
+              color: `var(--${specimen.token})`,
               padding: '5px 10px',
               whiteSpace: 'nowrap',
             }}

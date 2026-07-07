@@ -40,9 +40,9 @@ export default function Home() {
             inset: 0,
             opacity: atmosphereOpacity,
             background: `
-              radial-gradient(60% 50% at 78% 18%, rgba(157,107,128,0.16) 0%, transparent 60%),
-              radial-gradient(50% 45% at 12% 68%, rgba(153,225,217,0.10) 0%, transparent 60%),
-              radial-gradient(45% 40% at 55% 95%, rgba(229,189,223,0.08) 0%, transparent 55%)`,
+              radial-gradient(60% 50% at 78% 18%, color-mix(in srgb, var(--wine) 16%, transparent) 0%, transparent 60%),
+              radial-gradient(50% 45% at 12% 68%, color-mix(in srgb, var(--turquoise) 10%, transparent) 0%, transparent 60%),
+              radial-gradient(45% 40% at 55% 95%, color-mix(in srgb, var(--orchid) 8%, transparent) 0%, transparent 55%)`,
           }}
         />
 
@@ -253,8 +253,8 @@ export default function Home() {
               className="glass"
               style={{
                 padding: 'clamp(24px, 3.5vw, 48px)',
-                background: 'rgba(153, 225, 217, 0.04)',
-                borderColor: 'rgba(153, 225, 217, 0.18)',
+                background: 'color-mix(in srgb, var(--turquoise) 4%, transparent)',
+                borderColor: 'color-mix(in srgb, var(--turquoise) 18%, transparent)',
               }}
             >
               <div

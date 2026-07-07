@@ -95,7 +95,7 @@ export default function About() {
             className="glass"
             style={{
               padding: 'clamp(24px, 4vw, 56px)',
-              background: 'rgba(157, 107, 128, 0.07)',
+              background: 'color-mix(in srgb, var(--wine) 7%, transparent)',
             }}
           >
             <div

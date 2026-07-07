@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
 
 const links = [
   { href: '/work', label: 'Work' },
@@ -14,6 +15,7 @@ export default function Nav() {
 
   return (
     <nav
+      className="site-nav"
       style={{
         position: 'fixed',
         top: 0,
@@ -24,7 +26,6 @@ export default function Nav() {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '18px var(--gutter)',
-        mixBlendMode: 'difference',
       }}
     >
       <Link
@@ -48,6 +49,7 @@ export default function Nav() {
             {l.label}
           </Link>
         ))}
+        <ThemeToggle />
         <span className="caption nav-meta" style={{ color: 'var(--muted)' }}>
           Doha ©2026
         </span>

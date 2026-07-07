@@ -10,12 +10,15 @@ export type Project = {
   disabled?: boolean;
   /* Work-grid thumbnail: a looping snippet or still of the platform */
   cardMedia?: { type: 'video' | 'image'; src: string };
-  /* Color specimen identity — the dyslove.design color-card motif */
+  /* Color specimen identity — the dyslove.design color-card motif.
+     token maps to a theme-aware CSS accent (--turquoise etc.) so the
+     project color adapts between darkroom and daylight. */
   specimen: {
     name: string;
     hex: string;
     rgb: string;
     cmyk: string;
+    token: 'turquoise' | 'orchid' | 'sienna' | 'wine';
   };
   overview: string;
   /* Three-act story — lead is the scannable takeaway, text is the support */
@@ -52,7 +55,7 @@ const projectList: Project[] = [
     year: '2023',
     role: 'UX Lead',
     sector: 'Education',
-    specimen: { name: 'Wine Ash', hex: '#9D6B80', rgb: '157, 107, 128', cmyk: '0, 32, 18, 38' },
+    specimen: { name: 'Wine Ash', hex: '#9D6B80', rgb: '157, 107, 128', cmyk: '0, 32, 18, 38', token: 'wine' },
     overview:
       'Qatar University serves more than twenty-five thousand students across a sprawling campus — and a sprawl of disconnected portals to match. We consolidated registration, timetables, campus wayfinding and student services into one calm, bilingual digital campus.',
     chapters: [
@@ -87,7 +90,7 @@ const projectList: Project[] = [
     year: '2025',
     role: 'UX Strategy & Design Direction',
     sector: 'Sport',
-    specimen: { name: 'Turquoise', hex: '#99E1D9', rgb: '153, 225, 217', cmyk: '32, 0, 4, 12' },
+    specimen: { name: 'Turquoise', hex: '#99E1D9', rgb: '153, 225, 217', cmyk: '32, 0, 4, 12', token: 'turquoise' },
     clientLogo: '/qbf-logo.svg',
     video: '/qbf-home.mp4',
     videoCaption: 'The revamped QBF homepage',
@@ -147,7 +150,7 @@ const projectList: Project[] = [
     year: '2025',
     role: 'UX Lead — Design Direction',
     sector: 'Sport · Government',
-    specimen: { name: 'Sienna', hex: '#D6B292', rgb: '214, 178, 146', cmyk: '0, 17, 32, 16' },
+    specimen: { name: 'Sienna', hex: '#D6B292', rgb: '214, 178, 146', cmyk: '0, 17, 32, 16', token: 'sienna' },
     clientLogo: '/qoc-logo.svg',
     comingSoon: true,
     partner: { name: 'Microsoft', logo: '/microsoft-logo.svg' },
@@ -208,7 +211,7 @@ const projectList: Project[] = [
     year: '2022',
     role: 'Project Manager',
     sector: 'Culture · Community',
-    specimen: { name: 'Orchid', hex: '#E5BDDF', rgb: '229, 189, 223', cmyk: '0, 18, 3, 10' },
+    specimen: { name: 'Orchid', hex: '#E5BDDF', rgb: '229, 189, 223', cmyk: '0, 18, 3, 10', token: 'orchid' },
     clientLogo: '/almujadilah-logo.svg',
     liveUrl: 'https://almujadilah.qa/en',
     video: '/almujadilah-home.mp4',

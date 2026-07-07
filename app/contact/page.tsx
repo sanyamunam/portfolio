@@ -16,8 +16,8 @@ export default function Contact() {
         overflow: 'hidden',
         position: 'relative',
         background: `
-          radial-gradient(55% 45% at 20% 20%, rgba(229,189,223,0.10) 0%, transparent 60%),
-          radial-gradient(50% 40% at 85% 70%, rgba(153,225,217,0.08) 0%, transparent 60%),
+          radial-gradient(55% 45% at 20% 20%, color-mix(in srgb, var(--orchid) 10%, transparent) 0%, transparent 60%),
+          radial-gradient(50% 40% at 85% 70%, color-mix(in srgb, var(--turquoise) 8%, transparent) 0%, transparent 60%),
           var(--jet)`,
       }}
     >

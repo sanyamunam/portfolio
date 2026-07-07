@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Reveal from '@/components/Reveal';
 import ShowcaseVideo from '@/components/ShowcaseVideo';
 import { projects, getProject } from '@/lib/projects';
-import { withBase } from '@/lib/site';
+import { withBase, mix } from '@/lib/site';
 
 export const dynamicParams = false;
 
@@ -33,10 +33,6 @@ export async function generateMetadata({
   };
 }
 
-function tint(hex: string, alpha: number) {
-  const n = parseInt(hex.slice(1), 16);
-  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
-}
 
 export default async function CaseStudy({
   params,
@@ -51,6 +47,7 @@ export default async function CaseStudy({
   const next =
     enabled[(enabled.findIndex((p) => p.slug === slug) + 1) % enabled.length];
   const { specimen } = project;
+  const accent = (pct: number) => mix(specimen.token, pct);
 
   return (
     <>
@@ -63,12 +60,13 @@ export default async function CaseStudy({
           paddingRight: 'var(--gutter)',
           position: 'relative',
           overflow: 'hidden',
-          background: `radial-gradient(70% 60% at 70% 0%, ${tint(specimen.hex, 0.14)} 0%, transparent 65%), var(--jet)`,
+          background: `radial-gradient(70% 60% at 70% 0%, ${accent(14)} 0%, transparent 65%), var(--jet)`,
         }}
       >
         {project.clientLogo && (
           <Reveal>
             <img
+              className="client-logo"
               src={withBase(project.clientLogo)}
               alt={`${project.client} logo`}
               style={{
@@ -80,7 +78,7 @@ export default async function CaseStudy({
           </Reveal>
         )}
         <Reveal delay={0.05}>
-          <p className="caption" style={{ marginBottom: 20, color: tint(specimen.hex, 1) }}>
+          <p className="caption" style={{ marginBottom: 20, color: accent(100) }}>
             Case {project.index} — {project.client}
           </p>
         </Reveal>
@@ -173,8 +171,8 @@ export default async function CaseStudy({
             className="glass"
             style={{
               padding: 'clamp(28px, 4vw, 48px)',
-              background: tint(specimen.hex, 0.08),
-              borderColor: tint(specimen.hex, 0.35),
+              background: accent(8),
+              borderColor: accent(35),
             }}
           >
             <h2
@@ -213,7 +211,7 @@ export default async function CaseStudy({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="qatarbasketball.qa"
-                style={{ marginTop: 32, color: tint(specimen.hex, 1) }}
+                style={{ marginTop: 32, color: accent(100) }}
               >
                 Visit the live website ↗
               </a>
@@ -223,7 +221,7 @@ export default async function CaseStudy({
               style={{
                 height: 4,
                 marginTop: 28,
-                background: `linear-gradient(90deg, ${specimen.hex}, transparent)`,
+                background: `linear-gradient(90deg, ${accent(100)}, transparent)`,
               }}
             />
           </div>
@@ -243,8 +241,8 @@ export default async function CaseStudy({
               className="glass"
               style={{
                 padding: 'clamp(10px, 1.5vw, 18px)',
-                background: tint(specimen.hex, 0.05),
-                borderColor: tint(specimen.hex, 0.3),
+                background: accent(5),
+                borderColor: accent(30),
               }}
             >
               <ShowcaseVideo
@@ -264,7 +262,7 @@ export default async function CaseStudy({
                   rel="noopener noreferrer"
                   className="link-line"
                   data-cursor-label="qatarbasketball.qa"
-                  style={{ color: tint(specimen.hex, 1) }}
+                  style={{ color: accent(100) }}
                 >
                   See it live ↗
                 </a>
@@ -289,12 +287,12 @@ export default async function CaseStudy({
               className="glass"
               style={{
                 padding: 'clamp(56px, 9vw, 120px) clamp(24px, 5vw, 64px)',
-                background: `radial-gradient(80% 100% at 50% 0%, ${tint(specimen.hex, 0.1)} 0%, transparent 70%), ${tint(specimen.hex, 0.04)}`,
-                borderColor: tint(specimen.hex, 0.3),
+                background: `radial-gradient(80% 100% at 50% 0%, ${accent(10)} 0%, transparent 70%), ${accent(4)}`,
+                borderColor: accent(30),
                 textAlign: 'center',
               }}
             >
-              <p className="caption" style={{ color: tint(specimen.hex, 1), marginBottom: 20 }}>
+              <p className="caption" style={{ color: accent(100), marginBottom: 20 }}>
                 Showcase — reserved for launch
               </p>
               <h2
@@ -344,9 +342,9 @@ export default async function CaseStudy({
                         height: 10,
                         flexShrink: 0,
                         background:
-                          step.state === 'next' ? 'transparent' : specimen.hex,
+                          step.state === 'next' ? 'transparent' : accent(100),
                         border: `1px solid ${
-                          step.state === 'next' ? 'var(--muted)' : specimen.hex
+                          step.state === 'next' ? 'var(--muted)' : accent(100)
                         }`,
                       }}
                     />
@@ -355,7 +353,7 @@ export default async function CaseStudy({
                       style={{
                         color:
                           step.state === 'now'
-                            ? tint(specimen.hex, 1)
+                            ? accent(100)
                             : step.state === 'done'
                               ? 'var(--bone)'
                               : 'var(--muted)',
@@ -417,8 +415,8 @@ export default async function CaseStudy({
                     maxWidth: 920,
                     margin: '0 auto',
                     padding: 'clamp(14px, 2vw, 24px)',
-                    background: tint(specimen.hex, 0.05),
-                    borderColor: tint(specimen.hex, 0.3),
+                    background: accent(5),
+                    borderColor: accent(30),
                   }}
                 >
                   <img
@@ -439,7 +437,7 @@ export default async function CaseStudy({
                     <span style={{ color: 'var(--bone)' }}>
                       {project.processLead.caption}
                     </span>
-                    <span style={{ color: tint(specimen.hex, 1) }}>
+                    <span style={{ color: accent(100) }}>
                       {project.processLead.meta}
                     </span>
                   </p>
@@ -456,7 +454,7 @@ export default async function CaseStudy({
                   className="artifact glass"
                   style={{
                     transform: `rotate(${i % 2 ? 0.9 : -1.1}deg)`,
-                    borderColor: tint(specimen.hex, 0.22),
+                    borderColor: accent(22),
                   }}
                 >
                   <div style={{ width: p.w, maxWidth: '78vw', height: 320, overflow: 'hidden' }}>
@@ -481,7 +479,7 @@ export default async function CaseStudy({
                       gap: 12,
                     }}
                   >
-                    <span style={{ color: tint(specimen.hex, 0.9) }}>
+                    <span style={{ color: accent(90) }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span>{p.caption}</span>
@@ -504,7 +502,7 @@ export default async function CaseStudy({
                     className="display"
                     style={{
                       fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
-                      color: tint(specimen.hex, 1),
+                      color: accent(100),
                       display: 'block',
                     }}
                   >
@@ -555,7 +553,7 @@ export default async function CaseStudy({
               >
                 <p
                   className="display"
-                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', color: tint(specimen.hex, 1) }}
+                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', color: accent(100) }}
                 >
                   {s.value}
                 </p>

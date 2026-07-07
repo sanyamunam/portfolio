@@ -111,14 +111,7 @@ export default function Home() {
       </section>
 
       {/* ——— SELECTED WORK — editorial index —————————— */}
-      <section
-        className="section"
-        style={{
-          background: `
-            radial-gradient(55% 40% at 85% 0%, rgba(157,107,128,0.10) 0%, transparent 60%),
-            var(--jet-wine)`,
-        }}
-      >
+      <section className="section" style={{ background: 'var(--jet-2)' }}>
         <div
           style={{
             display: 'flex',

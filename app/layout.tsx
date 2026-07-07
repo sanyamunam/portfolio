@@ -6,12 +6,12 @@ import Footer from '@/components/Footer';
 import { SITE_URL } from '@/lib/site';
 
 const DESCRIPTION =
-  'Portfolio of Sanya Munam — UX Lead, Doha.';
+  'Portfolio of Sanya Munam — UX Lead & Project Manager, Doha.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Sanya Munam — UX Lead, Doha',
+    default: 'Sanya Munam — UX Lead & Project Manager, Doha',
     template: '%s · Sanya Munam',
   },
   description: DESCRIPTION,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: 'Sanya Munam',
-    title: 'Sanya Munam — UX Lead, Doha',
+    title: 'Sanya Munam — UX Lead & Project Manager, Doha',
     description: DESCRIPTION,
     locale: 'en_US',
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sanya Munam — UX Lead, Doha',
+    title: 'Sanya Munam — UX Lead & Project Manager, Doha',
     description: DESCRIPTION,
     images: ['/og.jpg'],
   },

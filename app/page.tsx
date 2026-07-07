@@ -63,7 +63,7 @@ export default function Home() {
             userSelect: 'none',
           }}
         >
-          UX LEAD
+          UX · PM
         </div>
 
         {/* hero subtitle — author's bio on a book jacket */}
@@ -85,7 +85,7 @@ export default function Home() {
             style={{ maxWidth: '44ch' }}
           >
             <p className="caption" style={{ marginBottom: 12 }}>
-              Sanya Munam — UX Lead · Doha, Qatar
+              Sanya Munam — UX Lead & Project Manager · Doha, Qatar
             </p>
             <p className="body-lg" style={{ color: 'var(--bone)' }}>
               I shape UX strategy and design direction for products that feel
@@ -109,7 +109,14 @@ export default function Home() {
       </section>
 
       {/* ——— SELECTED WORK — editorial index —————————— */}
-      <section className="section" style={{ background: 'var(--jet-2)' }}>
+      <section
+        className="section"
+        style={{
+          background: `
+            radial-gradient(55% 40% at 85% 0%, rgba(153,225,217,0.06) 0%, transparent 60%),
+            var(--jet-teal)`,
+        }}
+      >
         <div
           style={{
             display: 'flex',

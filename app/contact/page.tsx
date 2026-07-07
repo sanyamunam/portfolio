@@ -35,7 +35,7 @@ export default function Contact() {
         <Reveal>
           <div>
             <p className="caption" style={{ marginBottom: 12 }}>
-              Sanya Munam — UX Lead
+              Sanya Munam — UX Lead & Project Manager
             </p>
             <p
               className="body-lg"

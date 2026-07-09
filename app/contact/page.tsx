@@ -1,278 +1,270 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Wordmark from '@/components/Wordmark';
+import { useRef } from 'react';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from 'framer-motion';
 import Reveal from '@/components/Reveal';
-import { mix } from '@/lib/site';
 
 const EMAIL = 'sanyamunam95@gmail.com';
 
-/* Ways in — each row opens a pre-addressed email with the subject
-   already written. The archive's index grammar, pointed at the inbox. */
+/* Typographic shortcuts — each opens a pre-addressed email. */
 const OPENERS = [
-  {
-    title: 'A project brief',
-    note: 'Something to build, fix or completely rethink',
-    token: 'turquoise',
-  },
-  {
-    title: 'A UX audit',
-    note: 'A second pair of eyes on a product that underperforms',
-    token: 'orchid',
-  },
-  {
-    title: 'A talk or a workshop',
-    note: 'Design thinking, UX strategy, building design teams',
-    token: 'sienna',
-  },
-  {
-    title: 'Unreasonably good design',
-    note: 'No agenda — enthusiasm is a valid subject line',
-    token: 'wine',
-  },
+  { label: 'A project brief', token: 'turquoise' },
+  { label: 'A UX audit', token: 'orchid' },
+  { label: 'A talk or a workshop', token: 'sienna' },
+  { label: 'Unreasonably good design', token: 'wine' },
 ];
 
-const STEPS = [
-  {
-    label: 'You write',
-    text: 'A line is enough. No deck, no formalities, no pitch voice.',
-  },
-  {
-    label: 'We talk',
-    text: 'Thirty minutes on your problem — a conversation, not a sales call.',
-  },
-  {
-    label: 'You get a point of view',
-    text: 'Honest direction, realistic scope and clear next steps.',
-  },
-];
+/* Same fractal noise as the site grain — here it plays the undeveloped
+   emulsion that clears as the print develops. */
+const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
-const ESSENTIALS = [
-  { label: 'Location', value: 'Doha, Qatar' },
-  { label: 'Timezone', value: 'GMT+3' },
-  { label: 'Write about', value: 'Anything UX — strategy to pixels' },
-  { label: 'First reply', value: 'Within a day' },
-];
-
-export default function Contact() {
+function SpreadLine({ text }: { text: string }) {
   return (
     <>
-      {/* ——— header — same grammar as WORK and CURIOUS ————— */}
-      <section
-        style={{
-          paddingTop: 'clamp(120px, 18vh, 200px)',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{ padding: '0 var(--gutter)', marginBottom: 16 }}>
-          <Reveal>
-            <p className="caption">Correspondence — Doha, Qatar</p>
-          </Reveal>
-        </div>
-        <div style={{ padding: '0 8px' }}>
-          <Wordmark text="TALK" color="var(--orchid)" delay={0.2} />
-        </div>
-      </section>
+      {text.split('').map((ch, i) => (
+        <span key={i} style={{ display: 'inline-block' }}>
+          {ch}
+        </span>
+      ))}
+    </>
+  );
+}
 
-      {/* ——— the invitation + essentials plate ————————
-           Composed like a case-study overview: statement on the left,
-           a specimen plate on the right. */}
-      <section
-        className="section surface-contact"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))',
-          gap: 'clamp(40px, 6vw, 96px)',
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <Reveal>
-            <p className="caption" style={{ marginBottom: 24 }}>
-              The invitation
-            </p>
-          </Reveal>
-          <Reveal delay={0.06}>
-            <p
-              className="display"
-              style={{
-                fontSize: 'clamp(1.8rem, 3.6vw, 3.4rem)',
-                textTransform: 'none',
-                maxWidth: '20ch',
-                lineHeight: 1.05,
-                textWrap: 'balance',
-              }}
-            >
+export default function Contact() {
+  const reduced = useReducedMotion() ?? false;
+  const stageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ['start start', 'end end'],
+  });
+
+  /* ——— the development sequence, driven by scroll ——— */
+  const safelight = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+  const developedLight = useTransform(scrollYProgress, [0.35, 0.75], [0, 1]);
+  const emulsion = useTransform(scrollYProgress, [0, 0.55], [0.4, 0]);
+  const letsOpacity = useTransform(scrollYProgress, [0.05, 0.5], [0.35, 1]);
+  const talkOpacity = useTransform(scrollYProgress, [0.1, 0.62], [0.08, 1]);
+  const typeScale = useTransform(scrollYProgress, [0, 0.6], [0.97, 1]);
+  const stage1 = useTransform(scrollYProgress, [0, 0.26, 0.34], [1, 1, 0]);
+  const stage2 = useTransform(
+    scrollYProgress,
+    [0.34, 0.42, 0.6, 0.68],
+    [0, 1, 1, 0],
+  );
+  const stage3 = useTransform(scrollYProgress, [0.68, 0.76], [0, 1]);
+  const ctaOpacity = useTransform(scrollYProgress, [0.66, 0.82], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.66, 0.82], [36, 0]);
+
+  const typeSize = 'clamp(4rem, 17vw, 15.5rem)';
+
+  return (
+    <>
+      {/* ——— THE LAST PRINT — a photograph developing on scroll ———
+           280vh scroll stage, 100svh sticky frame. The page begins under
+           the darkroom safelight; scrolling develops the print until the
+           invitation is fixed. */}
+      <section ref={stageRef} style={{ height: '280vh', position: 'relative' }}>
+        <div
+          style={{
+            position: 'sticky',
+            top: 0,
+            height: '100svh',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* safelight — the red lamp before anything develops */}
+          <motion.div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: 0,
+              opacity: reduced ? 0 : safelight,
+              background: `
+                radial-gradient(70% 60% at 72% 18%, color-mix(in srgb, var(--wine) calc(26% * var(--wash-boost, 1)), transparent) 0%, transparent 65%),
+                radial-gradient(50% 45% at 12% 82%, color-mix(in srgb, var(--wine) calc(14% * var(--wash-boost, 1)), transparent) 0%, transparent 60%)`,
+            }}
+          />
+
+          {/* developed light — the full palette blooms in */}
+          <motion.div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: 0,
+              opacity: reduced ? 1 : developedLight,
+              background: `
+                radial-gradient(60% 50% at 78% 16%, color-mix(in srgb, var(--orchid) calc(14% * var(--wash-boost, 1)), transparent) 0%, transparent 62%),
+                radial-gradient(55% 48% at 10% 72%, color-mix(in srgb, var(--turquoise) calc(11% * var(--wash-boost, 1)), transparent) 0%, transparent 62%)`,
+            }}
+          />
+
+          {/* undeveloped emulsion — heavy grain that clears */}
+          <motion.div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: 0,
+              opacity: reduced ? 0 : emulsion,
+              backgroundImage: NOISE,
+            }}
+          />
+
+          {/* top row — kicker + darkroom stage timer */}
+          <div
+            style={{
+              padding: 'clamp(96px, 13vh, 150px) var(--gutter) 0',
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: 24,
+              position: 'relative',
+            }}
+          >
+            <Reveal>
+              <p className="caption">Sanya Munam — Correspondence</p>
+            </Reveal>
+            <div style={{ position: 'relative', minWidth: 180 }}>
+              <motion.p
+                className="caption"
+                style={{
+                  opacity: reduced ? 0 : stage1,
+                  position: 'absolute',
+                  right: 0,
+                  whiteSpace: 'nowrap',
+                  color: 'var(--muted)',
+                }}
+              >
+                Stage 01 — Exposing
+              </motion.p>
+              <motion.p
+                className="caption"
+                style={{
+                  opacity: reduced ? 0 : stage2,
+                  position: 'absolute',
+                  right: 0,
+                  whiteSpace: 'nowrap',
+                  color: 'var(--muted)',
+                }}
+              >
+                Stage 02 — Developing
+              </motion.p>
+              <motion.p
+                className="caption"
+                style={{
+                  opacity: reduced ? 1 : stage3,
+                  position: 'absolute',
+                  right: 0,
+                  whiteSpace: 'nowrap',
+                  color: 'var(--orchid)',
+                }}
+              >
+                Stage 03 — Fixed. Your move.
+              </motion.p>
+            </div>
+          </div>
+
+          {/* the invitation — fades in as the print fixes */}
+          <motion.div
+            style={{
+              opacity: reduced ? 1 : ctaOpacity,
+              y: reduced ? 0 : ctaY,
+              alignSelf: 'flex-end',
+              padding: '0 var(--gutter)',
+              maxWidth: '40ch',
+              position: 'relative',
+            }}
+          >
+            <p className="body-lg" style={{ marginBottom: 20, textWrap: 'balance' }}>
               Always up for a conversation about UX and unreasonably good
               design.
             </p>
-          </Reveal>
-          <Reveal delay={0.14}>
             <a
               href={`mailto:${EMAIL}`}
               className="cta"
               data-cursor-label="Write to Sanya"
-              style={{ color: 'var(--turquoise)', marginTop: 36, display: 'inline-flex' }}
+              style={{ color: 'var(--turquoise)' }}
             >
               Say hello ↗
             </a>
-          </Reveal>
-        </div>
+            <p className="caption" style={{ marginTop: 18, color: 'var(--muted)' }}>
+              Doha, Qatar · GMT+3 · First reply within a day
+            </p>
+          </motion.div>
 
-        <Reveal delay={0.12}>
-          <div
-            className="glass"
+          {/* the monumental type — ghost to ink */}
+          <motion.h1
+            aria-label="Let's talk"
             style={{
-              padding: 'clamp(28px, 4vw, 48px)',
-              background: mix('orchid', 8),
-              borderColor: mix('orchid', 35),
+              padding: '0 8px 2px',
+              scale: reduced ? 1 : typeScale,
+              transformOrigin: 'bottom left',
+              position: 'relative',
             }}
           >
-            <h2
+            <motion.span
               className="display"
-              style={{
-                fontSize: 'clamp(1.8rem, 3.2vw, 2.8rem)',
-                textTransform: 'none',
-                marginBottom: 28,
-              }}
-            >
-              The essentials
-            </h2>
-            <div style={{ display: 'grid', gap: 12 }}>
-              {ESSENTIALS.map((row) => (
-                <div key={row.label} style={{ display: 'flex', gap: 24 }}>
-                  <span className="caption" style={{ width: 88, flexShrink: 0 }}>
-                    {row.label}
-                  </span>
-                  <span className="caption" style={{ color: 'var(--bone)' }}>
-                    {row.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div
               aria-hidden
               style={{
-                height: 4,
-                marginTop: 28,
-                background: 'linear-gradient(90deg, var(--orchid), transparent)',
+                opacity: reduced ? 1 : letsOpacity,
+                display: 'flex',
+                justifyContent: 'space-between',
+                fontSize: typeSize,
+                lineHeight: 0.85,
+                color: 'transparent',
+                WebkitTextStroke: '1.5px var(--bone)',
               }}
-            />
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ——— where to start — the index, pointed at the inbox ——— */}
-      <section className="section">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-            gap: 16,
-            flexWrap: 'wrap',
-            marginBottom: 'clamp(36px, 5vw, 64px)',
-          }}
-        >
-          <Reveal>
-            <h2 className="display" style={{ fontSize: 'var(--text-display)' }}>
-              Where to start
-            </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <span className="caption" style={{ color: 'var(--muted)' }}>
-              Pick one — it opens a pre-addressed email
-            </span>
-          </Reveal>
-        </div>
-
-        <div>
-          {OPENERS.map((o, i) => (
-            <Reveal key={o.title} delay={i * 0.06}>
-              <motion.a
-                href={`mailto:${EMAIL}?subject=${encodeURIComponent(o.title)}`}
-                data-cursor-label="Write this"
-                whileHover="hover"
-                initial="rest"
-                animate="rest"
-                style={{ display: 'block' }}
-              >
-                <div
-                  className="hairline-top"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'clamp(40px, 6vw, 80px) 1fr auto',
-                    gap: 'clamp(12px, 3vw, 40px)',
-                    alignItems: 'center',
-                    padding: 'clamp(18px, 3vw, 34px) 0',
-                  }}
-                >
-                  <span
-                    className="display"
-                    style={{
-                      fontSize: 'clamp(1.4rem, 3vw, 2.6rem)',
-                      color: `var(--${o.token})`,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div style={{ minWidth: 0 }}>
-                    <motion.h3
-                      className="display"
-                      variants={{ rest: { x: 0 }, hover: { x: 16 } }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-                      style={{
-                        fontSize: 'clamp(1.5rem, 3.6vw, 2.8rem)',
-                        textTransform: 'none',
-                        color: 'var(--bone)',
-                      }}
-                    >
-                      {o.title}
-                    </motion.h3>
-                    <span className="caption" style={{ color: 'var(--muted)' }}>
-                      {o.note}
-                    </span>
-                  </div>
-                  <span className="caption" style={{ color: `var(--${o.token})` }}>
-                    Write →
-                  </span>
-                </div>
-              </motion.a>
-            </Reveal>
-          ))}
-          <div className="hairline-top" />
+            >
+              <SpreadLine text="LET&#8217;S" />
+            </motion.span>
+            <motion.span
+              className="display"
+              aria-hidden
+              style={{
+                opacity: reduced ? 1 : talkOpacity,
+                display: 'flex',
+                justifyContent: 'space-between',
+                fontSize: typeSize,
+                lineHeight: 0.85,
+                color: 'var(--orchid)',
+              }}
+            >
+              <SpreadLine text="TALK" />
+            </motion.span>
+          </motion.h1>
         </div>
       </section>
 
-      {/* ——— what happens next — a slim colophon band ————— */}
+      {/* ——— P.S. — typographic shortcuts, no blank page ——— */}
       <section
+        className="hairline-top"
         style={{
-          padding: 'clamp(36px, 5vw, 64px) var(--gutter)',
-          borderBottom: '1px solid var(--line)',
+          padding: 'clamp(44px, 6vw, 80px) var(--gutter)',
         }}
       >
         <Reveal>
-          <p className="caption" style={{ color: 'var(--orchid)', marginBottom: 28 }}>
-            What happens next
+          <p className="caption" style={{ color: 'var(--muted)', marginBottom: 18 }}>
+            P.S. — Know what it&#8217;s about? Skip the blank page:
           </p>
         </Reveal>
-        <Reveal delay={0.06}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
-              gap: 'clamp(20px, 3vw, 40px)',
-            }}
-          >
-            {STEPS.map((s, i) => (
-              <div key={s.label}>
-                <p className="caption" style={{ color: 'var(--muted)', marginBottom: 8 }}>
-                  {String(i + 1).padStart(2, '0')} — {s.label}
-                </p>
-                <p style={{ fontWeight: 600, fontSize: 15, color: 'var(--bone)' }}>
-                  {s.text}
-                </p>
-              </div>
+        <Reveal delay={0.08}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px 32px' }}>
+            {OPENERS.map((o) => (
+              <a
+                key={o.label}
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent(o.label)}`}
+                className="caption link-line"
+                data-cursor-label="Write this"
+                style={{ color: `var(--${o.token})` }}
+              >
+                {o.label} ↗
+              </a>
             ))}
           </div>
         </Reveal>

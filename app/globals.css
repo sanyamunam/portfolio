@@ -625,6 +625,36 @@ img, svg { display: block; max-width: 100%; }
   border-color: color-mix(in srgb, var(--wine) 40%, transparent);
 }
 
+/* ——— Contact — floating archive plates + note fields ————— */
+
+/* underline form fields — Atomic/Estrela register, darkroom tokens */
+.note-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--bone);
+  font-family: var(--font-switzer);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 0;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.note-field:focus { border-bottom-color: var(--turquoise); }
+
+.note-field::placeholder { color: var(--muted); opacity: 0.7; }
+
+textarea.note-field { resize: vertical; min-height: 96px; }
+
+/* the constellation thins out on small screens — type carries the hero */
+@media (max-width: 760px) {
+  .talk-plate { display: none; }
+  .talk-plate-keep { display: block; }
+}
+
 /* ——— Reduced motion ————————————————————— */
 
 @media (prefers-reduced-motion: reduce) {

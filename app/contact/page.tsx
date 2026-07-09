@@ -7,50 +7,140 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import Wordmark from '@/components/Wordmark';
 import Reveal from '@/components/Reveal';
 import { withBase } from '@/lib/site';
 
 const EMAIL = 'sanyamunam95@gmail.com';
 
-/* Fragments of the working life, floated around the invitation —
-   boards, builds and the odd obsession. The archive, loose-leaf. */
-const PLATES = [
+/* The fun stuff — not case studies, but the personality of the archive:
+   the ink self-portrait, the 600-page obsession, Dad's favourite app,
+   a loose color specimen and the maker's seal. */
+type Plate = {
+  kind: 'ink' | 'img' | 'logo' | 'chip' | 'glyph';
+  src?: string;
+  pos: React.CSSProperties;
+  rotate: number;
+  keep?: boolean;
+};
+
+const PLATES: Plate[] = [
   {
-    src: '/process/board.png',
-    alt: 'QBF FigJam war room',
-    style: { top: '9%', left: '5%', width: 'clamp(140px, 16vw, 250px)' },
+    kind: 'ink',
+    pos: { top: '10%', left: '5%', width: 'clamp(130px, 15vw, 225px)' },
     rotate: -2,
     keep: true,
   },
   {
-    src: '/cards/qbf-card.jpg',
-    alt: 'Qatar Basketball Federation platform',
-    style: { top: '11%', right: '6%', width: 'clamp(150px, 17vw, 265px)' },
+    kind: 'img',
+    src: '/sparks/jobs-book.jpg',
+    pos: { top: '13%', right: '7%', width: 'clamp(100px, 11vw, 165px)' },
     rotate: 1.6,
-    keep: false,
-  },
-  {
-    src: '/process-am/hall.jpg',
-    alt: 'AlMujadilah prayer hall',
-    style: { bottom: '17%', left: '8%', width: 'clamp(120px, 14vw, 215px)' },
-    rotate: -1.2,
-    keep: false,
-  },
-  {
-    src: '/cards/am-card.jpg',
-    alt: 'AlMujadilah platform',
-    style: { bottom: '7%', left: '41%', width: 'clamp(130px, 15vw, 230px)' },
-    rotate: 2,
-    keep: false,
-  },
-  {
-    src: '/process-qoc/concept-home.jpg',
-    alt: 'Qatar Olympic Committee concept',
-    style: { bottom: '19%', right: '7%', width: 'clamp(130px, 15vw, 235px)' },
-    rotate: -1.6,
     keep: true,
   },
+  {
+    kind: 'logo',
+    src: '/sparks/gpay.svg',
+    pos: { bottom: '18%', left: '8%', width: 'clamp(120px, 14vw, 205px)' },
+    rotate: -1.2,
+  },
+  {
+    kind: 'chip',
+    pos: { bottom: '7%', left: '42%', width: 'clamp(110px, 12vw, 185px)' },
+    rotate: 2,
+  },
+  {
+    kind: 'glyph',
+    pos: { bottom: '20%', right: '7%', width: 'clamp(105px, 12vw, 180px)' },
+    rotate: -1.6,
+  },
 ];
+
+function PlateContent({ plate }: { plate: Plate }) {
+  switch (plate.kind) {
+    case 'ink':
+      return (
+        <div
+          className="ink-illustration"
+          style={{
+            color: 'var(--turquoise)',
+            WebkitMask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
+            mask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
+          }}
+        />
+      );
+    case 'img':
+      return (
+        <img
+          src={withBase(plate.src!)}
+          alt=""
+          loading="lazy"
+          style={{ width: '100%', display: 'block' }}
+        />
+      );
+    case 'logo':
+      return (
+        <div
+          style={{
+            aspectRatio: '4 / 3',
+            background: '#e4ddd0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 14,
+          }}
+        >
+          <img
+            src={withBase(plate.src!)}
+            alt=""
+            loading="lazy"
+            style={{ width: '68%', display: 'block' }}
+          />
+        </div>
+      );
+    case 'chip':
+      return (
+        <div
+          style={{
+            aspectRatio: '4 / 3',
+            background: 'var(--orchid)',
+            display: 'flex',
+            alignItems: 'flex-end',
+            padding: 10,
+          }}
+        >
+          <span
+            className="caption"
+            style={{ color: 'var(--jet)', fontSize: 10 }}
+          >
+            Orchid — specimen 02
+          </span>
+        </div>
+      );
+    case 'glyph':
+      return (
+        <div
+          style={{
+            aspectRatio: '1 / 1',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span
+            className="stamp-mark"
+            style={{
+              color: 'var(--sienna)',
+              fontSize: 'clamp(3rem, 5vw, 4.6rem)',
+              lineHeight: 1,
+            }}
+          >
+            ✺
+          </span>
+        </div>
+      );
+  }
+}
 
 function DeskClock() {
   const [time, setTime] = useState<string | null>(null);
@@ -80,7 +170,7 @@ export default function Contact() {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ['start end', 'end start'],
   });
 
   /* each plate drifts at its own pace — the room has depth */
@@ -106,34 +196,57 @@ export default function Contact() {
 
   return (
     <>
-      {/* ——— HERO — the invitation, among the archive ————
-           One warm sentence at center; fragments of real work floating
-           around it, developing on hover like everything else here. */}
+      {/* ——— header — same grammar as WORK and CURIOUS ————— */}
+      <section
+        style={{
+          paddingTop: 'clamp(120px, 18vh, 200px)',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ padding: '0 var(--gutter)', marginBottom: 16 }}>
+          <Reveal>
+            <p className="caption">Correspondence — Doha, Qatar</p>
+          </Reveal>
+        </div>
+        <div style={{ padding: '0 8px' }}>
+          <Wordmark text="TALK" color="var(--orchid)" delay={0.2} />
+        </div>
+      </section>
+
+      {/* ——— the invitation, among the keepsakes ————————
+           One warm sentence at center; the archive's personality —
+           self-portrait, book, specimen, seal — floating around it. */}
       <section
         ref={heroRef}
         style={{
-          minHeight: '100svh',
+          minHeight: '88svh',
           position: 'relative',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: 'clamp(110px, 15vh, 170px) var(--gutter) clamp(64px, 9vh, 110px)',
+          padding: 'clamp(64px, 10vh, 120px) var(--gutter)',
         }}
       >
         {PLATES.map((p, i) => (
           <motion.figure
-            key={p.src}
+            key={p.kind}
             className={`glass talk-plate${p.keep ? ' talk-plate-keep' : ''}`}
             aria-hidden
-            initial={{ opacity: 0, filter: 'grayscale(0.85)' }}
+            initial={{
+              opacity: 0,
+              filter:
+                p.kind === 'img' || p.kind === 'logo'
+                  ? 'grayscale(0.85)'
+                  : 'none',
+            }}
             animate={{ opacity: 1 }}
             whileHover={{ filter: 'grayscale(0)', scale: 1.04 }}
-            transition={{ duration: 0.6, delay: 0.5 + i * 0.12 }}
+            transition={{ duration: 0.6, delay: 0.4 + i * 0.12 }}
             style={{
               position: 'absolute',
-              ...p.style,
+              ...p.pos,
               y: reduced ? 0 : drift[i],
               rotate: p.rotate,
               padding: 8,
@@ -141,26 +254,16 @@ export default function Contact() {
               zIndex: 0,
             }}
           >
-            <img
-              src={withBase(p.src)}
-              alt=""
-              loading="lazy"
-              style={{ width: '100%', display: 'block' }}
-            />
+            <PlateContent plate={p} />
           </motion.figure>
         ))}
 
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <Reveal>
-            <p className="caption" style={{ marginBottom: 'clamp(20px, 3vh, 32px)' }}>
-              Sanya Munam — Correspondence
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1
+            <h2
               className="display"
               style={{
-                fontSize: 'clamp(2.6rem, 6.5vw, 5.6rem)',
+                fontSize: 'clamp(2.4rem, 6vw, 5.2rem)',
                 textTransform: 'none',
                 lineHeight: 1.04,
                 maxWidth: '16ch',
@@ -176,7 +279,7 @@ export default function Contact() {
                 ✺
               </span>{' '}
               and make something effortless.
-            </h1>
+            </h2>
           </Reveal>
         </div>
 
@@ -184,7 +287,7 @@ export default function Contact() {
           className="caption"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           style={{
             position: 'absolute',
             bottom: 'clamp(20px, 3.5vh, 36px)',

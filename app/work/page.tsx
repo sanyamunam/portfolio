@@ -22,7 +22,7 @@ export default function Work() {
           </Reveal>
         </div>
         <div style={{ padding: '0 8px' }}>
-          <Wordmark text="WORK" color="var(--bone)" delay={0.2} />
+          <Wordmark text="WORK" color="var(--sienna)" delay={0.2} />
         </div>
       </section>
 

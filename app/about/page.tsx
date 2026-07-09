@@ -74,7 +74,7 @@ export default function About() {
           </Reveal>
         </div>
         <div style={{ padding: '0 8px' }}>
-          <Wordmark text="CURIOUS" color="var(--bone)" delay={0.2} />
+          <Wordmark text="CURIOUS" color="var(--wine)" delay={0.2} />
         </div>
       </section>
 

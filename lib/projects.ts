@@ -145,6 +145,7 @@ const projectList: Project[] = [
   {
     slug: 'qatar-olympic-committee',
     index: '02',
+    disabled: true,
     client: 'Qatar Olympic Committee',
     title: 'Preparing the stage for 2036',
     year: '2025',

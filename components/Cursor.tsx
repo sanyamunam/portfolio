@@ -23,9 +23,35 @@ export default function Cursor() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     setEnabled(true);
 
+    /* ink dust — the pointer sheds tiny specimen pixels as it moves */
+    const DUST = ['--turquoise', '--orchid', '--sienna', '--wine', '--bone'];
+    const noDust = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let lastDust = 0;
+    let dustIndex = 0;
+
+    const shed = (e: MouseEvent) => {
+      if (noDust) return;
+      const now = performance.now();
+      if (now - lastDust < 45) return;
+      lastDust = now;
+      const d = document.createElement('div');
+      d.className = 'px-dust';
+      const size = 3 + Math.random() * 3;
+      d.style.width = `${size}px`;
+      d.style.height = `${size}px`;
+      d.style.left = `${e.clientX + (Math.random() * 16 - 8)}px`;
+      d.style.top = `${e.clientY + (Math.random() * 16 - 8)}px`;
+      d.style.background = `var(${DUST[dustIndex++ % DUST.length]})`;
+      document.body.appendChild(d);
+      d.addEventListener('animationend', () => d.remove());
+      /* backstop for throttled tabs where the animation never runs */
+      setTimeout(() => d.remove(), 1500);
+    };
+
     const move = (e: MouseEvent) => {
       mx.set(e.clientX);
       my.set(e.clientY);
+      shed(e);
     };
 
     const over = (e: MouseEvent) => {

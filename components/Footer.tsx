@@ -1,8 +1,68 @@
 'use client';
 
+import {
+  motion,
+  useAnimationControls,
+  useReducedMotion,
+} from 'framer-motion';
 import Reveal from './Reveal';
 
 const EMAIL = 'sanyamunam95@gmail.com';
+
+/* The closing mark — the name as a blind emboss on the darkroom wall.
+   Nearly invisible at rest; run the cursor over it and a wave of light
+   travels through the letters, then the room goes quiet again. */
+function GhostName() {
+  const reduced = useReducedMotion() ?? false;
+  const wave = useAnimationControls();
+  const letters = 'SANYA MUNAM'.split('');
+
+  const ripple = () => {
+    if (reduced) return;
+    wave.start((i: number) => ({
+      y: ['0%', '14%', '0%'],
+      opacity: [0.26, 1, 0.26],
+      transition: { duration: 0.7, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] },
+    }));
+  };
+
+  return (
+    <div
+      aria-hidden
+      onMouseEnter={ripple}
+      style={{
+        margin: 'clamp(48px, 7vw, 104px) calc(8px - var(--gutter)) 0',
+        userSelect: 'none',
+      }}
+    >
+      <span
+        className="display"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontSize: 'clamp(2.3rem, 11.5vw, 10.5rem)',
+          lineHeight: 0.9,
+          color: 'color-mix(in srgb, var(--bone) 30%, transparent)',
+        }}
+      >
+        {letters.map((ch, i) =>
+          ch === ' ' ? (
+            <span key={i} style={{ width: '0.28em' }} />
+          ) : (
+            <motion.span
+              key={i}
+              custom={i}
+              animate={wave}
+              style={{ display: 'inline-block', opacity: 0.26 }}
+            >
+              {ch}
+            </motion.span>
+          ),
+        )}
+      </span>
+    </div>
+  );
+}
 
 const SKILLS = [
   'UX Strategy',
@@ -121,13 +181,18 @@ export default function Footer() {
           </span>
         </Reveal>
 
+        {/* the blind-embossed name — hover to send light through it */}
+        <Reveal delay={0.2} style={{ width: '100%' }}>
+          <GhostName />
+        </Reveal>
+
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '100%',
-            marginTop: 'clamp(48px, 7vw, 96px)',
+            marginTop: 'clamp(28px, 4vw, 56px)',
             flexWrap: 'wrap',
             gap: 20,
           }}

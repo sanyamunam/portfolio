@@ -484,15 +484,28 @@ img, svg { display: block; max-width: 100%; }
 
 .site-nav { mix-blend-mode: difference; }
 
+/* The theme switch is a specimen swatch of the other room: a chip of
+   linen paper in the darkroom, a chip of jet ink in daylight. Clicking
+   the swatch takes you to the room it was cut from. */
 .theme-toggle {
   background: none;
   border: none;
-  padding: 0;
+  padding: 8px;
+  margin: -8px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: var(--turquoise);
-  font: inherit;
+}
+
+.theme-chip {
+  width: 12px;
+  height: 12px;
+  background: var(--bone);
+  display: inline-block;
+}
+
+.theme-toggle:focus-visible {
+  outline: 1px solid var(--turquoise);
+  outline-offset: 3px;
 }
 
 @media (hover: hover) and (pointer: fine) {

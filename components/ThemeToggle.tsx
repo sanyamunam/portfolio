@@ -5,9 +5,10 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 type Theme = 'dark' | 'light';
 
-/* Darkroom ↔ Daylight. The control is a specimen swatch of the other
-   room — paper in the dark, ink in the light. On click the new theme
-   expands as a circle from the exact point you clicked. */
+/* Darkroom ↔ Daylight. The control is the darkroom's pull-cord lamp:
+   a cord hanging from the top of the page. Press it and the cord
+   stretches; release, it snaps back and the new theme floods out from
+   the bead as a circle — the light turning on. */
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
   const reduced = useReducedMotion() ?? false;
@@ -78,31 +79,49 @@ export default function ThemeToggle() {
       type="button"
       className="theme-toggle"
       onClick={toggle}
-      aria-label={`Switch to the ${destination.toLowerCase()} theme`}
-      title={destination}
+      aria-label={`Pull the light cord — switch to the ${destination.toLowerCase()} theme`}
+      title={`Pull — ${destination.toLowerCase()}`}
       data-cursor
-      data-cursor-label={destination}
-      whileHover="hover"
-      whileTap="tap"
+      data-cursor-label={theme === 'light' ? 'Lights off' : 'Lights on'}
+      whileHover="sway"
+      whileTap="pull"
     >
       <motion.span
-        className="theme-chip"
+        className="cord-group"
         aria-hidden
         variants={
           reduced
             ? undefined
             : {
-                hover: {
-                  rotate: 45,
-                  scale: 1.45,
-                  boxShadow:
-                    '0 0 12px color-mix(in srgb, var(--bone) 45%, transparent)',
+                sway: {
+                  rotate: [0, 5, -4, 2, 0],
+                  transition: { duration: 1.4, ease: 'easeInOut' },
                 },
-                tap: { rotate: 45, scale: 0.85 },
+                pull: { rotate: 0 },
               }
         }
-        transition={{ type: 'spring', stiffness: 320, damping: 18 }}
-      />
+      >
+        <motion.span
+          className="cord-line"
+          variants={reduced ? undefined : { pull: { scaleY: 1.4 } }}
+          transition={{ type: 'spring', stiffness: 420, damping: 17 }}
+        />
+        <motion.span
+          className="cord-bead"
+          variants={
+            reduced
+              ? undefined
+              : {
+                  sway: {
+                    boxShadow:
+                      '0 0 10px color-mix(in srgb, var(--sienna) 55%, transparent)',
+                  },
+                  pull: { y: 12 },
+                }
+          }
+          transition={{ type: 'spring', stiffness: 420, damping: 17 }}
+        />
+      </motion.span>
     </motion.button>
   );
 }

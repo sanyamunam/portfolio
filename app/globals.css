@@ -484,23 +484,47 @@ img, svg { display: block; max-width: 100%; }
 
 .site-nav { mix-blend-mode: difference; }
 
-/* The theme switch is a specimen swatch of the other room: a chip of
-   linen paper in the darkroom, a chip of jet ink in daylight. Clicking
-   the swatch takes you to the room it was cut from. */
+/* The theme switch is the darkroom's pull-cord lamp: a thin cord
+   hanging from the top of the page, ending in a small diamond bead.
+   Press and it stretches; let go and the lights change. */
 .theme-toggle {
   background: none;
   border: none;
-  padding: 8px;
-  margin: -8px;
-  display: inline-flex;
-  align-items: center;
+  padding: 0;
+  position: relative;
+  width: 26px;
+  height: 22px;
+  align-self: center;
+  flex-shrink: 0;
 }
 
-.theme-chip {
-  width: 12px;
-  height: 12px;
+.cord-group {
+  position: absolute;
+  left: calc(50% - 4px);
+  top: -18px; /* reach the viewport ceiling above the nav padding */
+  width: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+}
+
+.cord-line {
+  display: block;
+  width: 1px;
+  height: 30px;
   background: var(--bone);
-  display: inline-block;
+  opacity: 0.55;
+  transform-origin: top center;
+}
+
+.cord-bead {
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin-top: 3px;
+  background: var(--bone);
+  transform: rotate(45deg);
 }
 
 .theme-toggle:focus-visible {

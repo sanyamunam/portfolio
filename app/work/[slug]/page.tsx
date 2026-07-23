@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Reveal from '@/components/Reveal';
 import ShowcaseVideo from '@/components/ShowcaseVideo';
-import DotStat from '@/components/DotStat';
 import { projects, getProject } from '@/lib/projects';
 import { withBase, mix, wash } from '@/lib/site';
 
@@ -558,7 +557,7 @@ export default async function CaseStudy({
                   className="display"
                   style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', color: accent(100) }}
                 >
-                  <DotStat value={s.value} />
+                  {s.value}
                 </p>
                 <p className="caption" style={{ marginTop: 10 }}>{s.label}</p>
               </div>

@@ -5,8 +5,8 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Wordmark from '@/components/Wordmark';
 import Reveal from '@/components/Reveal';
-import InkPortrait from '@/components/InkPortrait';
 import { projects } from '@/lib/projects';
+import { withBase } from '@/lib/site';
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -250,8 +250,14 @@ export default function Home() {
               className="glass fig-plate-teal"
               style={{ padding: 'clamp(24px, 3.5vw, 48px)' }}
             >
-              {/* pixel portrait — the cursor paints the ink back in */}
-              <InkPortrait token="turquoise" />
+              <div
+                className="ink-illustration"
+                style={{
+                  color: 'var(--turquoise)',
+                  WebkitMask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
+                  mask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
+                }}
+              />
               <p
                 className="caption"
                 style={{

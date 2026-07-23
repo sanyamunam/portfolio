@@ -692,20 +692,6 @@ textarea.note-field { resize: vertical; min-height: 96px; }
   .talk-plate-keep { display: block; }
 }
 
-/* ——— Screen-reader-only text (canvas effects keep real text) ——— */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* ——— Ink dust — the cursor sheds specimen pixels ————
    Ported from the digital-ripple trail the user loved on
    theoptimisticdesigner.com: tiny squares sprinkle behind the

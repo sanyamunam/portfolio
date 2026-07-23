@@ -2,6 +2,7 @@
 
 import Wordmark from '@/components/Wordmark';
 import Reveal from '@/components/Reveal';
+import InkPortrait from '@/components/InkPortrait';
 import { withBase } from '@/lib/site';
 
 const sparks = [
@@ -94,14 +95,8 @@ export default function About() {
             className="glass fig-plate-wine"
             style={{ padding: 'clamp(24px, 4vw, 56px)' }}
           >
-            <div
-              className="ink-illustration"
-              style={{
-                color: 'var(--turquoise)',
-                WebkitMask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
-                mask: `url(${withBase('/illustration.svg')}) center / contain no-repeat`,
-              }}
-            />
+            {/* pixel portrait — the cursor paints the ink back in */}
+            <InkPortrait token="turquoise" />
             <p className="caption" style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between' }}>
               <span>Fig. 01 — The designer at work</span>
               <span style={{ color: 'var(--muted)' }}>Ink on jet</span>

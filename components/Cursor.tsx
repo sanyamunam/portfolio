@@ -20,8 +20,18 @@ export default function Cursor() {
   const ringY = useSpring(my, { stiffness: 260, damping: 26, mass: 0.6 });
 
   useEffect(() => {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    setEnabled(true);
+    /* Enable on the first real mouse/trackpad movement rather than sniffing
+       media queries — touchscreen laptops report a coarse primary pointer
+       but still deserve the ink dot. A finger touch hands control back. */
+    const root = document.documentElement;
+    let mouseActive = false;
+    const setMouse = (on: boolean) => {
+      if (on === mouseActive) return;
+      mouseActive = on;
+      setEnabled(on);
+      root.classList.toggle('ink-cursor', on);
+    };
+    const onPointer = (e: PointerEvent) => setMouse(e.pointerType === 'mouse');
 
     /* ink dust — the pointer sheds tiny specimen pixels as it moves */
     const DUST = ['--turquoise', '--orchid', '--sienna', '--wine', '--bone'];
@@ -49,6 +59,7 @@ export default function Cursor() {
     };
 
     const move = (e: MouseEvent) => {
+      if (!mouseActive) return;
       mx.set(e.clientX);
       my.set(e.clientY);
       shed(e);
@@ -65,11 +76,16 @@ export default function Cursor() {
       }
     };
 
+    window.addEventListener('pointermove', onPointer);
+    window.addEventListener('pointerdown', onPointer);
     window.addEventListener('mousemove', move);
     window.addEventListener('mouseover', over);
     return () => {
+      window.removeEventListener('pointermove', onPointer);
+      window.removeEventListener('pointerdown', onPointer);
       window.removeEventListener('mousemove', move);
       window.removeEventListener('mouseover', over);
+      root.classList.remove('ink-cursor');
     };
   }, [mx, my]);
 

@@ -132,10 +132,12 @@ a {
 
 img, svg { display: block; max-width: 100%; }
 
-/* Native cursor off on fine pointers — the ink dot takes over */
-@media (hover: hover) and (pointer: fine) {
-  body, a, button, [data-cursor] { cursor: none; }
-}
+/* Native cursor off once a mouse/trackpad is in use — the ink dot takes over.
+   Class-based (set by Cursor.tsx) so touchscreen laptops still get it. */
+.ink-cursor body,
+.ink-cursor a,
+.ink-cursor button,
+.ink-cursor [data-cursor] { cursor: none; }
 
 /* ——— Type roles ——————————————————————————— */
 
@@ -532,9 +534,7 @@ img, svg { display: block; max-width: 100%; }
   outline-offset: 3px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .theme-toggle { cursor: none; }
-}
+.ink-cursor .theme-toggle { cursor: none; }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {

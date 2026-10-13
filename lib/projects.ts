@@ -145,7 +145,6 @@ const projectList: Project[] = [
   {
     slug: 'qatar-olympic-committee',
     index: '02',
-    disabled: true,
     client: 'Qatar Olympic Committee',
     title: 'Preparing the stage for 2036',
     year: '2025',
@@ -153,7 +152,6 @@ const projectList: Project[] = [
     sector: 'Sport · Government',
     specimen: { name: 'Sienna', hex: '#D6B292', rgb: '214, 178, 146', cmyk: '0, 17, 32, 16', token: 'sienna' },
     clientLogo: '/qoc-logo.svg',
-    comingSoon: true,
     partner: { name: 'Microsoft', logo: '/microsoft-logo.svg' },
     overviewHeading: 'The bid begins at home.',
     overview:
@@ -164,7 +162,7 @@ const projectList: Project[] = [
       { label: 'Role', value: 'UX Lead — design direction' },
       { label: 'Partner', value: 'Microsoft' },
       { label: 'Research', value: 'GA & Hotjar · Benchmarking · Personas · Interviews' },
-      { label: 'Status', value: 'In development — launching soon' },
+      { label: 'Status', value: 'Live since 2026' },
     ],
     processLead: {
       src: '/process-qoc/board.png',
@@ -178,7 +176,7 @@ const projectList: Project[] = [
       { src: '/process-qoc/archive-book.jpg', caption: 'Archive research — Qatar’s sporting history', w: 540 },
       { src: '/process-qoc/pain-points.jpg', caption: 'Research — key pain points, mapped', w: 440 },
       { src: '/process-qoc/bench-stats.jpg', caption: 'Benchmarking — stats & records patterns', w: 500 },
-      { src: '/process-qoc/concept-home.jpg', caption: 'Concept — the new homepage, in the works', w: 300 },
+      { src: '/process-qoc/concept-home.jpg', caption: 'Concept — the new homepage', w: 300 },
     ],
     chapters: [
       {
@@ -193,8 +191,8 @@ const projectList: Project[] = [
       },
       {
         label: 'The outcome',
-        lead: 'Redesigned end to end — ready for the spotlight.',
-        text: 'The full QOC experience was revamped and is now in development. The reveal lands with the launch, on the road to 2036.',
+        lead: 'Redesigned end to end — and live for the spotlight.',
+        text: 'The full QOC experience was revamped and is now live — a digital home ready to stand beside the bid, on the road to 2036.',
       },
     ],
     stats: [

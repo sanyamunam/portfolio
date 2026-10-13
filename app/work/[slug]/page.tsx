@@ -50,6 +50,10 @@ export default async function CaseStudy({
   const accent = (pct: number) => mix(specimen.token, pct);
   /* background washes only — amplified in daylight via --wash-boost */
   const soft = (pct: number) => wash(specimen.token, pct);
+  /* cursor label for live-site links — bare host, e.g. almujadilah.qa */
+  const liveHost = project.liveUrl
+    ? new URL(project.liveUrl).hostname.replace(/^www\./, '')
+    : undefined;
 
   return (
     <>
@@ -212,7 +216,7 @@ export default async function CaseStudy({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-cursor-label="qatarbasketball.qa"
+                data-cursor-label={liveHost}
                 style={{ marginTop: 32, color: accent(100) }}
               >
                 Visit the live website ↗
@@ -263,7 +267,7 @@ export default async function CaseStudy({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-line"
-                  data-cursor-label="qatarbasketball.qa"
+                  data-cursor-label={liveHost}
                   style={{ color: accent(100) }}
                 >
                   See it live ↗

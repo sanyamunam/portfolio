@@ -165,7 +165,7 @@ export default function Home() {
                     {p.client}
                   </motion.h3>
                   <span className="caption" style={{ color: 'var(--muted)' }}>
-                    {p.disabled ? 'Case study in progress — content on its way' : p.title}
+                    {p.disabled ? 'Not live yet — case study lands at launch' : p.title}
                   </span>
                 </div>
 

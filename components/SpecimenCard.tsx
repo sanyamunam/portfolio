@@ -70,7 +70,7 @@ export default function SpecimenCard({ project }: { project: Project }) {
               }}
             >
               {project.disabled
-                ? 'In progress'
+                ? 'Not live yet'
                 : project.comingSoon
                   ? 'In the works'
                   : specimen.name}
@@ -135,7 +135,7 @@ export default function SpecimenCard({ project }: { project: Project }) {
         >
           <span className="caption" style={{ color: 'var(--muted)' }}>
             {project.disabled
-              ? 'Content on its way'
+              ? 'Platform not live yet'
               : `${project.role} · ${project.sector}`}
           </span>
           <span
@@ -147,7 +147,7 @@ export default function SpecimenCard({ project }: { project: Project }) {
               whiteSpace: 'nowrap',
             }}
           >
-            {project.disabled ? 'Case study in progress' : 'Read the case'}
+            {project.disabled ? 'Case study at launch' : 'Read the case'}
           </span>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function SpecimenCard({ project }: { project: Project }) {
   );
 
   if (project.disabled) {
-    return <div aria-label={`${project.client} — case study in progress`}>{card}</div>;
+    return <div aria-label={`${project.client} — not live yet, case study at launch`}>{card}</div>;
   }
 
   return (
